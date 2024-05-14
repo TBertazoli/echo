@@ -1,9 +1,11 @@
-import './App.css';
+import MapSearch from "../../components/MapSearch";
+
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      App
+      <MapSearch />
     </div>
   );
 }
