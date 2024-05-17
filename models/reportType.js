@@ -6,7 +6,7 @@ const reportTypeSchema = new Schema(
     reportType: { type: String, required: true },
   },
   {
-    toJSON: { virtuals: true },
+    timestamps: true,
   }
 );
 

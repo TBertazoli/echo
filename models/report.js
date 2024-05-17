@@ -19,16 +19,26 @@ const reportSchema = new Schema(
     description: {
       type: String,
     },
-    report_date: {
+    reportDate: {
       type: Date,
       required: true,
     },
-    media_url: {
+    mediaUrl: {
       type: String,
     },
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+    },
+    reportType: {
+      type: Schema.Types.ObjectId,
+      ref: "ReportType",
+      required: true,
+    },
+    incidentType: {
+      type: Schema.Types.ObjectId,
+      ref: "IncidentType",
       required: true,
     },
   },
