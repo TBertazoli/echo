@@ -41,6 +41,11 @@ const reportSchema = new Schema(
       ref: "IncidentType",
       required: true,
     },
+    incidentTimeline: {
+      type: Schema.Types.ObjectId,
+      ref: "IncidentTimeline",
+      required: true,
+    },
   },
   {
     timestamps: true,
