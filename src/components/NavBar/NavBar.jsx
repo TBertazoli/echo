@@ -94,7 +94,7 @@ export default function NavBar({ user, setUser }) {
                 </g>
               </g>
             </svg>
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white hidden md:block">
               Echo
             </span>
           </Link>
