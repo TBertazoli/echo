@@ -163,7 +163,7 @@ export default function NavBar({ user, setUser }) {
             <img
               className="w-8 h-8 rounded-full mr-0 md:mr-2 mt-1"
               src="https://jeffjbutler.com//wp-content/uploads/2018/01/default-user.png"
-              alt="user photo"
+              alt="user default"
             />
             <div className="flex flex-col hidden md:block">
               <span className="block text-sm text-gray-900 dark:text-white">
