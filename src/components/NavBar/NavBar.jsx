@@ -34,12 +34,11 @@ export default function NavBar({ user, setUser }) {
     )
       .then((response) => response.json())
       .then((data) => {
-        // Check if the location name matches expected values
         if (data.name && data.sys.country) {
           setWeather(data);
         } else {
           console.log("Unexpected location data:", data);
-          setWeather(null); // Reset weather data in case of unexpected values
+          setWeather(null); 
         }
       })
       .catch((error) => {
