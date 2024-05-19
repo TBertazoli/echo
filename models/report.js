@@ -61,7 +61,6 @@ const reportSchema = new Schema(
     incidentTimeline: {
       type: Schema.Types.ObjectId,
       ref: "IncidentTimeline",
-      required: true,
     },
   },
   {
