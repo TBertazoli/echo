@@ -1,7 +1,6 @@
 import { useState } from "react";
 import * as usersService from "../../utilities/users-service";
 import { useSpring, animated } from "@react-spring/web";
-import { set } from "mongoose";
 
 export default function LoginForm({ setUser, setShowSignUp }) {
   const [credentials, setCredentials] = useState({
