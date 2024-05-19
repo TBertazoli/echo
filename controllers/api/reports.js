@@ -4,14 +4,14 @@ const User = require("../../models/user");
 module.exports = {
   create,
   show,
-  // showOne,
+  showOne,
   // update,
   // delete: deleteOne,
 };
 
 async function create(req, res) {
-  //   const user = await User.findById(req.user._id);
-  const user = "6647d4203cecb94f41d48749";
+  const user = await User.findById(req.user._id);
+  //   const user = "6647d4203cecb94f41d48749";
   console.log(user);
 
   try {
@@ -31,6 +31,15 @@ async function show(req, res) {
     const reports = await Report.find({ user: user });
     console.log(reports);
     res.json(reports);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+async function showOne(req, res) {
+  try {
+    const report = await Report.findById(req.params.id);
+    res.json(report);
   } catch (err) {
     res.status(400).json(err);
   }
