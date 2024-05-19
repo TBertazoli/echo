@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const incidentTypeSchema = new Schema(
   {
-    incidentType: { type: String, required: true },
+    incident: { type: String, required: true },
     reportType: {
       type: Schema.Types.ObjectId,
       ref: "ReportType",

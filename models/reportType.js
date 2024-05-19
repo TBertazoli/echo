@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const reportTypeSchema = new Schema(
   {
-    reportType: { type: String, required: true },
+    type: { type: String, required: true },
   },
   {
     timestamps: true,
