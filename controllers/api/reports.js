@@ -5,7 +5,7 @@ module.exports = {
   create,
   show,
   showOne,
-  // update,
+  update,
   // delete: deleteOne,
 };
 
@@ -40,6 +40,19 @@ async function showOne(req, res) {
   try {
     const report = await Report.findById(req.params.id);
     res.json(report);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+async function update(req, res) {
+  try {
+    const updatedReport = await Report.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updatedReport);
   } catch (err) {
     res.status(400).json(err);
   }
