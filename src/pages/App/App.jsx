@@ -10,17 +10,19 @@ import ProtectedRoute from "../../components/ProtecedRoute";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState(null);
 
   return (
     <main className="App h-full">
       {user ? (
         <>
-          <NavBar user={user} setUser={setUser} />
+          <NavBar user={user} setUser={setUser} setLatitude={setLatitude} setLongitude={setLongitude} />
           <Routes>
             {/* Route components in here */}
-            <Route path="/" element={<HomeLayout />} />
-            <Route path="/login" element={<HomeLayout />} />
-            <Route path="/signup" element={<HomeLayout />} />
+            <Route path="/" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
+            <Route path="/login" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
+            <Route path="/signup" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
           </Routes>
         </>
       ) : (

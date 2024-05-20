@@ -4,7 +4,10 @@ import { useSpring, animated } from "@react-spring/web";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 
+
 export default function SignUpForm({ setUser }) {
+  
+    
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,6 +16,7 @@ export default function SignUpForm({ setUser }) {
       navigate("/");
     }
   }, [navigate]);
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -31,6 +35,7 @@ export default function SignUpForm({ setUser }) {
     },
     config: { duration: 200 },
   });
+
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -74,14 +79,14 @@ export default function SignUpForm({ setUser }) {
               </h3>
 
               <animated.div
-                className="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                claseName="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                 role="alert"
                 style={springs}
               >
                 {error && (
                   <>
                     <svg
-                      className="flex-shrink-0 inline w-4 h-4 me-3"
+                      claseName="flex-shrink-0 inline w-4 h-4 me-3"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -89,9 +94,9 @@ export default function SignUpForm({ setUser }) {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
-                    <span className="sr-only">Info</span>
+                    <span claseName="sr-only">Info</span>
                     <div>
-                      <span className="font-medium">{error}</span>
+                      <span claseName="font-medium">{error}</span>
                     </div>{" "}
                   </>
                 )}
@@ -164,7 +169,7 @@ export default function SignUpForm({ setUser }) {
                   <div role="status">
                     <svg
                       aria-hidden="true"
-                      className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                      claseName="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                       viewBox="0 0 100 101"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -178,19 +183,19 @@ export default function SignUpForm({ setUser }) {
                         fill="currentFill"
                       />
                     </svg>
-                    <span className="sr-only">Loading...</span>
+                    <span claseName="sr-only">Loading...</span>
                   </div>
                 )}
               </button>
 
               <p
                 data-slot="text"
-                className="text-base/6 mt-8 text-left sm:text-sm/6 text-zinc-400"
+                claseName="text-base/6 mt-8 text-left sm:text-sm/6 text-zinc-400"
               >
                 Already have an account?{" "}
                 <span
                   onClick={() => navigate("/login")}
-                  className="font-semibold text-zinc-950 hover:text-zinc-700 dark:text-white dark:hover:text-zinc-300 cursor-pointer"
+                  claseName="font-semibold text-zinc-950 hover:text-zinc-700 dark:text-white dark:hover:text-zinc-300 cursor-pointer"
                 >
                   Sign in
                 </span>

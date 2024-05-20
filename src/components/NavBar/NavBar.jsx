@@ -2,13 +2,16 @@ import { Link } from "react-router-dom";
 import * as userService from "../../utilities/users-service";
 import { useState, useEffect } from "react";
 
-export default function NavBar({ user, setUser }) {
+export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [address, setAddress] = useState(null);
   const [isLocationLoaded, setIsLocationLoaded] = useState(false);
   const [isWeatherLoaded, setIsWeatherLoaded] = useState(false);
 
   const openWeatherAPI = process.env.REACT_APP_OPENWEATHER_API_KEY;
+  const mapboxToken =
+    "pk.eyJ1IjoiYmVydGF6b2xpdCIsImEiOiJjbHc2ZnZkMXIxd3ZnMmtuNnFocDg2MDBpIn0.3FrIoyBW1TCx6Yb9VAsCEA";
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -27,6 +30,8 @@ export default function NavBar({ user, setUser }) {
     setIsLocationLoaded(true);
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
+    setLatitude(latitude);
+    setLongitude(longitude);
     setLocation({ latitude, longitude });
 
     fetch(
@@ -38,7 +43,7 @@ export default function NavBar({ user, setUser }) {
           setWeather(data);
         } else {
           console.log("Unexpected location data:", data);
-          setWeather(null); 
+          setWeather(null);
         }
       })
       .catch((error) => {
@@ -48,11 +53,37 @@ export default function NavBar({ user, setUser }) {
       .finally(() => {
         setIsWeatherLoaded(true);
       });
+
+    fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxToken}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.features && data.features.length > 0) {
+          // city, state, country, postcode
+          const address = data.features[0].context;
+          const city = address.find((item) => item.id.includes("place"));
+          const state = address.find((item) => item.id.includes("region"));
+          const country = address.find((item) => item.id.includes("country"));
+          const postcode = address.find((item) => item.id.includes("postcode"));
+
+          setAddress(
+            `${city.text}, ${state.text}, ${country.text} ${postcode.text}`
+          );
+        } else {
+          console.log("Unexpected address data:", data);
+          setAddress(null);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setAddress(null);
+      });
   }
 
   function error(err) {
     console.log("Unable to retrieve your location", err);
-    setLocation(null); 
+    setLocation(null);
     setIsLocationLoaded(true);
     setIsWeatherLoaded(true);
   }
@@ -94,28 +125,30 @@ export default function NavBar({ user, setUser }) {
                 </g>
               </g>
             </svg>
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white hidden md:block">
+            <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white hidden md:block">
               Echo
             </span>
           </Link>
-          {weather && isWeatherLoaded ? (
-            <div className="flex flex-col ml-4 text-sm text-gray-500 dark:text-gray-400">
-              <div className="flex items-center gap-2 ml-3">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-                <span>
-                  {weather.name}, {weather.sys.country}
-                </span>
-              </div>
+          {address && weather && isWeatherLoaded ? (
+            <div className="flex items-center  ml-4 text-sm text-gray-500 dark:text-gray-400">
+              <span>{address}</span>{" "}
+              <span
+                className="mx-2 font-semibold text-gray-400 dark:text-zinc-800 text-2xl"
+                style={{
+                  position: "relative",
+                  left: "0.5rem",
+                  bottom: "0.1rem",
+                }}
+              >
+                |
+              </span>
               <span className="flex items-center">
                 <img
                   src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                   alt={weather.weather[0].description}
-                  className="w-8 h-8"
+                  className="w-12 h-12"
                 />
-                <span className="ml-2">
+                <span className="">
                   {weather.main.temp}°F, {weather.weather[0].description}
                 </span>
               </span>
@@ -125,7 +158,7 @@ export default function NavBar({ user, setUser }) {
               <div role="status">
                 <svg
                   aria-hidden="true"
-                  className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  className="w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -141,9 +174,21 @@ export default function NavBar({ user, setUser }) {
                 </svg>
                 <span className="sr-only">Loading...</span>
               </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                Retrieving your location...
-              </span>
+              <div role="status" class=" animate-pulse flex items-center">
+                <div class="h-2.5  rounded-full bg-zinc-700 w-48 "></div>
+                <span
+                  className="mx-2 font-semibold text-gray-400 dark:text-zinc-800 text-2xl block"
+                  style={{
+                    position: "relative",
+                    left: "0.5rem",
+                    bottom: "0.1rem",
+                  }}
+                >
+                  |
+                </span>
+                <div class="h-2.5  rounded-full bg-zinc-700 w-48 block ml-4"></div>
+                <span class="sr-only">Loading...</span>
+              </div>
             </div>
           ) : (
             <div className="flex items-center gap-2 ml-4">
@@ -166,17 +211,16 @@ export default function NavBar({ user, setUser }) {
               alt="user default"
             />
             <div className="flex flex-col hidden md:block">
-              <span className="block text-sm text-gray-900 dark:text-white">
+              <span className="block text-sm text-gray-900 dark:text-white font-semibold">
                 {user.name}
               </span>
-              <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+              <span className="block text-sm text-gray-500 truncate  dark:text-gray-400">
                 {user.email}
               </span>
             </div>
           </div>
 
           <button
-            
             onClick={handleLogOut}
             className="font-semibold text-white cursor-pointer hover:text-gray-400 bg-zinc-600 hover:bg-zinc-700 px-4 py-2 rounded-lg shadow-xl"
           >
