@@ -1,8 +1,10 @@
 import { useState } from "react";
 import * as usersService from "../../utilities/users-service";
 import { useSpring, animated } from "@react-spring/web";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm({ setUser, setShowSignUp }) {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -34,10 +36,7 @@ export default function LoginForm({ setUser, setShowSignUp }) {
       const user = await usersService.login(credentials);
       setUser(user);
       setIsLoading(false);
-      // push to the homepage
-      
-
-
+      navigate("/");
     } catch (error) {
       setIsLoading(false);
       setError("Log In Failed - Incorrect Email or Password");

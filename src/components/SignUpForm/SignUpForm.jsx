@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { signUp } from "../../utilities/users-service";
 import { useSpring, animated } from "@react-spring/web";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm({ setUser, setShowSignUp }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,6 +40,7 @@ export default function SignUpForm({ setUser, setShowSignUp }) {
       const user = await signUp({ name, email, password });
       setUser(user);
       setIsLoading(false);
+      navigate("/");
     } catch (error) {
       setIsLoading(false);
       setError("Sign Up Failed - Try Again");
