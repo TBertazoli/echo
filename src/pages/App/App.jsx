@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import "./App.css";
-import AuthPage from "../AuthPage/AuthPage";
 import NavBar from "../../components/NavBar/NavBar";
 import HomeLayout from "../../components/Home/HomeLayout";
+import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import ProtectedRoute from "../../components/ProtecedRoute";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -17,10 +19,16 @@ export default function App() {
           <Routes>
             {/* Route components in here */}
             <Route path="/" element={<HomeLayout />} />
+            <Route path="/login" element={<HomeLayout />} />
+            <Route path="/signup" element={<HomeLayout />} />
           </Routes>
         </>
       ) : (
-        <AuthPage setUser={setUser}/>
+        <Routes>
+          <Route path="/signup" element={<SignUpForm setUser={setUser} />} />
+          <Route path="/login" element={<LoginForm setUser={setUser} />} />
+          <Route path="/" element={<LoginForm setUser={setUser} />} />
+        </Routes>
       )}
     </main>
   );
