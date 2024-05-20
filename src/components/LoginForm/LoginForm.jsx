@@ -67,14 +67,14 @@ export default function LoginForm({ setUser }) {
               </h3>
 
               <animated.div
-                claseName="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                className="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                 role="alert"
                 style={springs}
               >
                 {error && (
                   <>
                     <svg
-                      claseName="flex-shrink-0 inline w-4 h-4 me-3"
+                      className="flex-shrink-0 inline w-4 h-4 me-3"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -82,9 +82,9 @@ export default function LoginForm({ setUser }) {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
-                    <span claseName="sr-only">Info</span>
+                    <span className="sr-only">Info</span>
                     <div>
-                      <span claseName="font-medium">{error}</span>
+                      <span className="font-medium">{error}</span>
                     </div>{" "}
                   </>
                 )}
@@ -124,7 +124,7 @@ export default function LoginForm({ setUser }) {
                   <div role="status">
                     <svg
                       aria-hidden="true"
-                      claseName="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                      className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                       viewBox="0 0 100 101"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -138,19 +138,16 @@ export default function LoginForm({ setUser }) {
                         fill="currentFill"
                       />
                     </svg>
-                    <span claseName="sr-only">Loading...</span>
+                    <span className="sr-only">Loading...</span>
                   </div>
                 )}
               </button>
 
-              <p
-                data-slot="text"
-                claseName="text-base/6 mt-8 text-left text-zinc-500 sm:text-sm/6 dark:text-zinc-400"
-              >
+              <p className="text-base/6 mt-8 text-left sm:text-sm/6 text-white mt-4">
                 Don’t have an account?{" "}
                 <span
                   onClick={() => navigate("/signup")}
-                  claseName="font-semibold text-zinc-950 hover:text-zinc-700 dark:text-white dark:hover:text-zinc-300 cursor-pointer"
+                  className="font-semibold  cursor-pointer"
                 >
                   Sign up
                 </span>
