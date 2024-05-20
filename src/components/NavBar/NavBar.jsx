@@ -125,7 +125,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
                 </g>
               </g>
             </svg>
-            <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white hidden md:block">
+            <span className="self-center text-3xl font-semibold whitespace-nowrap text-white hidden md:block">
               Echo
             </span>
           </Link>
@@ -211,10 +211,10 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
               alt="user default"
             />
             <div className="flex flex-col hidden md:block">
-              <span className="block text-sm text-gray-900 dark:text-white font-semibold">
+              <span className="block text-sm text-white font-semibold">
                 {user.name}
               </span>
-              <span className="block text-sm text-gray-500 truncate  dark:text-gray-400">
+              <span className="block text-sm text-gray-400">
                 {user.email}
               </span>
             </div>

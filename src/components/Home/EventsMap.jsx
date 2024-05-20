@@ -75,7 +75,6 @@ export default function MapSearch({
             zoom: 13,
           });
           setMarker({ latitude, longitude });
-          evt.target.reset();
         } else {
           alert("Coordinates not found in the response.");
         }
@@ -93,8 +92,7 @@ export default function MapSearch({
       <div className="relative w-full h-full">
         <div className="absolute w-full p-4 z-10">
           <form
-            className="h-full w-full bg-white-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-zinc-950 border-opacity-20 p-4"
-            style={{ maxWidth: "400px", marginLeft: "auto" }}
+            className="flex gap-2 h-full w-full bg-white-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-zinc-950 border-opacity-20 p-4"
             onSubmit={handleSelect}
           >
             <div style={{ width: "100%" }}>
@@ -105,7 +103,7 @@ export default function MapSearch({
                   onChange={handleAddressChange}
                   type="text"
                   autoComplete="address-line1"
-                  className="w-full mb-4 relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+                  className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
                 />
               </AddressAutofill>
             </div>
@@ -116,7 +114,7 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-line2"
-              className="mb-2 p-2 border rounded w-full"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -125,7 +123,7 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-level2"
-              className="mb-2 p-2 border rounded w-full"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -134,7 +132,7 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-level1"
-              className="mb-2 p-2 border rounded w-full"
+              className="w-full  relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -143,7 +141,7 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="country"
-              className="mb-2 p-2 border rounded w-full"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -152,14 +150,14 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="postal-code"
-              className="mb-2 p-2 border rounded w-full "
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
-            <div className="flex flex-end w-full">
+            <div className="flexw-full">
               <input
                 type="submit"
                 value="Submit"
-                className="w-1/4 p-2 bg-blue-500 text-white rounded"
+                className="w-full  relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer"
               />
             </div>
           </form>
