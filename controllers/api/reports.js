@@ -6,7 +6,7 @@ module.exports = {
   show,
   showOne,
   update,
-  // delete: deleteOne,
+  delete: deleteReport,
 };
 
 async function create(req, res) {
@@ -53,6 +53,15 @@ async function update(req, res) {
       { new: true }
     );
     res.json(updatedReport);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+async function deleteReport(req, res) {
+  try {
+    const deletedReport = await Report.findByIdAndDelete(req.params.id);
+    res.json(deletedReport);
   } catch (err) {
     res.status(400).json(err);
   }

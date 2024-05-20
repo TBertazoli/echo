@@ -7,6 +7,6 @@ router.post("/", reportsCtrl.create);
 router.get("/", reportsCtrl.show);
 router.get("/:id", reportsCtrl.showOne);
 router.put("/:id", reportsCtrl.update);
-// router.delete("/:id", ensureLoggedIn, reportsCtrl.delete);
+router.delete("/:id", reportsCtrl.delete);
 
 module.exports = router;
