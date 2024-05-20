@@ -25,8 +25,7 @@ async function create(req, res) {
 
 async function show(req, res) {
   try {
-    // const user = await User.findById(req.user._id);
-    const user = "6647d4203cecb94f41d48749";
+    const user = await User.findById(req.user._id);
     const reports = await Report.find({ user: user });
     console.log(reports);
     res.json(reports);
