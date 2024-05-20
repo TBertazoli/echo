@@ -20,7 +20,7 @@ export default function App() {
           </Routes>
         </>
       ) : (
-        <AuthPage setUser={setUser} />
+        <AuthPage setUser={setUser}/>
       )}
     </main>
   );
