@@ -34,6 +34,10 @@ export default function LoginForm({ setUser, setShowSignUp }) {
       const user = await usersService.login(credentials);
       setUser(user);
       setIsLoading(false);
+      // push to the homepage
+      
+
+
     } catch (error) {
       setIsLoading(false);
       setError("Log In Failed - Incorrect Email or Password");
