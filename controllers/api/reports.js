@@ -10,13 +10,12 @@ module.exports = {
 };
 
 async function create(req, res) {
-  //   const user = await User.findById(req.user._id);
-  const user = "6647d4203cecb94f41d48749";
-  //
-
+  const user = await User.findById(req.user._id);
   try {
-    const report = await Report.create(req.body);
-    user.report.push(req.body);
+    const report = await Report.create({
+      ...req.body,
+      user: user,
+    });
     console.log(report);
     res.json(report);
   } catch (err) {
