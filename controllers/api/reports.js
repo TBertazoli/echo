@@ -16,7 +16,7 @@ async function create(req, res) {
       ...req.body,
       user: user,
     });
-    console.log(report);
+
     res.json(report);
   } catch (err) {
     res.status(400).json(err);
@@ -27,7 +27,7 @@ async function show(req, res) {
   try {
     const user = await User.findById(req.user._id);
     const reports = await Report.find({ user: user });
-    console.log(reports);
+
     res.json(reports);
   } catch (err) {
     res.status(400).json(err);
