@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-main {
+html {
+  background-color: #18181b;
   height: 100vh;
 }
 
-html {
-  background-color: #18181B;
+body {
+  height: 100% !important;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

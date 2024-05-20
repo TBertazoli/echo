@@ -2,27 +2,35 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import "./App.css";
-import AuthPage from "../AuthPage/AuthPage";
-import NewOrderPage from "../NewOrderPage/NewOrderPage";
-import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
 import NavBar from "../../components/NavBar/NavBar";
+import HomeLayout from "../../components/Home/HomeLayout";
+import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import ProtectedRoute from "../../components/ProtecedRoute";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState(null);
 
   return (
-    <main className="App">
+    <main className="App h-full">
       {user ? (
         <>
-          <NavBar user={user} setUser={setUser} />
+          <NavBar user={user} setUser={setUser} setLatitude={setLatitude} setLongitude={setLongitude} />
           <Routes>
             {/* Route components in here */}
-            <Route path="/orders/new" element={<NewOrderPage />} />
-            <Route path="/orders" element={<OrderHistoryPage />} />
+            <Route path="/" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
+            <Route path="/login" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
+            <Route path="/signup" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
           </Routes>
         </>
       ) : (
-        <AuthPage setUser={setUser} />
+        <Routes>
+          <Route path="/signup" element={<SignUpForm setUser={setUser} />} />
+          <Route path="/login" element={<LoginForm setUser={setUser} />} />
+          <Route path="/" element={<LoginForm setUser={setUser} />} />
+        </Routes>
       )}
     </main>
   );
