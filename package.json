@@ -1,19 +1,23 @@
 {
-  "name": "mern-infrastructure",
+  "name": "echo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@mapbox/search-js-react": "^1.0.0-beta.21",
+    "@react-spring/web": "^9.7.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "flowbite": "^2.3.0",
     "jsonwebtoken": "^8.5.1",
     "mapbox-gl": "^3.3.0",
     "mongoose": "^6.7.2",
     "morgan": "^1.10.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth": "^2.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1",
@@ -24,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "seed": "node seed.js"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +49,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
 }
