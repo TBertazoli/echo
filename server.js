@@ -2,10 +2,12 @@ const express = require("express");
 const path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
-// Always require and configure near the top
+const passport = require("passport");
+
 require("dotenv").config();
 // Connect to the database
 require("./config/database");
+require("./config/passport");
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use(express.static(path.join(__dirname, "build")));
 
 // Middleware to check and verify a JWT and
 // assign the user object from the JWT to req.user
+app.use(passport.initialize());
 app.use(require("./config/checkToken"));
 
 const port = process.env.PORT || 3001;
