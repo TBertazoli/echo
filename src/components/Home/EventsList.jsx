@@ -15,7 +15,7 @@ export default function EventsList({
     // test
   }
   return (
-    <div className="col-span-4 relative bg-zinc-900 border-r border-zinc-800 overflow-scroll">
+    <div className="col-span-4 relative bg-zinc-900 border-r border-zinc-800 overflow-scroll shadow-2xl">
       <div className="sticky top-0 flex justify-between bg-zinc-900 ">
         <h1 className="text-white text-2xl font-semibold p-4 sticky top-0 ">
           Events
@@ -31,7 +31,7 @@ export default function EventsList({
         </div>
       </div>
 
-      <div className="overflow-scroll max-h-full">
+      <div className="overflow-scroll max-h-full border-t border-zinc-800">
         {reports.map((event) => (
           <div
             key={event.id}
@@ -39,15 +39,16 @@ export default function EventsList({
             onClick={() => handleClick(event)}
           >
             <div className="mb-12">
-              <h2 className="text-white font-semibold">{event.title}</h2>
-              <p className="text-gray-400 text-sm">{event.address}</p>
+              <h2 className="text-white font-semibold mb-2">{event.title}</h2>
+              <p className="text-gray-400 text-sm mb-8">{event.address}</p>
             </div>
 
             <div>
               <EventTypeIcon type={event.eventType.type} />
-              <p className="text-gray-400 text-sm mt-12">
+              <p className="text-gray-400 text-sm mt-12 mb-2">
                 {new Date(event.createdAt).toLocaleString("en-US", {
                   month: "short",
+                  year: "numeric",
                   day: "numeric",
                   hour: "numeric",
                   minute: "numeric",

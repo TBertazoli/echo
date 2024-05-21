@@ -3,6 +3,7 @@ import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Link } from "react-router-dom";
 import { AddressAutofill, config } from "@mapbox/search-js-react";
+import * as Events from "../../utilities/user-events-service"
 
 const CreateEvent = ({ onEventCreated }) => {
   const [eventDetails, setEventDetails] = useState({
