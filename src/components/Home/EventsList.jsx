@@ -15,7 +15,7 @@ export default function EventsList({
         {reports.map((event) => (
           <div
             key={event.id}
-            className="flex items-center justify-between p-4 border-b border-zinc-800"
+            className="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-800 cursor-pointer"
             onClick={() => handleClick(event)}
           >
             <div>
