@@ -13,7 +13,7 @@ export default function EventsMap({
   const [viewport, setViewport] = useState({
     latitude: propLatitude,
     longitude: propLongitude,
-    zoom: 12,
+    zoom: 13,
   });
   const [marker, setMarker] = useState({
     latitude: propLatitude,
@@ -26,7 +26,7 @@ export default function EventsMap({
     setViewport({
       latitude: propLatitude,
       longitude: propLongitude,
-      zoom: 12,
+      zoom: 13,
     });
     setMarker({
       latitude: propLatitude,
@@ -54,7 +54,8 @@ export default function EventsMap({
   });
 
   function handleAddressChange(evt) {
-    setAddress({ ...address, [evt.target.name]: evt.target.value });
+    const { name, value } = evt.target;
+    setAddress((prevAddress) => ({ ...prevAddress, [name]: value }));
   }
 
   const token =
@@ -67,7 +68,7 @@ export default function EventsMap({
   async function handleSelect(evt) {
     evt.preventDefault();
 
-    const fullAddress = `${address.address} ${address.unit} ${address.city} ${address.state} ${address.country} ${address.postcode}`;
+    const fullAddress = `${address["address address-search"]} ${address.unit} ${address.city} ${address.state} ${address.country} ${address.postcode}`;
 
     try {
       const response = await fetch(
@@ -92,7 +93,7 @@ export default function EventsMap({
           alert("Coordinates not found in the response.");
         }
       } else {
-        alert("Address not found");
+        alert("Please enter a valid address.");
       }
     } catch (error) {
       console.error("Error fetching geocoding data:", error);
@@ -174,7 +175,7 @@ export default function EventsMap({
               <input
                 type="submit"
                 value="Submit"
-                className="w-full  relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer"
+                className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer"
               />
             </div>
           </form>
@@ -201,8 +202,6 @@ export default function EventsMap({
                   key={report.id}
                   longitude={report.longitude}
                   latitude={report.latitude}
-                  offsetLeft={-20}
-                  offsetTop={-10}
                   onClick={() => handleMarkerClick(report)}
                 >
                   <span className="relative flex h-3 w-3 cursor-pointer">
@@ -211,12 +210,7 @@ export default function EventsMap({
                   </span>
                 </Marker>
               ))}
-              <Marker
-                longitude={marker.longitude}
-                latitude={marker.latitude}
-                offsetLeft={-20}
-                offsetTop={-10}
-              >
+              <Marker longitude={marker.longitude} latitude={marker.latitude}>
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
