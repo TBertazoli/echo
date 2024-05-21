@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import EventTypeIcon from "../Events/EventTypeIcon";
 export default function EventsList({
   reports,
   selectedEvent,
@@ -37,12 +38,13 @@ export default function EventsList({
             className="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-800 cursor-pointer"
             onClick={() => handleClick(event)}
           >
-            <div>
+            <div className="mb-12">
               <h2 className="text-white font-semibold">{event.title}</h2>
               <p className="text-gray-400 text-sm">{event.address}</p>
             </div>
 
             <div>
+              <EventTypeIcon type={event.eventType.type} />
               <p className="text-gray-400 text-sm mt-12">
                 {new Date(event.createdAt).toLocaleString("en-US", {
                   month: "short",

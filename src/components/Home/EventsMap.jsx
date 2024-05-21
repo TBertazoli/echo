@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { AddressAutofill, config } from "@mapbox/search-js-react";
 import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import EventTypeIcon from "../Events/EventTypeIcon";
 
 export default function EventsMap({
   longitude: propLongitude,
@@ -226,9 +227,10 @@ export default function EventsMap({
                   offsetTop={-10}
                 >
                   <div className="p-2">
-                    <h2 className="text-white font-semibold">
+                    <h2 className="text-white font-semibold text-lg mb-2 truncate">
                       {selectedEvent.title}
                     </h2>
+                    <EventTypeIcon type={selectedEvent.eventType.type} />
                     <p className="text-gray-400 text-sm">
                       {selectedEvent.address}
                     </p>
