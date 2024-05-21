@@ -11,11 +11,12 @@ export default function EventsList({
 
   function handleCreateEvent() {
     // push to create event page
+    // test
   }
   return (
-    <div className="col-span-4 relative bg-zinc-900 border-r border-zinc-800 max-h-full">
-      <div className="sticky top-0 flex justify-between">
-        <h1 className="text-white text-2xl font-semibold p-4 sticky top-0 bg-zinc-900">
+    <div className="col-span-4 relative bg-zinc-900 border-r border-zinc-800 overflow-scroll">
+      <div className="sticky top-0 flex justify-between bg-zinc-900 ">
+        <h1 className="text-white text-2xl font-semibold p-4 sticky top-0 ">
           Events
         </h1>
 
@@ -29,7 +30,7 @@ export default function EventsList({
         </div>
       </div>
 
-      <div className="overflow-scroll">
+      <div className="overflow-scroll max-h-full">
         {reports.map((event) => (
           <div
             key={event.id}
