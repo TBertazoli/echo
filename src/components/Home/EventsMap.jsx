@@ -1,33 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AddressAutofill, config } from "@mapbox/search-js-react";
-import Map, { Marker } from "react-map-gl";
+import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-export default function MapSearch({
+export default function EventsMap({
   longitude: propLongitude,
   latitude: propLatitude,
+  reports,
+  selectedEvent,
+  setSelectedEvent,
 }) {
   const [viewport, setViewport] = useState({
     latitude: propLatitude,
     longitude: propLongitude,
-    zoom: 13,
+    zoom: 12,
   });
   const [marker, setMarker] = useState({
     latitude: propLatitude,
     longitude: propLongitude,
   });
 
+  const isUserInitiated = useRef(false);
+
   useEffect(() => {
     setViewport({
       latitude: propLatitude,
       longitude: propLongitude,
-      zoom: 13,
+      zoom: 12,
     });
     setMarker({
       latitude: propLatitude,
       longitude: propLongitude,
     });
   }, [propLongitude, propLatitude]);
+
+  useEffect(() => {
+    if (selectedEvent) {
+      setViewport({
+        latitude: selectedEvent.latitude,
+        longitude: selectedEvent.longitude,
+        zoom: 13,
+      });
+    }
+  }, [selectedEvent]);
 
   const [address, setAddress] = useState({
     address: "",
@@ -51,8 +66,6 @@ export default function MapSearch({
 
   async function handleSelect(evt) {
     evt.preventDefault();
-
-    console.log("Address:", address); // Debugging log
 
     const fullAddress = `${address.address} ${address.unit} ${address.city} ${address.state} ${address.country} ${address.postcode}`;
 
@@ -87,8 +100,12 @@ export default function MapSearch({
     }
   }
 
+  const handleMarkerClick = (report) => {
+    setSelectedEvent(report);
+  };
+
   return (
-    <div className="col-span-8 h-full w-full">
+    <div className="col-span-8 h-full w-full overflow-hidden">
       <div className="relative w-full h-full">
         <div className="absolute w-full p-4 z-10">
           <form
@@ -132,7 +149,7 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-level1"
-              className="w-full  relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -167,20 +184,74 @@ export default function MapSearch({
             <Map
               mapboxAccessToken={token}
               viewState={viewport}
+              onMove={(evt) => {
+                setTimeout(() => {
+                  isUserInitiated.current = true;
+                  setViewport(evt.viewState);
+                }, 0);
+              }}
+              onMoveEnd={() => {
+                isUserInitiated.current = false;
+              }}
               mapStyle="mapbox://styles/mapbox/dark-v10"
               style={{ width: "100%", height: "100%" }}
             >
+              {reports.map((report) => (
+                <Marker
+                  key={report.id}
+                  longitude={report.longitude}
+                  latitude={report.latitude}
+                  offsetLeft={-20}
+                  offsetTop={-10}
+                  onClick={() => handleMarkerClick(report)}
+                >
+                  <span className="relative flex h-3 w-3 cursor-pointer">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                  </span>
+                </Marker>
+              ))}
               <Marker
                 longitude={marker.longitude}
                 latitude={marker.latitude}
                 offsetLeft={-20}
                 offsetTop={-10}
               >
-                <span class="relative flex h-3 w-3">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </span>
               </Marker>
+
+              {selectedEvent && (
+                <Popup
+                  latitude={selectedEvent.latitude}
+                  longitude={selectedEvent.longitude}
+                  closeOnClick={true}
+                  onClose={() => setSelectedEvent(null)}
+                  offsetTop={-10}
+                >
+                  <div className="p-2">
+                    <h2 className="text-white font-semibold">
+                      {selectedEvent.title}
+                    </h2>
+                    <p className="text-gray-400 text-sm">
+                      {selectedEvent.address}
+                    </p>
+                    <p className="text-gray-400 text-sm mt-2">
+                      {new Date(selectedEvent.createdAt).toLocaleString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                        }
+                      )}
+                    </p>
+                  </div>
+                </Popup>
+              )}
             </Map>
           )}
         </div>
