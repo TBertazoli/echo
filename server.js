@@ -33,7 +33,7 @@ app.use("/api/users", require("./routes/api/users"));
 // to return the index.html on all non-AJAX/API requests
 app.use("/api/user/events", require("./routes/api/events"));
 app.use("/api/events", require("./routes/api/allEvents"));
-app.use("/api/eventTypes", require("./routes/api/eventType"));
+app.use("/api/eventtype", require("./routes/api/eventType"));
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
