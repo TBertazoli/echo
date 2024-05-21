@@ -7,7 +7,11 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    const reports = await Report.find({});
+    const reports = await Report.find({})..populate("reportType");
+      //   populate("user");
+      
+
+    console.log(reports);
     res.json(reports);
   } catch (err) {
     res.status(400).json(err);
