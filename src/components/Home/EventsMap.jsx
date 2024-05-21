@@ -209,14 +209,14 @@ export default function MapSearch({
                       onClose={() => setSelectedEvent(null)}
                       offsetTop={-10}
                     >
-                      <div className="p-2 ">
-                        <h2 className="text-white font-semibold">
+                      <div className="p-4 rounded-md">
+                        <h2 className="text-white font-semibold text-xl">
                           {report.title}
                         </h2>
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-gray-400 text-sm mb-12">
                           {report.address}
                         </p>
-                        <p className="text-gray-400 text-sm mt-2">
+                        <p className="text-gray-400 text-sm mt-2 text-right">
                           {new Date(report.createdAt).toLocaleString("en-US", {
                             month: "short",
                             day: "numeric",
