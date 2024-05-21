@@ -7,7 +7,15 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    const events = await Event.find({});
+    const events = await Event.find()
+      .populate({
+        path: "eventType",
+        model: "EventType",
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
 
     console.log(events);
     res.json(events);
