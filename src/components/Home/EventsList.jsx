@@ -11,6 +11,7 @@ export default function EventsList({
 
   function handleCreateEvent() {
     // push to create event page
+    // test
   }
   return (
     <div className="col-span-4 relative bg-zinc-900 border-r border-zinc-800 overflow-scroll">
