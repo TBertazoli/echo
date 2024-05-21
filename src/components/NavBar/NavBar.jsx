@@ -90,7 +90,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
 
   return (
     <nav className="bg-zinc-900 border-b border-zinc-800">
-      <div className="max-w-screen-xl flex flex-wrap content-center items-center justify-between mx-auto p-8">
+      <div className="w-full flex  items-center justify-between  p-8">
         <div className="flex gap-4 items-center">
           <Link className="flex items-center space-x-3 rtl:space-x-reverse">
             <svg
@@ -214,9 +214,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
               <span className="block text-sm text-white font-semibold">
                 {user.name}
               </span>
-              <span className="block text-sm text-gray-400">
-                {user.email}
-              </span>
+              <span className="block text-sm text-gray-400">{user.email}</span>
             </div>
           </div>
 
