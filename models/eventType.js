@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+require("./incidentType");
 
 const eventTypeSchema = new Schema(
   {
@@ -10,4 +11,4 @@ const eventTypeSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("eventType", eventTypeSchema);
+module.exports = mongoose.model("EventType", eventTypeSchema);

@@ -1,24 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// const incidentType = new Schema(
-//   {
-//     type: { type: String, required: true },
-//   },
-//   {
-//     timestamps: true,
-//   }
-// );
-
-// const eventType = new Schema(
-//   {
-//     type: { type: String, required: true },
-//     incidentType: [incidentType],
-//   },
-//   {
-//     timestamps: true,
-//   }
-// );
+require("./eventType");
 
 const eventSchema = new Schema(
   {
@@ -69,12 +52,8 @@ const eventSchema = new Schema(
     },
     eventType: {
       type: Schema.Types.ObjectId,
-      ref: "eventType",
+      ref: "EventType",
       required: true,
-    },
-    incidentType: {
-      type: Schema.Types.ObjectId,
-      ref: "incidentType",
     },
 
     incidentTimeline: {
