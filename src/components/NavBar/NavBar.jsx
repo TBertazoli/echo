@@ -92,7 +92,10 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
     <nav className="bg-zinc-900 border-b border-zinc-800">
       <div className="w-full flex  items-center justify-between  p-8">
         <div className="flex gap-4 items-center">
-          <Link className="flex items-center space-x-3 rtl:space-x-reverse">
+          <Link
+            className="flex items-center space-x-3 rtl:space-x-reverse"
+            to="/"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -220,7 +223,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
 
           <button
             onClick={handleLogOut}
-            className="font-semibold text-white cursor-pointer hover:text-gray-400 bg-zinc-600 hover:bg-zinc-700 px-4 py-2 rounded-lg shadow-xl"
+            className="text-white  text-sm border bg-zinc-600 border-zinc-600 data-[hover]:border-zinc-700 hover:bg-zinc-700 focus:outline-none cursor-pointer px-2 py-2 rounded-lg"
           >
             Log Out
           </button>
