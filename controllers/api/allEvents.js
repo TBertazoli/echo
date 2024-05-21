@@ -7,7 +7,7 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    const events = await Event.find({}).populate("eventType");
+    const events = await Event.find({});
 
     console.log(events);
     res.json(events);
