@@ -92,7 +92,10 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
     <nav className="bg-zinc-900 border-b border-zinc-800">
       <div className="w-full flex  items-center justify-between  p-8">
         <div className="flex gap-4 items-center">
-          <Link className="flex items-center space-x-3 rtl:space-x-reverse">
+          <Link
+            className="flex items-center space-x-3 rtl:space-x-reverse"
+            to="/"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"

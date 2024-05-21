@@ -7,6 +7,7 @@ import HomeLayout from "../../components/Home/HomeLayout";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import ProtectedRoute from "../../components/ProtecedRoute";
+import CreateEvent from "../../components/Events/CreateEvent";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -23,6 +24,7 @@ export default function App() {
             <Route path="/" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
             <Route path="/login" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
             <Route path="/signup" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
+            <Route path="/create-event" element={<CreateEvent />} />
           </Routes>
         </>
       ) : (
