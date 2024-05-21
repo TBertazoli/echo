@@ -220,7 +220,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
 
           <button
             onClick={handleLogOut}
-            className="font-semibold text-white cursor-pointer hover:text-gray-400 bg-zinc-600 hover:bg-zinc-700 px-4 py-2 rounded-lg shadow-xl"
+            className="text-white  text-sm border bg-zinc-600 border-zinc-600 data-[hover]:border-zinc-700 hover:bg-zinc-700 focus:outline-none cursor-pointer px-2 py-2 rounded-lg"
           >
             Log Out
           </button>
