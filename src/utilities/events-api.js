@@ -1,10 +1,10 @@
 import sendRequest from "./send-request";
-const BASE_URL = "/api/reports";
+const BASE_URL = "/api/events";
 
-export async function getAllReports() {
+export async function getAllEvents() {
   return sendRequest(`${BASE_URL}/`);
 }
 
-export async function getOneReport(id) {
+export async function getOneEvent(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }

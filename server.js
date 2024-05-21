@@ -28,8 +28,8 @@ app.use("/api/users", require("./routes/api/users"));
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX/API requests
-app.use("/api/user/reports", require("./routes/api/reports"));
-app.use("/api/reports", require("./routes/api/allReports"));
+app.use("/api/user/events", require("./routes/api/events"));
+app.use("/api/events", require("./routes/api/allEvents"));
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));

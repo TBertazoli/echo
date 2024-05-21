@@ -1,4 +1,4 @@
-const Report = require("../../models/report");
+const Event = require("../../models/event");
 const User = require("../../models/user");
 
 module.exports = {
@@ -12,12 +12,12 @@ module.exports = {
 async function create(req, res) {
   const user = await User.findById(req.user._id);
   try {
-    const report = await Report.create({
+    const event = await Event.create({
       ...req.body,
       user: user,
     });
 
-    res.json(report);
+    res.json(event);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -26,9 +26,9 @@ async function create(req, res) {
 async function show(req, res) {
   try {
     const user = await User.findById(req.user._id);
-    const reports = await Report.find({ user: user });
+    const event = await Event.find({ user: user });
 
-    res.json(reports);
+    res.json(event);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -36,8 +36,8 @@ async function show(req, res) {
 
 async function showOne(req, res) {
   try {
-    const report = await Report.findById(req.params.id);
-    res.json(report);
+    const event = await Event.findById(req.params.id);
+    res.json(event);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -45,12 +45,10 @@ async function showOne(req, res) {
 
 async function update(req, res) {
   try {
-    const updatedReport = await Report.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    res.json(updatedReport);
+    const updateEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.json(updateEvent);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -58,8 +56,8 @@ async function update(req, res) {
 
 async function deleteReport(req, res) {
   try {
-    const deletedReport = await Report.findByIdAndDelete(req.params.id);
-    res.json(deletedReport);
+    const deleteEvent = await Event.findByIdAndDelete(req.params.id);
+    res.json(deleteEvent);
   } catch (err) {
     res.status(400).json(err);
   }

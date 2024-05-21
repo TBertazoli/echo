@@ -1,4 +1,4 @@
-const Report = require("../../models/report");
+const Event = require("../../models/event");
 
 module.exports = {
   show,
@@ -7,8 +7,10 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    const reports = await Report.find({});
-    res.json(reports);
+    const events = await Event.find({});
+
+    console.log(events);
+    res.json(events);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -16,8 +18,8 @@ async function show(req, res) {
 
 async function showOne(req, res) {
   try {
-    const report = await Report.findById(req.params.id);
-    res.json(report);
+    const event = await Event.findById(req.params.id);
+    res.json(event);
   } catch (err) {
     res.status(400).json(err);
   }

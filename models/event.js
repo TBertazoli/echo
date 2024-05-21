@@ -1,7 +1,26 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const reportSchema = new Schema(
+// const incidentType = new Schema(
+//   {
+//     type: { type: String, required: true },
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
+
+// const eventType = new Schema(
+//   {
+//     type: { type: String, required: true },
+//     incidentType: [incidentType],
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
+
+const eventSchema = new Schema(
   {
     title: { type: String, required: true },
     address: {
@@ -48,16 +67,16 @@ const reportSchema = new Schema(
       ref: "User",
       required: true,
     },
-    reportType: {
+    eventType: {
       type: Schema.Types.ObjectId,
-      ref: "ReportType",
+      ref: "eventType",
       required: true,
     },
     incidentType: {
       type: Schema.Types.ObjectId,
-      ref: "IncidentType",
-      required: true,
+      ref: "incidentType",
     },
+
     incidentTimeline: {
       type: Schema.Types.ObjectId,
       ref: "IncidentTimeline",
@@ -65,8 +84,7 @@ const reportSchema = new Schema(
   },
   {
     timestamps: true,
-    toJSON: { virtuals: true },
   }
 );
 
-module.exports = mongoose.model("Report", reportSchema);
+module.exports = mongoose.model("Event", eventSchema);
