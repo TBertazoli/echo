@@ -2,10 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-main {
+html {
+  background-color: #18181b;
   height: 100vh;
 }
 
-html {
-  background-color: #18181B;
+body {
+  height: 100% !important;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mapboxgl-popup-content {
+  background-color: #18181b !important;
+  color: white;
+
+  width: 250px;
+  border: 1px solid #353539;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: #18181b !important;
+}
+
+.mapboxgl-popup-close-button {
+  color: white;
+  padding: 0.5rem;
 }
