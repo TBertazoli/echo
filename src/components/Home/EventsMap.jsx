@@ -206,8 +206,18 @@ export default function EventsMap({
                   onClick={() => handleMarkerClick(report)}
                 >
                   <span className="relative flex h-3 w-3 cursor-pointer">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    {report.eventType.type === "Contruction" ||
+                    report.eventType.type === "Traffic" ? (
+                      <>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                      </>
+                    )}
                   </span>
                 </Marker>
               ))}
@@ -231,20 +241,30 @@ export default function EventsMap({
                       {selectedEvent.title}
                     </h2>
                     <EventTypeIcon type={selectedEvent.eventType.type} />
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-400 text-sm font-semibold">
                       {selectedEvent.address}
                     </p>
-                    <p className="text-gray-400 text-sm mt-2">
-                      {new Date(selectedEvent.createdAt).toLocaleString(
-                        "en-US",
-                        {
-                          month: "short",
-                          day: "numeric",
-                          hour: "numeric",
-                          minute: "numeric",
-                        }
-                      )}
+
+                    <p className="text-white text-sm mt-2 truncate">
+                      {selectedEvent.description}
                     </p>
+
+                    <div className="flex justify-between items-center">
+                      <p className="text-gray-400 text-xs mt-2">
+                        {new Date(selectedEvent.createdAt).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric",
+                          }
+                        )}
+                      </p>
+                      <button className=" mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        View Event
+                      </button>
+                    </div>
                   </div>
                 </Popup>
               )}
