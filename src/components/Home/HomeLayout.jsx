@@ -1,6 +1,6 @@
 import EventsList from "../Home/EventsList";
 import EventsMap from "../Home/EventsMap";
-import * as Reports from "../../utilities/reports-service";
+import * as Reports from "../../utilities/events-service";
 import { useState, useEffect } from "react";
 
 export default function HomeLayout({ longitude, latitude }) {
@@ -9,7 +9,7 @@ export default function HomeLayout({ longitude, latitude }) {
 
   useEffect(() => {
     async function getReports() {
-      const reports = await Reports.getAllReports();
+      const reports = await Reports.getAllEvents();
       console.log(reports);
       setReports(reports);
     }
