@@ -10,4 +10,4 @@ const eventTypeSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("eventType", eventTypeSchema);
+module.exports = mongoose.model("EventType", eventTypeSchema);
