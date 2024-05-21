@@ -1,9 +1,9 @@
 require("dotenv").config();
 require("./config/database");
 
+const Event = require("./models/event");
 const EventType = require("./models/eventType");
 const IncidentType = require("./models/incidentType");
-const Event = require("./models/event");
 
 (async function () {
   await EventType.deleteMany({});
@@ -104,7 +104,7 @@ const Event = require("./models/event");
       country: "USA",
       zip: "77002",
       description: "Robbery on Elm St",
-      user: "6647d4203cecb94f41d48747",
+      user: "664c319ac9683858ae859410",
       reportDate: new Date("2019-03-14T00:00:00.000Z"),
       eventType: eventType[0],
       incidentType: incident[0],
@@ -119,7 +119,7 @@ const Event = require("./models/event");
       country: "USA",
       zip: "77002",
       description: "Peacefull protest on Travis St",
-      user: "6647d4203cecb94f41d48747",
+      user: "664c319ac9683858ae859410",
       reportDate: new Date("2020-04-14T00:00:00.000Z"),
       eventType: eventType[1],
       incidentType: incident[1],
@@ -134,7 +134,7 @@ const Event = require("./models/event");
       country: "USA",
       zip: "77010",
       description: "Major roadblock on McKinney St",
-      user: "6647d4203cecb94f41d48747",
+      user: "664c319ac9683858ae859410",
       reportDate: new Date("2021-05-14T00:00:00.000Z"),
       eventType: eventType[2],
       incidentType: incident[2],
@@ -149,7 +149,7 @@ const Event = require("./models/event");
       country: "USA",
       zip: "77003",
       description: "Vandalism on Oak St",
-      user: "664873d0f13746d8d9ec0d88",
+      user: "664c8d11717164ec8ad06075",
       reportDate: new Date("2021-07-22T00:00:00.000Z"),
       eventType: eventType[1],
       incidentType: incident[1],
@@ -164,7 +164,7 @@ const Event = require("./models/event");
       country: "USA",
       zip: "77004",
       description: "Assault on Pine St",
-      user: "664873d0f13746d8d9ec0d88",
+      user: "664c8d11717164ec8ad06075",
       reportDate: new Date("2022-11-05T00:00:00.000Z"),
       eventType: eventType[2],
       incidentType: incident[2],
@@ -179,7 +179,7 @@ const Event = require("./models/event");
       country: "USA",
       zip: "77005",
       description: "Burglary on Maple St",
-      user: "664873d0f13746d8d9ec0d88",
+      user: "664c8d11717164ec8ad06075",
       reportDate: new Date("2023-01-18T00:00:00.000Z"),
       eventType: eventType[3],
       incidentType: incident[3],

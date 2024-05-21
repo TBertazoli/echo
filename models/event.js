@@ -1,6 +1,25 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// const incidentType = new Schema(
+//   {
+//     type: { type: String, required: true },
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
+
+// const eventType = new Schema(
+//   {
+//     type: { type: String, required: true },
+//     incidentType: [incidentType],
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
+
 const eventSchema = new Schema(
   {
     title: { type: String, required: true },
@@ -50,14 +69,14 @@ const eventSchema = new Schema(
     },
     eventType: {
       type: Schema.Types.ObjectId,
-      ref: "EventType",
+      ref: "eventType",
       required: true,
     },
     incidentType: {
       type: Schema.Types.ObjectId,
-      ref: "IncidentType",
-      required: true,
+      ref: "incidentType",
     },
+
     incidentTimeline: {
       type: Schema.Types.ObjectId,
       ref: "IncidentTimeline",
@@ -65,7 +84,6 @@ const eventSchema = new Schema(
   },
   {
     timestamps: true,
-    toJSON: { virtuals: true },
   }
 );
 
