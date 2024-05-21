@@ -18,7 +18,7 @@ export default function EventTypeIcon({ type }) {
     Fire: "🔥",
     Explosion: "💥",
     Other: "🚨",
-    Contruction: "👷🏽",
+    Construction: "👷🏽",
     Vandalism: "🌌",
     Kidnapping: "👶",
     Roadblock: "🚧",
@@ -29,7 +29,7 @@ export default function EventTypeIcon({ type }) {
   };
 
   return (
-    <p className="text-sm text-zinc-600 text-right">
+    <p className="text-sm text-zinc-600 text-right ">
       <span role="img" aria-label={type}>
         {type} {icons[type]}
       </span>

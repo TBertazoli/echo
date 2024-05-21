@@ -50,7 +50,7 @@ export default function EventsList({
 
             <div className="mt-12">
               <EventTypeIcon type={event.eventType.type} />
-              <p className="text-gray-400 text-sm  mt-2">
+              <p className="text-gray-400 text-xs  mt-2 font-semibold">
                 {new Date(event.createdAt).toLocaleString("en-US", {
                   month: "short",
                   year: "numeric",
