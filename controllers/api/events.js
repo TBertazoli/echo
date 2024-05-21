@@ -11,6 +11,7 @@ module.exports = {
 
 async function create(req, res) {
   const user = await User.findById(req.user._id);
+
   try {
     const event = await Event.create({
       ...req.body,
@@ -26,7 +27,10 @@ async function create(req, res) {
 async function show(req, res) {
   try {
     const user = await User.findById(req.user._id);
-    const event = await Event.find({ user: user });
+    const event = await Event.find({ user: user }).populate({
+      path: "eventType",
+      model: "EventType",
+    });
 
     res.json(event);
   } catch (err) {
