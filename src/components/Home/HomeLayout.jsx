@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function HomeLayout({ longitude, latitude }) {
   const [reports, setReports] = useState([]);
-
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     async function getReports() {
@@ -18,9 +18,11 @@ export default function HomeLayout({ longitude, latitude }) {
 
   console.log(reports);
   return (
-    <div className="grid grid-cols-12 h-full">
-      <EventsList />
-      <EventsMap longitude={longitude} latitude={latitude} />
+    <div className="grid grid-cols-12 h-full overflow-hidden" style={{
+      maxHeight: "100vh",
+    }}>
+      <EventsList reports={reports} selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} />
+      <EventsMap longitude={longitude} latitude={latitude} reports={reports} selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} />
     </div>
   );
 }

@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { AddressAutofill, config } from "@mapbox/search-js-react";
-import Map, { Marker } from "react-map-gl";
+import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 export default function MapSearch({
   longitude: propLongitude,
   latitude: propLatitude,
+  reports,
+  selectedEvent,
+  setSelectedEvent,
 }) {
   const [viewport, setViewport] = useState({
     latitude: propLatitude,
     longitude: propLongitude,
-    zoom: 13,
+    zoom: 12,
   });
   const [marker, setMarker] = useState({
     latitude: propLatitude,
@@ -18,10 +21,20 @@ export default function MapSearch({
   });
 
   useEffect(() => {
+    if (selectedEvent) {
+      setViewport({
+        latitude: selectedEvent.latitude,
+        longitude: selectedEvent.longitude,
+        zoom: 13,
+      });
+    }
+  }, [selectedEvent]);
+
+  useEffect(() => {
     setViewport({
       latitude: propLatitude,
       longitude: propLongitude,
-      zoom: 13,
+      zoom: 12,
     });
     setMarker({
       latitude: propLatitude,
@@ -88,7 +101,7 @@ export default function MapSearch({
   }
 
   return (
-    <div className="col-span-8 h-full w-full">
+    <div className="col-span-8 h-full w-full overflow-hidden">
       <div className="relative w-full h-full">
         <div className="absolute w-full p-4 z-10">
           <form
@@ -167,18 +180,64 @@ export default function MapSearch({
             <Map
               mapboxAccessToken={token}
               viewState={viewport}
+              onMove={(evt) => setViewport(evt.viewState)}
               mapStyle="mapbox://styles/mapbox/dark-v10"
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "auto", height: "100vh" }}
             >
+              {reports.map((report) => (
+                <>
+                  <Marker
+                    key={report.id}
+                    longitude={report.longitude}
+                    latitude={report.latitude}
+                    offsetLeft={-20}
+                    offsetTop={-10}
+                    onClick={() => setSelectedEvent(report)}
+                  >
+                    <span className="relative flex h-3 w-3 cursor-pointer">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                  </Marker>
+
+                  {selectedEvent && selectedEvent.id === report.id && (
+                    <Popup
+                      key={report.id}
+                      latitude={report.latitude}
+                      longitude={report.longitude}
+                      closeOnClick={true}
+                      onClose={() => setSelectedEvent(null)}
+                      offsetTop={-10}
+                    >
+                      <div className="p-2 ">
+                        <h2 className="text-white font-semibold">
+                          {report.title}
+                        </h2>
+                        <p className="text-gray-400 text-sm">
+                          {report.address}
+                        </p>
+                        <p className="text-gray-400 text-sm mt-2">
+                          {new Date(report.createdAt).toLocaleString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric",
+                          })}
+                        </p>
+                      </div>
+                    </Popup>
+                  )}
+                </>
+              ))}
               <Marker
                 longitude={marker.longitude}
                 latitude={marker.latitude}
                 offsetLeft={-20}
                 offsetTop={-10}
               >
-                <span class="relative flex h-3 w-3">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </span>
               </Marker>
             </Map>
