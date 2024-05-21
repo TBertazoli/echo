@@ -1,4 +1,4 @@
-const Report = require("../../models/report");
+const Report = require("../../models/event");
 const User = require("../../models/user");
 
 module.exports = {

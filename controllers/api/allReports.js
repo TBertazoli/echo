@@ -1,4 +1,4 @@
-const Report = require("../../models/report");
+const Report = require("../../models/event");
 
 module.exports = {
   show,
@@ -7,9 +7,8 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    const reports = await Report.find({})..populate("reportType");
-      //   populate("user");
-      
+    const reports = await Report.find({}).populate("eventType");
+    //   populate("user");
 
     console.log(reports);
     res.json(reports);

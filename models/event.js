@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const reportSchema = new Schema(
+const eventSchema = new Schema(
   {
     title: { type: String, required: true },
     address: {
@@ -48,9 +48,9 @@ const reportSchema = new Schema(
       ref: "User",
       required: true,
     },
-    reportType: {
+    eventType: {
       type: Schema.Types.ObjectId,
-      ref: "ReportType",
+      ref: "EventType",
       required: true,
     },
     incidentType: {
@@ -69,4 +69,4 @@ const reportSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("Report", reportSchema);
+module.exports = mongoose.model("Event", eventSchema);
