@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { AddressAutofill, config } from "@mapbox/search-js-react";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Link } from "react-router-dom";
+import { AddressAutofill, config } from "@mapbox/search-js-react";
 
 const CreateEvent = ({ onEventCreated }) => {
   const [eventDetails, setEventDetails] = useState({
@@ -40,7 +40,7 @@ const CreateEvent = ({ onEventCreated }) => {
 
   const handleSelectAddress = async (evt) => {
     evt.preventDefault();
-    const fullAddress = `${eventDetails.address}, ${eventDetails.city}, ${eventDetails.state}, ${eventDetails.country}, ${eventDetails.zip}`;
+    const fullAddress = `${eventDetails["address address-search"]}, ${eventDetails.city}, ${eventDetails.state}, ${eventDetails.country}, ${eventDetails.zip}`;
     try {
       const response = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
@@ -51,7 +51,24 @@ const CreateEvent = ({ onEventCreated }) => {
       if (data.features && data.features.length > 0) {
         const feature = data.features[0];
         const [longitude, latitude] = feature.center;
-        setEventDetails({ ...eventDetails, latitude, longitude });
+        const place = feature.place_name;
+
+        // Parsing address components
+        const addressComponents = feature.context.reduce((acc, component) => {
+          if (component.id.includes("place")) acc.city = component.text;
+          if (component.id.includes("region")) acc.state = component.text;
+          if (component.id.includes("country")) acc.country = component.text;
+          if (component.id.includes("postcode")) acc.zip = component.text;
+          return acc;
+        }, {});
+
+        setEventDetails({
+          ...eventDetails,
+          latitude,
+          longitude,
+          address: place,
+          ...addressComponents,
+        });
         setViewport({ ...viewport, latitude, longitude });
         setMarker({ latitude, longitude });
       } else {
@@ -86,22 +103,18 @@ const CreateEvent = ({ onEventCreated }) => {
 
   return (
     <div className="max-w-4xl mx-auto mt-12 mb-12">
-      {/* back button */}
       <Link to="/">
         <button className="rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer">
-          <i class="las la-arrow-left"></i> Back
+          <i className="las la-arrow-left"></i> Back
         </button>
       </Link>
-      <h1
-        className="text-3xl font-semibold text-white 
-      p pt-8 mb-4"
-      >
+      <h1 className="text-3xl font-semibold text-white pt-8 mb-4">
         Create Event
       </h1>
-      <div className="">
-        <div className="">
+      <div>
+        <div>
           <form
-            className="flex flex-col gap-4 w-full mb-12 rounded-md bg-clip-padding  border  border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600"
+            className="flex flex-col gap-4 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600"
             onSubmit={handleSubmit}
           >
             <input
@@ -116,14 +129,22 @@ const CreateEvent = ({ onEventCreated }) => {
               <input
                 name="address"
                 placeholder="Address"
-                value={eventDetails.address}
-                onChange={handleAddressChange}
+                onInput={handleAddressChange}
+                autoComplete="address-line1"
                 required
                 className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
               />
             </AddressAutofill>
 
-            <div className="">
+            <button
+              type="button"
+              onClick={handleSelectAddress}
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer"
+            >
+              Autofill Address
+            </button>
+
+            <div>
               <Map
                 mapboxAccessToken={token}
                 viewState={viewport}
@@ -195,14 +216,14 @@ const CreateEvent = ({ onEventCreated }) => {
               className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
-            <div class="flex items-center justify-center w-full">
+            <div className="flex items-center justify-center w-full">
               <label
-                for="dropzone-file"
-                class="flex flex-col items-center justify-center w-full h-64 border-2 border-zinc-500 border-dashed rounded-lg cursor-pointer bg-zinc-700"
+                htmlFor="dropzone-file"
+                className="flex flex-col items-center justify-center w-full h-64 border-2 border-zinc-500 border-dashed rounded-lg cursor-pointer bg-zinc-700"
               >
-                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <svg
-                    class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                    className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -210,21 +231,21 @@ const CreateEvent = ({ onEventCreated }) => {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                     />
                   </svg>
-                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span class="font-semibold">Click to upload</span> or drag
-                    and drop
+                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Click to upload</span> or
+                    drag and drop
                   </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
-                <input id="dropzone-file" type="file" class="hidden" />
+                <input id="dropzone-file" type="file" className="hidden" />
               </label>
             </div>
 
