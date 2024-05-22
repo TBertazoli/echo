@@ -19,15 +19,29 @@ export default function App() {
     <main className="App h-full">
       {user ? (
         <>
-          <NavBar user={user} setUser={setUser} setLatitude={setLatitude} setLongitude={setLongitude} />
+          <NavBar
+            user={user}
+            setUser={setUser}
+            setLatitude={setLatitude}
+            setLongitude={setLongitude}
+          />
           <Routes>
             {/* Route components in here */}
-            <Route path="/" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
-            <Route path="/login" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
-            <Route path="/signup" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
+            <Route
+              path="/"
+              element={<HomeLayout longitude={longitude} latitude={latitude} />}
+            />
+            <Route
+              path="/login"
+              element={<HomeLayout longitude={longitude} latitude={latitude} />}
+            />
+            <Route
+              path="/signup"
+              element={<HomeLayout longitude={longitude} latitude={latitude} />}
+            />
             <Route path="/create-event" element={<CreateEvent />} />
             {/* view details */}
-            <Route path="/view-event/:id" element={<ViewEvent />} />
+            <Route path="/events/:id" element={<ViewEvent />} />
             {/* edit event */}
           </Routes>
         </>

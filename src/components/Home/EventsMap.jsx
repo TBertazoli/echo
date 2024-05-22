@@ -4,6 +4,8 @@ import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import EventTypeIcon from "../Events/EventTypeIcon";
 
+import { Link } from "react-router-dom";
+
 export default function EventsMap({
   longitude: propLongitude,
   latitude: propLatitude,
@@ -261,9 +263,11 @@ export default function EventsMap({
                           }
                         )}
                       </p>
-                      <button className=" mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        View Event
-                      </button>
+                      <Link to={`/events/${selectedEvent._id}`}>
+                        <button className=" mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                          View Event
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </Popup>
