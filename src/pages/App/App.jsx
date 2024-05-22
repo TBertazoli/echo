@@ -8,6 +8,7 @@ import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import ProtectedRoute from "../../components/ProtecedRoute";
 import CreateEvent from "../../components/Events/CreateEvent";
+import ViewEvent from "../../components/Events/ViewEvent";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -18,13 +19,30 @@ export default function App() {
     <main className="App h-full">
       {user ? (
         <>
-          <NavBar user={user} setUser={setUser} setLatitude={setLatitude} setLongitude={setLongitude} />
+          <NavBar
+            user={user}
+            setUser={setUser}
+            setLatitude={setLatitude}
+            setLongitude={setLongitude}
+          />
           <Routes>
             {/* Route components in here */}
-            <Route path="/" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
-            <Route path="/login" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
-            <Route path="/signup" element={<HomeLayout longitude={longitude} latitude={latitude} />} />
+            <Route
+              path="/"
+              element={<HomeLayout longitude={longitude} latitude={latitude} />}
+            />
+            <Route
+              path="/login"
+              element={<HomeLayout longitude={longitude} latitude={latitude} />}
+            />
+            <Route
+              path="/signup"
+              element={<HomeLayout longitude={longitude} latitude={latitude} />}
+            />
             <Route path="/create-event" element={<CreateEvent />} />
+            {/* view details */}
+            <Route path="/events/:id" element={<ViewEvent />} />
+            {/* edit event */}
           </Routes>
         </>
       ) : (

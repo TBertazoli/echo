@@ -3,7 +3,6 @@ import * as userEventsAPI from "./user-events-api";
 export async function createEvent(event) {
   return userEventsAPI.create(event);
 }
-
 export async function getUserEvents() {
   return userEventsAPI.getUserEvents();
 }

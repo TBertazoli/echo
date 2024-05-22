@@ -21,7 +21,7 @@ body {
   background-color: #18181b !important;
   color: white;
 
-  width: 250px;
+  width: 280px;
   border: 1px solid #353539;
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -34,4 +34,9 @@ body {
 .mapboxgl-popup-close-button {
   color: white;
   padding: 0.5rem;
+}
+
+:root {
+  --toastify-color-dark: #27272A !important;
+  --toastify-color-progress-info: #3B81F6 !important;
 }

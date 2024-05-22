@@ -2,6 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import { AddressAutofill, config } from "@mapbox/search-js-react";
 import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import EventTypeIcon from "../Events/EventTypeIcon";
+
+import { Link } from "react-router-dom";
 
 export default function EventsMap({
   longitude: propLongitude,
@@ -205,8 +208,18 @@ export default function EventsMap({
                   onClick={() => handleMarkerClick(report)}
                 >
                   <span className="relative flex h-3 w-3 cursor-pointer">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    {report.eventType.type === "Contruction" ||
+                    report.eventType.type === "Traffic" ? (
+                      <>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                      </>
+                    )}
                   </span>
                 </Marker>
               ))}
@@ -226,23 +239,38 @@ export default function EventsMap({
                   offsetTop={-10}
                 >
                   <div className="p-2">
-                    <h2 className="text-white font-semibold">
+                    <h2 className="text-white font-semibold text-lg mb-2 truncate">
                       {selectedEvent.title}
                     </h2>
-                    <p className="text-gray-400 text-sm">
-                      {selectedEvent.address}
+                    <div className="flex items-center justify-between">
+                      <p className="text-gray-400  font-semibold truncate w-1/2">
+                        {selectedEvent.address}
+                      </p>
+                      <EventTypeIcon type={selectedEvent.eventType.type} />
+                    </div>
+
+                    <p className="text-white text-sm mt-4 mb-4 truncate">
+                      {selectedEvent.description}
                     </p>
-                    <p className="text-gray-400 text-sm mt-2">
-                      {new Date(selectedEvent.createdAt).toLocaleString(
-                        "en-US",
-                        {
-                          month: "short",
-                          day: "numeric",
-                          hour: "numeric",
-                          minute: "numeric",
-                        }
-                      )}
-                    </p>
+
+                    <div className="flex justify-between items-center">
+                      <p className="text-gray-400 text-xs mt-2">
+                        {new Date(selectedEvent.createdAt).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric",
+                          }
+                        )}
+                      </p>
+                      <Link to={`/events/${selectedEvent._id}`}>
+                        <button className=" mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                          View Event
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </Popup>
               )}
