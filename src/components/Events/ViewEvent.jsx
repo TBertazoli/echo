@@ -10,7 +10,7 @@ import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function ViewEvent({user}) {
+export default function ViewEvent({ user }) {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -114,13 +114,19 @@ export default function ViewEvent({user}) {
       {/* delete modal */}
 
       {user && user._id === event.user && (
-        <div className="mb-8 flex justify-end">
+        <div className="mb-8 flex justify-end gap-4">
           <button
             onClick={openModal}
             className="bg-red-500 text-white px-4 py-2 rounded-lg"
           >
             Delete Event
           </button>
+
+          <Link to={`/events/${id}/edit`}>
+            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+              Edit Event
+            </button>
+          </Link>
         </div>
       )}
 
