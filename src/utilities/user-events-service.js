@@ -1,21 +1,25 @@
-import * as userEeventsAPI from "./user-events-api";
+import * as userEventsAPI from "./user-events-api";
 
-export async function createEvent(report) {
-  return userEeventsAPI.create(report);
+export async function createEvent(event) {
+  return userEventsAPI.create(event);
 }
 
 export async function getUserEvents() {
-  return userEeventsAPI.getUserEvents();
+  return userEventsAPI.getUserEvents();
 }
 
 export async function getOneUserEvent(id) {
-  return userEeventsAPI.getOneUserEvent(id);
+  return userEventsAPI.getOneUserEvent(id);
 }
 
-export async function updateUserEvent(id, report) {
-  return userEeventsAPI.updateUserEvent(id, report);
+export async function updateUserEvent(id, event) {
+  return userEventsAPI.updateUserEvent(id, event);
 }
 
 export async function deleteUserEvent(id) {
-  return userEeventsAPI.deleteUserEvent(id);
+  return userEventsAPI.deleteUserEvent(id);
+}
+
+export async function addMedia(id, media) {
+  return userEventsAPI.addMedia(id, media);
 }
