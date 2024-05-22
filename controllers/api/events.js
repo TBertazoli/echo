@@ -3,6 +3,7 @@ const User = require("../../models/user");
 const { S3Client } = require("@aws-sdk/client-s3");
 const { PutObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const incidentTimeline = require("../../models/incidentTimeline");
 
 module.exports = {
   create,
@@ -59,10 +60,12 @@ async function create(req, res) {
 async function show(req, res) {
   try {
     const user = await User.findById(req.user._id);
-    const event = await Event.find({ user: user }).populate({
-      path: "eventType",
-      model: "EventType",
-    });
+    const event = await Event.find({ user: user })
+      .populate({
+        path: "eventType",
+        model: "EventType",
+      })
+      .populate(incidentTimeline);
 
     res.json(event);
   } catch (err) {
