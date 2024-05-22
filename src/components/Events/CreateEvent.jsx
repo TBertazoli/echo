@@ -69,15 +69,27 @@ const CreateEvent = () => {
   }, [id]);
 
   useEffect(() => {
-    setViewport({
-      latitude: eventDetails.latitude,
-      longitude: eventDetails.longitude,
-      zoom: 15,
-    });
-    setMarker({
-      latitude: eventDetails.latitude,
-      longitude: eventDetails.longitude,
-    });
+    if (eventDetails.latitude && eventDetails.longitude) {
+      setViewport({
+        latitude: eventDetails.latitude,
+        longitude: eventDetails.longitude,
+        zoom: 15,
+      });
+      setMarker({
+        latitude: eventDetails.latitude,
+        longitude: eventDetails.longitude,
+      });
+    } else {
+      setViewport({
+        latitude: 37.7749,
+        longitude: -122.4194,
+        zoom: 15,
+      });
+      setMarker({
+        latitude: 37.7749,
+        longitude: -122.4194,
+      });
+    }
   }, [eventDetails]);
 
   // set eventType if id exists and date
