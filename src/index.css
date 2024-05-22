@@ -37,6 +37,10 @@ body {
 }
 
 :root {
-  --toastify-color-dark: #27272A !important;
-  --toastify-color-progress-info: #3B81F6 !important;
+  --toastify-color-dark: #27272a !important;
+  --toastify-color-progress-info: #3b81f6 !important;
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }

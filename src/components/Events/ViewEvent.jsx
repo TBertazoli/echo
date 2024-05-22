@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import * as EventsService from "../../utilities/events-api";
+import * as UserEventsService from "../../utilities/user-events-service";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import EventTypeIcon from "./EventTypeIcon";
 import Modal from "react-modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function ViewEvent() {
+export default function ViewEvent({user}) {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const history = useNavigate();
 
   function openModal() {
     setIsOpen(true);
@@ -24,12 +28,18 @@ export default function ViewEvent() {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
+      backgroundColor: "#27272A",
+      color: "white",
+      border: "none",
+      borderRadius: "0.5rem",
+      // bg: "zinc-800",
     },
   };
 
   function closeModal() {
     setIsOpen(false);
   }
+
   useEffect(() => {
     async function getEvent() {
       const event = await EventsService.getOneEvent(id);
@@ -38,6 +48,22 @@ export default function ViewEvent() {
     getEvent();
   }, [id]);
 
+  async function handleDelete() {
+    try {
+      await UserEventsService.deleteUserEvent(id);
+      toast.info("Waiting for event to be deleted...", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+        icon: false,
+        onClose: () => {
+          history("/");
+        },
+      });
+    } catch {
+      console.log("Error deleting event");
+    }
+  }
   const handleCopyUrl = () => {
     navigator.clipboard.writeText(window.location.href);
     alert("URL copied to clipboard");
@@ -47,6 +73,7 @@ export default function ViewEvent() {
 
   return (
     <div className="container mx-auto p-4 mb-4">
+      <ToastContainer />
       <Link to="/">
         <button className="rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer">
           <i className="las la-arrow-left"></i> Back
@@ -86,14 +113,16 @@ export default function ViewEvent() {
 
       {/* delete modal */}
 
-      <div className="mb-8 flex-end">
-        <button
-          onClick={openModal}
-          className="bg-red-500 text-white px-4 py-2 rounded-lg"
-        >
-          Delete Event
-        </button>
-      </div>
+      {user && user._id === event.user && (
+        <div className="mb-8 flex justify-end">
+          <button
+            onClick={openModal}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg"
+          >
+            Delete Event
+          </button>
+        </div>
+      )}
 
       <Modal
         isOpen={modalIsOpen}
@@ -101,16 +130,23 @@ export default function ViewEvent() {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+        <h2 className="text-2xl mb-4">
+          Are you sure you want to delete this event?
+        </h2>
+        <div className="flex gap-4">
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg"
+          >
+            Yes
+          </button>
+          <button
+            onClick={closeModal}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          >
+            No
+          </button>
+        </div>
       </Modal>
       <div className="flex flex-col gap-4 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
         <div className="flex justify-between ">
