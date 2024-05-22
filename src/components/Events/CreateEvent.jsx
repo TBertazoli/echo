@@ -19,17 +19,14 @@ const CreateEvent = ({ onEventCreated }) => {
     description: "",
     reportDate: "",
     mediaUrl: "",
+    eventType: "",
   });
 
   const [eventTypes, setEventTypes] = useState([]);
 
-  const [selectedType, setSelectedType] = useState(null);
-
   useEffect(() => {
     const fetchEventTypes = async () => {
-      console.log("Fetching event types");
       const types = await EventTypes.getEventType();
-      console.log(types);
       setEventTypes(types);
     };
     fetchEventTypes();
@@ -56,7 +53,7 @@ const CreateEvent = ({ onEventCreated }) => {
 
   const handleSelectAddress = async (evt) => {
     evt.preventDefault();
-    const fullAddress = `${eventDetails["address address-search"]}, ${eventDetails.city}, ${eventDetails.state}, ${eventDetails.country}, ${eventDetails.zip}`;
+    const fullAddress = `${eventDetails.address}, ${eventDetails.city}, ${eventDetails.state}, ${eventDetails.country}, ${eventDetails.zip}`;
     try {
       const response = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
@@ -99,10 +96,7 @@ const CreateEvent = ({ onEventCreated }) => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const response = await Events.createEvent({
-        ...eventDetails,
-        type: selectedType,
-      });
+      const response = await Events.createEvent(eventDetails);
       if (response.ok) {
         const newEvent = await response.json();
         onEventCreated(newEvent);
@@ -119,7 +113,7 @@ const CreateEvent = ({ onEventCreated }) => {
   return (
     <div className="max-w-4xl mx-auto mt-12 mb-12">
       <Link to="/">
-        <button className="rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer">
+        <button className="rounded-lg px-4 py-2 text-white bg-blue-500 hover:bg-blue-700 focus:outline-none">
           <i className="las la-arrow-left"></i> Back
         </button>
       </Link>
@@ -129,7 +123,7 @@ const CreateEvent = ({ onEventCreated }) => {
       <div>
         <div>
           <form
-            className="flex flex-col gap-4 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600"
+            className="flex flex-col gap-4 w-full mb-12 rounded-md p-4 bg-zinc-800 border border-zinc-600"
             onSubmit={handleSubmit}
           >
             <input
@@ -138,23 +132,24 @@ const CreateEvent = ({ onEventCreated }) => {
               value={eventDetails.title}
               onChange={handleAddressChange}
               required
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             />
             <AddressAutofill accessToken={token}>
               <input
                 name="address"
                 placeholder="Address"
-                onInput={handleAddressChange}
+                value={eventDetails.address}
+                onChange={handleAddressChange}
                 autoComplete="address-line1"
                 required
-                className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+                className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
               />
             </AddressAutofill>
 
             <button
               type="button"
               onClick={handleSelectAddress}
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer"
+              className="w-full block rounded-lg px-4 py-2 text-base text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
             >
               Autofill Address
             </button>
@@ -171,8 +166,6 @@ const CreateEvent = ({ onEventCreated }) => {
                   <Marker
                     longitude={marker.longitude}
                     latitude={marker.latitude}
-                    offsetLeft={-20}
-                    offsetTop={-10}
                   >
                     <span className="relative flex h-3 w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -188,7 +181,7 @@ const CreateEvent = ({ onEventCreated }) => {
               value={eventDetails.city}
               onChange={handleAddressChange}
               required
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             />
             <input
               name="state"
@@ -196,7 +189,7 @@ const CreateEvent = ({ onEventCreated }) => {
               value={eventDetails.state}
               onChange={handleAddressChange}
               required
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             />
             <input
               name="country"
@@ -204,7 +197,7 @@ const CreateEvent = ({ onEventCreated }) => {
               value={eventDetails.country}
               onChange={handleAddressChange}
               required
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             />
             <input
               name="zip"
@@ -212,21 +205,21 @@ const CreateEvent = ({ onEventCreated }) => {
               value={eventDetails.zip}
               onChange={handleAddressChange}
               required
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             />
             <textarea
               name="description"
               placeholder="Description"
               value={eventDetails.description}
               onChange={handleAddressChange}
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             />
 
             <select
-              name="type"
-              value={selectedType}
-              onChange={(evt) => setSelectedType(evt.target.value)}
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              name="eventType"
+              value={eventDetails.eventType}
+              onChange={handleAddressChange}
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             >
               <option value="">Select Event Type</option>
               {eventTypes.map((type) => (
@@ -242,45 +235,12 @@ const CreateEvent = ({ onEventCreated }) => {
               value={eventDetails.reportDate}
               onChange={handleAddressChange}
               required
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             />
-
-            <div className="flex items-center justify-center w-full">
-              <label
-                htmlFor="dropzone-file"
-                className="flex flex-col items-center justify-center w-full h-64 border-2 border-zinc-500 border-dashed rounded-lg cursor-pointer bg-zinc-700"
-              >
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg
-                    className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 16"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                    />
-                  </svg>
-                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span className="font-semibold">Click to upload</span> or
-                    drag and drop
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p>
-                </div>
-                <input id="dropzone-file" type="file" className="hidden" />
-              </label>
-            </div>
 
             <button
               type="submit"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer"
+              className="w-full block rounded-lg px-4 py-2 text-base text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
             >
               Create Event
             </button>
