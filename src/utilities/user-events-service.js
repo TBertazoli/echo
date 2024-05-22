@@ -3,7 +3,6 @@ import * as userEeventsAPI from "./user-events-api";
 export async function createEvent(report) {
   return userEeventsAPI.create(report);
 }
-
 export async function getUserEvents() {
   return userEeventsAPI.getUserEvents();
 }

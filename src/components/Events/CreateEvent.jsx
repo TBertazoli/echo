@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Link } from "react-router-dom";
 import { AddressAutofill, config } from "@mapbox/search-js-react";
-import * as Events from "../../utilities/user-events-service"
+import * as Events from "../../utilities/user-events-service";
+import * as EventTypes from "../../utilities/eventType-service";
 
 const CreateEvent = ({ onEventCreated }) => {
   const [eventDetails, setEventDetails] = useState({
@@ -19,6 +20,20 @@ const CreateEvent = ({ onEventCreated }) => {
     reportDate: "",
     mediaUrl: "",
   });
+
+  const [eventTypes, setEventTypes] = useState([]);
+
+  const [selectedType, setSelectedType] = useState(null);
+
+  useEffect(() => {
+    const fetchEventTypes = async () => {
+      console.log("Fetching event types");
+      const types = await EventTypes.getEventType();
+      console.log(types);
+      setEventTypes(types);
+    };
+    fetchEventTypes();
+  }, []);
 
   const [viewport, setViewport] = useState({
     latitude: 37.7749, // Default to San Francisco
@@ -84,10 +99,9 @@ const CreateEvent = ({ onEventCreated }) => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const response = await fetch("/api/events", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(eventDetails),
+      const response = await Events.createEvent({
+        ...eventDetails,
+        type: selectedType,
       });
       if (response.ok) {
         const newEvent = await response.json();
@@ -207,6 +221,20 @@ const CreateEvent = ({ onEventCreated }) => {
               onChange={handleAddressChange}
               className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
+
+            <select
+              name="type"
+              value={selectedType}
+              onChange={(evt) => setSelectedType(evt.target.value)}
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+            >
+              <option value="">Select Event Type</option>
+              {eventTypes.map((type) => (
+                <option key={type.id} value={type.id}>
+                  {type.type}
+                </option>
+              ))}
+            </select>
             <input
               name="reportDate"
               type="date"
