@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AddressAutofill, config } from "@mapbox/search-js-react";
 import * as Events from "../../utilities/user-events-service";
 import * as EventTypes from "../../utilities/eventType-service";
@@ -9,6 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const CreateEvent = () => {
+  // check if id exists in the url
+  const { id } = useParams();
   const [eventDetails, setEventDetails] = useState({
     title: "",
     address: "",
@@ -45,11 +47,7 @@ const CreateEvent = () => {
     fetchEventTypes();
   }, []);
 
-  const [viewport, setViewport] = useState({
-    latitude: 37.7749, // Default to San Francisco
-    longitude: -122.4194,
-    zoom: 12,
-  });
+  const [viewport, setViewport] = useState(null);
 
   const [marker, setMarker] = useState({
     latitude: 37.7749,
@@ -59,6 +57,38 @@ const CreateEvent = () => {
   const token =
     "pk.eyJ1IjoiYmVydGF6b2xpdCIsImEiOiJjbHc2ZnZkMXIxd3ZnMmtuNnFocDg2MDBpIn0.3FrIoyBW1TCx6Yb9VAsCEA";
   config.accessToken = token;
+
+  useEffect(() => {
+    async function getEvent() {
+      const event = await Events.getOneUserEvent(id);
+      setEventDetails(event);
+    }
+    if (id) {
+      getEvent();
+    }
+  }, [id]);
+
+  useEffect(() => {
+    setViewport({
+      latitude: eventDetails.latitude,
+      longitude: eventDetails.longitude,
+      zoom: 15,
+    });
+    setMarker({
+      latitude: eventDetails.latitude,
+      longitude: eventDetails.longitude,
+    });
+  }, [eventDetails]);
+
+  // set eventType if id exists and date
+
+  useEffect(() => {
+    if (id && eventDetails.eventType) {
+      setEventDetails({
+        ...eventDetails,
+      });
+    }
+  }, [id, eventDetails.reportDate]);
 
   const handleAddressChange = (evt) => {
     if (evt.target.id === "address") {
@@ -138,14 +168,26 @@ const CreateEvent = () => {
     setIsLoaded(true);
     evt.preventDefault();
     try {
-      let event = await Events.createEvent(eventDetails);
-      toast.info("Creating your event", {
-        position: "top-center",
-        autoClose: 2000,
-        theme: "dark",
-        icon: false,
-        onClose: () => history("/events/" + event._id),
-      });
+      if (id) {
+        await Events.updateUserEvent(id, eventDetails);
+        toast.info("Updating your event", {
+          position: "top-center",
+          autoClose: 2000,
+          theme: "dark",
+          icon: false,
+          onClose: () => history("/events/" + id),
+        });
+        return;
+      } else {
+        let event = await Events.createEvent(eventDetails);
+        toast.info("Creating your event", {
+          position: "top-center",
+          autoClose: 2000,
+          theme: "dark",
+          icon: false,
+          onClose: () => history("/events/" + event._id),
+        });
+      }
     } catch (error) {
       toast.error("Error creating event");
     } finally {
@@ -327,6 +369,8 @@ const CreateEvent = () => {
                   </svg>
                   <span className="sr-only">Loading...</span>
                 </div>
+              ) : id ? (
+                "Update Event"
               ) : (
                 "Create Event"
               )}

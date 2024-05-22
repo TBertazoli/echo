@@ -43,6 +43,7 @@ export default function App() {
             {/* view details */}
             <Route path="/events/:id" element={<ViewEvent user={user} />} />
             {/* edit event */}
+            <Route path="/events/:id/edit" element={<CreateEvent />} />
           </Routes>
         </>
       ) : (
