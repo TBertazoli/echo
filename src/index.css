@@ -35,3 +35,8 @@ body {
   color: white;
   padding: 0.5rem;
 }
+
+:root {
+  --toastify-color-dark: #27272A !important;
+  --toastify-color-progress-info: #3B81F6 !important;
+}

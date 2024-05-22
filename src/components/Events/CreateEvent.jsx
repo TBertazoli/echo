@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AddressAutofill, config } from "@mapbox/search-js-react";
 import * as Events from "../../utilities/user-events-service";
 import * as EventTypes from "../../utilities/eventType-service";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const CreateEvent = ({ onEventCreated }) => {
+const CreateEvent = () => {
   const [eventDetails, setEventDetails] = useState({
     title: "",
     address: "",
@@ -22,7 +24,18 @@ const CreateEvent = ({ onEventCreated }) => {
     eventType: "",
   });
 
+  const history = useNavigate();
+
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const [eventTypes, setEventTypes] = useState([]);
+  const [disabledFields, setDisabledFields] = useState({
+    address: false,
+    city: false,
+    state: false,
+    country: false,
+    zip: false,
+  });
 
   useEffect(() => {
     const fetchEventTypes = async () => {
@@ -48,11 +61,39 @@ const CreateEvent = ({ onEventCreated }) => {
   config.accessToken = token;
 
   const handleAddressChange = (evt) => {
-    setEventDetails({ ...eventDetails, [evt.target.name]: evt.target.value });
+    if (evt.target.id === "address") {
+      setEventDetails({
+        ...eventDetails,
+        [evt.target.name.split(" ")[0]]: evt.target.value,
+      });
+    } else {
+      setEventDetails({ ...eventDetails, [evt.target.name]: evt.target.value });
+    }
   };
+
+  function clearAddressFields() {
+    setEventDetails({
+      ...eventDetails,
+      address: "",
+      city: "",
+      state: "",
+      country: "",
+      zip: "",
+    });
+  }
 
   const handleSelectAddress = async (evt) => {
     evt.preventDefault();
+
+    const inputFields = ["address", "city", "state", "country", "zip"];
+
+    for (let field of inputFields) {
+      if (eventDetails[field]) {
+        handleAddressChange({
+          target: { name: field, value: eventDetails[field] },
+        });
+      }
+    }
     const fullAddress = `${eventDetails.address}, ${eventDetails.city}, ${eventDetails.state}, ${eventDetails.country}, ${eventDetails.zip}`;
     try {
       const response = await fetch(
@@ -84,34 +125,38 @@ const CreateEvent = ({ onEventCreated }) => {
         });
         setViewport({ ...viewport, latitude, longitude });
         setMarker({ latitude, longitude });
+
       } else {
-        alert("Address not found");
+        toast.error("Address not found");
       }
     } catch (error) {
       console.error("Error fetching geocoding data:", error);
-      alert("Error fetching geocoding data");
+      toast.error("Error fetching geocoding data");
     }
   };
 
   const handleSubmit = async (evt) => {
+    setIsLoaded(true);
     evt.preventDefault();
     try {
-      const response = await Events.createEvent(eventDetails);
-      if (response.ok) {
-        const newEvent = await response.json();
-        onEventCreated(newEvent);
-        alert("Event created successfully");
-      } else {
-        alert("Error creating event");
-      }
+      let event = await Events.createEvent(eventDetails);
+      toast.info("Creating your event", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+        icon: false,
+        onClose: () => history("/events/" + event._id),
+      });
     } catch (error) {
-      console.error("Error creating event:", error);
-      alert("Error creating event");
+      toast.error("Error creating event");
+    } finally {
+      setIsLoaded(false);
     }
   };
 
   return (
     <div className="max-w-4xl mx-auto mt-12 mb-12">
+      <ToastContainer />
       <Link to="/">
         <button className="rounded-lg px-4 py-2 text-white bg-blue-500 hover:bg-blue-700 focus:outline-none">
           <i className="las la-arrow-left"></i> Back
@@ -123,7 +168,7 @@ const CreateEvent = ({ onEventCreated }) => {
       <div>
         <div>
           <form
-            className="flex flex-col gap-4 w-full mb-12 rounded-md p-4 bg-zinc-800 border border-zinc-600"
+            className="flex flex-col gap-4 w-full mb-12 rounded-md p-4 bg-zinc-800 border border-zinc-600 pt-8  pb-8"
             onSubmit={handleSubmit}
           >
             <input
@@ -137,23 +182,65 @@ const CreateEvent = ({ onEventCreated }) => {
             <AddressAutofill accessToken={token}>
               <input
                 name="address"
+                id="address"
                 placeholder="Address"
-                value={eventDetails.address}
                 onChange={handleAddressChange}
                 autoComplete="address-line1"
+                value={eventDetails.address}
+                disabled={disabledFields.address}
                 required
                 className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
               />
             </AddressAutofill>
-
+            <input
+              name="city"
+              placeholder="City"
+              value={eventDetails.city}
+              onChange={handleAddressChange}
+              disabled={disabledFields.city}
+              required
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+            />
+            <input
+              name="state"
+              placeholder="State"
+              value={eventDetails.state}
+              onChange={handleAddressChange}
+              disabled={disabledFields.state}
+              required
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+            />
+            <input
+              name="country"
+              placeholder="Country"
+              value={eventDetails.country}
+              onChange={handleAddressChange}
+              disabled={disabledFields.country}
+              required
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+            />
+            <input
+              name="zip"
+              placeholder="ZIP Code"
+              value={eventDetails.zip}
+              onChange={handleAddressChange}
+              disabled={disabledFields.zip}
+              required
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+            />
+            <span
+              onClick={clearAddressFields}
+              className="text-blue-500 cursor-pointer text-right"
+            >
+              Clear Address Fields
+            </span>
             <button
               type="button"
               onClick={handleSelectAddress}
               className="w-full block rounded-lg px-4 py-2 text-base text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
             >
-              Autofill Address
+              Verify Address
             </button>
-
             <div>
               <Map
                 mapboxAccessToken={token}
@@ -175,41 +262,10 @@ const CreateEvent = ({ onEventCreated }) => {
                 )}
               </Map>
             </div>
-            <input
-              name="city"
-              placeholder="City"
-              value={eventDetails.city}
-              onChange={handleAddressChange}
-              required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
-            />
-            <input
-              name="state"
-              placeholder="State"
-              value={eventDetails.state}
-              onChange={handleAddressChange}
-              required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
-            />
-            <input
-              name="country"
-              placeholder="Country"
-              value={eventDetails.country}
-              onChange={handleAddressChange}
-              required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
-            />
-            <input
-              name="zip"
-              placeholder="ZIP Code"
-              value={eventDetails.zip}
-              onChange={handleAddressChange}
-              required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
-            />
             <textarea
               name="description"
               placeholder="Description"
+              rows="4"
               value={eventDetails.description}
               onChange={handleAddressChange}
               className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
@@ -217,13 +273,12 @@ const CreateEvent = ({ onEventCreated }) => {
 
             <select
               name="eventType"
-              value={eventDetails.eventType}
               onChange={handleAddressChange}
               className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             >
               <option value="">Select Event Type</option>
               {eventTypes.map((type) => (
-                <option key={type.id} value={type.id}>
+                <option key={type._id} value={type._id}>
                   {type.type}
                 </option>
               ))}
@@ -242,7 +297,29 @@ const CreateEvent = ({ onEventCreated }) => {
               type="submit"
               className="w-full block rounded-lg px-4 py-2 text-base text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
             >
-              Create Event
+              {isLoaded ? (
+                <div role="status">
+                  <svg
+                    aria-hidden="true"
+                    className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-900"
+                    viewBox="0 0 100 101"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                      fill="currentFill"
+                    />
+                  </svg>
+                  <span className="sr-only">Loading...</span>
+                </div>
+              ) : (
+                "Create Event"
+              )}
             </button>
           </form>
         </div>

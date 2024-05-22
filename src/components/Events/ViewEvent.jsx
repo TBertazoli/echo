@@ -48,9 +48,9 @@ export default function ViewEvent() {
             offsetLeft={-20}
             offsetTop={-10}
           >
-            <span className="relative flex h-5 w-5">
+            <span className="relative flex h-3 w-3">
               <span className="absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75 animate-ping"></span>
-              <span className="relative inline-flex h-5 w-5 rounded-full bg-red-500"></span>
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500"></span>
             </span>
           </Marker>
         </Map>
@@ -65,9 +65,7 @@ export default function ViewEvent() {
         <div className="flex justify-between ">
           <h1 className="text-3xl font-bold mb-2 text-white">{event.title}</h1>
 
-          <EventTypeIcon
-            type={event.eventType.type}
-          />
+          <EventTypeIcon type={event.eventType.type} />
         </div>
 
         <p className="text-gray-400 mb-2">{event.address}</p>
