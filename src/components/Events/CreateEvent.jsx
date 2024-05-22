@@ -125,7 +125,6 @@ const CreateEvent = () => {
         });
         setViewport({ ...viewport, latitude, longitude });
         setMarker({ latitude, longitude });
-
       } else {
         toast.error("Address not found");
       }
@@ -171,6 +170,7 @@ const CreateEvent = () => {
             className="flex flex-col gap-4 w-full mb-12 rounded-md p-4 bg-zinc-800 border border-zinc-600 pt-8  pb-8"
             onSubmit={handleSubmit}
           >
+            <label className="text-white text-left">Event Title</label>
             <input
               name="title"
               placeholder="Title"
@@ -179,6 +179,8 @@ const CreateEvent = () => {
               required
               className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             />
+
+            <label className="text-white text-left">Location details</label>
             <AddressAutofill accessToken={token}>
               <input
                 name="address"
@@ -247,7 +249,11 @@ const CreateEvent = () => {
                 viewState={viewport}
                 onMove={(evt) => setViewport(evt.viewState)}
                 mapStyle="mapbox://styles/mapbox/dark-v10"
-                style={{ width: "100%", height: "300px" }}
+                style={{
+                  width: "100%",
+                  height: "300px",
+                  borderRadius: "0.5rem",
+                }}
               >
                 {marker.latitude && marker.longitude && (
                   <Marker
@@ -262,6 +268,7 @@ const CreateEvent = () => {
                 )}
               </Map>
             </div>
+            <label className="text-white text-left">Event Description</label>
             <textarea
               name="description"
               placeholder="Description"
@@ -271,6 +278,7 @@ const CreateEvent = () => {
               className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
             />
 
+            <label className="text-white text-left">Event Type</label>
             <select
               name="eventType"
               onChange={handleAddressChange}
@@ -283,6 +291,8 @@ const CreateEvent = () => {
                 </option>
               ))}
             </select>
+
+            <label className="text-white text-left">Report Date</label>
             <input
               name="reportDate"
               type="date"
