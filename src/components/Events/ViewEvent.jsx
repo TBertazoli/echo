@@ -1,14 +1,35 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import { useParams, Link } from "react-router-dom";
 import * as EventsService from "../../utilities/events-api";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import EventTypeIcon from "./EventTypeIcon";
+import Modal from "react-modal";
 
 export default function ViewEvent() {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   useEffect(() => {
     async function getEvent() {
       const event = await EventsService.getOneEvent(id);
@@ -54,6 +75,7 @@ export default function ViewEvent() {
             </span>
           </Marker>
         </Map>
+
         <button
           onClick={handleCopyUrl}
           className="absolute top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
@@ -61,6 +83,35 @@ export default function ViewEvent() {
           Share
         </button>
       </div>
+
+      {/* delete modal */}
+
+      <div className="mb-8 flex-end">
+        <button
+          onClick={openModal}
+          className="bg-red-500 text-white px-4 py-2 rounded-lg"
+        >
+          Delete Event
+        </button>
+      </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <h2>Hello</h2>
+        <button onClick={closeModal}>close</button>
+        <div>I am a modal</div>
+        <form>
+          <input />
+          <button>tab navigation</button>
+          <button>stays</button>
+          <button>inside</button>
+          <button>the modal</button>
+        </form>
+      </Modal>
       <div className="flex flex-col gap-4 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
         <div className="flex justify-between ">
           <h1 className="text-3xl font-bold mb-2 text-white">{event.title}</h1>
