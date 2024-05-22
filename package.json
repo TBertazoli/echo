@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.577.0",
+    "@aws-sdk/s3-request-presigner": "^3.582.0",
     "@mapbox/search-js-react": "^1.0.0-beta.21",
     "@react-spring/web": "^9.7.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "aws-sdk": "^2.1625.0",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -33,10 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "seed": "node seed.js",
-    "seed-event-type": "node seedEventType.js",
-    "seed-incident": "node seedIncident.js",
-    "seed-event": "node seedEvent.js"
+    "seed": "node seed.js"
   },
   "eslintConfig": {
     "extends": [
