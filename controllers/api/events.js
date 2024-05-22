@@ -10,7 +10,7 @@ module.exports = {
   showOne,
   update,
   delete: deleteReport,
-  // addMedia,
+  createTimeline,
 };
 
 async function generateSignedUrls(image, eventId) {
@@ -97,6 +97,19 @@ async function deleteReport(req, res) {
   try {
     const deleteEvent = await Event.findByIdAndDelete(req.params.id);
     res.json(deleteEvent);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+async function createTimeline(req, res) {
+  const event = await Event.findById(req.params.id);
+  console.log(event);
+  event.incidentTimeline.push(req.body);
+  let incident;
+  try {
+    incident = await event.save();
+    res.json(incident);
   } catch (err) {
     res.status(400).json(err);
   }
