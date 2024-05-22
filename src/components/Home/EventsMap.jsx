@@ -242,12 +242,14 @@ export default function EventsMap({
                     <h2 className="text-white font-semibold text-lg mb-2 truncate">
                       {selectedEvent.title}
                     </h2>
-                    <EventTypeIcon type={selectedEvent.eventType.type} />
-                    <p className="text-gray-400 text-sm font-semibold">
-                      {selectedEvent.address}
-                    </p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-gray-400  font-semibold truncate w-1/2">
+                        {selectedEvent.address}
+                      </p>
+                      <EventTypeIcon type={selectedEvent.eventType.type} />
+                    </div>
 
-                    <p className="text-white text-sm mt-2 truncate">
+                    <p className="text-white text-sm mt-4 mb-4 truncate">
                       {selectedEvent.description}
                     </p>
 
