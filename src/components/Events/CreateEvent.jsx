@@ -359,7 +359,7 @@ const CreateEvent = () => {
 
             <button
               type="submit"
-              className="w-full block rounded-lg px-4 py-2 text-base text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
+              className="w-full flex justify-center rounded-lg px-4 py-2 text-base text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
             >
               {isLoaded ? (
                 <div role="status">
