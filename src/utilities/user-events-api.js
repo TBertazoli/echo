@@ -25,6 +25,6 @@ export async function addMedia(id, media) {
   return sendRequest(`${BASE_URL}/${id}/addMedia`, "POST", media);
 }
 
-// export async function addEventTimeline(id, event)) {
-//   return sendRequest(`${BASE_URL}/${id}/addTimeline`, "POST", event);
-// }
+export async function addEventTimeline(id, event) {
+  return sendRequest(`${BASE_URL}/${id}/addTimeline`, "POST", event);
+}
