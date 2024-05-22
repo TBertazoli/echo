@@ -1,8 +1,8 @@
 import sendRequest from "./send-request";
-const BASE_URL = "/api/user/reports";
+const BASE_URL = "/api/user/events";
 
-export async function create(report) {
-  return sendRequest(`${BASE_URL}/`, "POST", report);
+export async function create(event) {
+  return sendRequest(`${BASE_URL}/`, "POST", event);
 }
 
 export async function getUserEvents() {
@@ -13,10 +13,14 @@ export async function getOneUserEvent(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }
 
-export async function updateUserEvent(id, report) {
-  return sendRequest(`${BASE_URL}/${id}`, "PUT", report);
+export async function updateUserEvent(id, event) {
+  return sendRequest(`${BASE_URL}/${id}`, "PUT", event);
 }
 
 export async function deleteUserEvent(id) {
   return sendRequest(`${BASE_URL}/${id}`, "DELETE");
+}
+
+export async function addMedia(id, media) {
+  return sendRequest(`${BASE_URL}/${id}/addMedia`, "POST", media);
 }

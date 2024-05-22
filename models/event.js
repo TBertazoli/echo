@@ -42,9 +42,11 @@ const eventSchema = new Schema(
       type: Date,
       required: true,
     },
-    mediaUrl: {
-      type: String,
-    },
+    mediaUrl: [
+      {
+        type: String,
+      },
+    ],
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",

@@ -9,6 +9,7 @@ module.exports = {
   showOne,
   update,
   delete: deleteReport,
+  addMedia,
 };
 
 async function create(req, res) {
@@ -18,7 +19,6 @@ async function create(req, res) {
     const event = await Event.create({
       ...req.body,
       user: user,
-      photo: req.file ? req.file.path : null,
     });
 
     res.json(event);
@@ -43,7 +43,10 @@ async function show(req, res) {
 
 async function showOne(req, res) {
   try {
-    const event = await Event.findById(req.params.id);
+    const event = await Event.findById(req.params.id).populate({
+      path: "eventType",
+      model: "EventType",
+    });
     res.json(event);
   } catch (err) {
     res.status(400).json(err);
@@ -70,21 +73,36 @@ async function deleteReport(req, res) {
   }
 }
 
-// async function addMedia(req, res) {
-//   AWS.config.update({
-//     region: process.env.AWS_REGION,
-//     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//   });
-//   const s3 = new AWS.S3();
+async function addMedia(req, res) {
+  AWS.config.update({
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  });
+  const s3 = new AWS.S3();
 
-//   try {
-//     const event = await Event.findById(req.params.id);
-//     const fileContent = fs.readFileSync(event.mediaUrl);
+  try {
+    const event = await Event.findById(req.params.id);
+    const filename = `${event._id}-${event.mediaUrl}`;
+    const fileContent = fs.readFileSync(event.mediaUrl);
+    s3.putObject(
+      {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: filename,
+        Body: fileContent,
+      },
+      (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Image uploaded successfully!");
+        }
+      }
+    );
 
-//     await event.save();
-//     res.json(event);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// }
+    await event.save();
+    res.json(event);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
