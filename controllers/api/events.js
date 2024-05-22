@@ -43,7 +43,10 @@ async function show(req, res) {
 
 async function showOne(req, res) {
   try {
-    const event = await Event.findById(req.params.id);
+    const event = await Event.findById(req.params.id).populate({
+      path: "eventType",
+      model: "EventType",
+    });
     res.json(event);
   } catch (err) {
     res.status(400).json(err);
