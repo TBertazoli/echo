@@ -44,8 +44,19 @@ export default function EventsList({
             onClick={() => handleClick(event)}
           >
             <div className="mb-8">
-              <h2 className="text-white font-semibold mb-2">{event.title}</h2>
-              <p className="text-gray-400 text-sm mb-8">{event.address}</p>
+              <h2
+                className="text-white font-semibold mb-2  truncate"
+                style={{ maxWidth: "250px" }}
+              >
+                {" "}
+                {event.title}
+              </h2>
+              <p
+                className="text-gray-400 text-sm mb-8"
+                style={{ maxWidth: "250px" }}
+              >
+                {event.address}
+              </p>
             </div>
 
             <div className="mt-12">
@@ -53,7 +64,6 @@ export default function EventsList({
               <p className="text-gray-400 text-xs  mt-2 font-semibold">
                 {new Date(event.createdAt).toLocaleString("en-US", {
                   month: "short",
-                  year: "numeric",
                   day: "numeric",
                   hour: "numeric",
                   minute: "numeric",
