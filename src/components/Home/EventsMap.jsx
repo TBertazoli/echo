@@ -208,8 +208,9 @@ export default function EventsMap({
                   onClick={() => handleMarkerClick(report)}
                 >
                   <span className="relative flex h-3 w-3 cursor-pointer">
-                    {report.eventType.type === "Contruction" ||
-                    report.eventType.type === "Traffic" ? (
+                    {report.eventType.type === "Construction" ||
+                    report.eventType.type === "Traffic" ||
+                    report.eventType.type === "Roadblock" ? (
                       <>
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
