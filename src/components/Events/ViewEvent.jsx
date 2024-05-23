@@ -274,6 +274,10 @@ export default function ViewEvent({ user }) {
         </button>
       </div>
 
+      {event.mediaUrl && (
+        <div className="flex gap-4 mb-8">{event.mediaUrl[0]}</div>
+      )}
+
       {/* delete modal */}
 
       {user && user._id === event.user && (
