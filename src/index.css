@@ -45,3 +45,24 @@ body {
 .ReactModal__Overlay {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
+
+.form-control {
+  background-color: #323235;
+  color: white;
+  border: none;
+  height: 100%;
+  width: 100%;
+}
+
+.rdtPicker {
+  display: none;
+  position: absolute;
+  min-width: 250px;
+  padding: 4px;
+  color: #f2f2f2;
+  margin-top: 1px;
+  z-index: 99999 !important;
+  background: #323235 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #18181b !important;
+}

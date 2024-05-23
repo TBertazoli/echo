@@ -9,17 +9,37 @@ import EventTypeIcon from "./EventTypeIcon";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { set } from "mongoose";
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 
 export default function ViewEvent({ user }) {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [timelineModalIsOpen, setTimelineModalIsOpen] = useState(false);
   const history = useNavigate();
   const [isLoadingDelete, setIsLoading] = useState(false);
+  const [timeline, setTimeline] = useState([]);
+  const [timelineEvent, setTimelineEvent] = useState({
+    datetime: "",
+    title: "",
+    description: "",
+  });
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  function openTimelineModal() {
+    setTimelineModalIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function closeTimelineModal() {
+    setTimelineModalIsOpen(false);
   }
 
   const customStyles = {
@@ -34,19 +54,32 @@ export default function ViewEvent({ user }) {
       color: "white",
       border: "none",
       borderRadius: "0.5rem",
-      // bg: "zinc-800",
     },
   };
 
-  function closeModal() {
-    setIsOpen(false);
+  const customStyles2 = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "#27272A",
+      color: "white",
+      border: "none",
+      borderRadius: "0.5rem",
+      width: "40%",
+      height: "48%",
+    },
+  };
+
+  async function getEvent() {
+    const event = await EventsService.getOneEvent(id);
+    setEvent(event);
   }
 
   useEffect(() => {
-    async function getEvent() {
-      const event = await EventsService.getOneEvent(id);
-      setEvent(event);
-    }
     getEvent();
   }, [id]);
 
@@ -66,8 +99,38 @@ export default function ViewEvent({ user }) {
     } catch {
       console.log("Error deleting event");
     } finally {
+      setIsLoading(false);
     }
   }
+
+  async function handleAddTimelineEvent() {
+    if (!timelineEvent.time || !timelineEvent.notes) {
+      toast.error("Please fill out all fields", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+      });
+      return;
+    }
+    try {
+      await UserEventsService.addEventTimeline(id, timelineEvent);
+      toast.success("Timeline event added successfully!", {
+        position: "top-center",
+        autoClose: 1000,
+        theme: "dark",
+      });
+      setTimelineModalIsOpen(false);
+      setTimelineEvent({ time: "", notes: "" });
+      getEvent();
+    } catch {
+      toast.error("Error adding timeline event", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+      });
+    }
+  }
+
   const handleCopyUrl = () => {
     navigator.clipboard.writeText(window.location.href);
     alert("URL copied to clipboard");
@@ -162,7 +225,7 @@ export default function ViewEvent({ user }) {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Example Modal"
+        contentLabel="Delete Event Modal"
       >
         <h2 className="text-2xl mb-4">
           Are you sure you want to delete this event?
@@ -204,19 +267,59 @@ export default function ViewEvent({ user }) {
           </button>
         </div>
       </Modal>
-      <div className="flex flex-col gap-2 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
+
+      {/* Add Timeline Event Modal */}
+      <Modal
+        isOpen={timelineModalIsOpen}
+        onRequestClose={closeTimelineModal}
+        style={customStyles2}
+        contentLabel="Add Timeline Event Modal"
+      >
+        <h2 className="text-2xl mb-4">Add Event to Timeline</h2>
+        <div className="flex flex-col gap-4">
+          <Datetime
+            className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
+            value={timelineEvent.time}
+            onChange={(date) =>
+              setTimelineEvent({ ...timelineEvent, time: date })
+            }
+          />
+          <input
+            type="text"
+            className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
+            placeholder="Title"
+            value={timelineEvent.notes}
+            onChange={(e) =>
+              setTimelineEvent({ ...timelineEvent, notes: e.target.value })
+            }
+          />
+          <div className="flex gap-2">
+            <button
+              onClick={handleAddTimelineEvent}
+              className="text-gray-200 bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+            >
+              Add
+            </button>
+            <button
+              onClick={closeTimelineModal}
+              className="text-gray-200 bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      <div className="flex flex-col gap-2 w-full mb-8 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
         <div className="">
           <EventTypeIcon type={event.eventType.type} />
-
           <p className="text-gray-400 mt-2">
             {event.address} {event.city} {event.state}, {event.country}{" "}
             {event.zip}
           </p>
-
           <h1 className="text-3xl font-bold text-gray-200 mt-2">
             {event.title}
           </h1>
-
           <div className="flex justify-between w-full mt-2">
             <div className="flex justify-start"></div>
             <p className="text-gray-500 mb-2 text-sm">
@@ -229,22 +332,52 @@ export default function ViewEvent({ user }) {
             </p>
           </div>
         </div>
-        {/* label */}
-
         {event.description && (
           <h2 className="text-2xl font-bold text-gray-200 mt-2">Summary</h2>
         )}
-
         {event.description && (
           <p className="text-gray-200 mb-4">{event.description}</p>
         )}
-        {/* {event.mediaUrl && (
-          <img
-            src={event.mediaUrl}
-            alt="Event media"
-            className="w-full h-auto rounded-lg shadow-md"
-          />
-        )} */}
+      </div>
+
+      {/* Timeline */}
+      <div className="flex flex-col gap-4 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
+        <div className="flex justify-between">
+          <h2 className="text-2xl font-bold text-gray-200 mt-2">Timeline</h2>
+          <button
+            onClick={openTimelineModal}
+            className="mt-2 text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-4 flex justify-center"
+          >
+            Add Event to Timeline
+          </button>
+        </div>
+        {event.incidentTimeline.length > 0 ? (
+          <ol className="relative border-s border-gray-200 dark:border-gray-700">
+            {event.incidentTimeline.map((timelineEvent) => (
+              <li className="mb-10 ms-4">
+                <div className="absolute w-3 h-3  rounded-full mt-1.5 -start-1.5 border  border-gray-900 bg-gray-700"></div>
+                <time className="mb-1 text-sm font-normal leading-none text-gray-500">
+                  {new Date(timelineEvent.time).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                  })}
+                </time>
+                <h3 className="text-lg font-semibold text-gray-200">
+                  {timelineEvent.notes}
+                </h3>
+              </li>
+            ))}
+
+            <li className="mb-10 ms-4">
+              <div className="absolute w-2 h-2  mb-1.5 -start-1 border  border-gray-900 bg-gray-700"></div>
+            </li>
+          </ol>
+        ) : (
+          <p className="text-gray-400">This event does not have a timeline.</p>
+        )}
       </div>
     </div>
   );

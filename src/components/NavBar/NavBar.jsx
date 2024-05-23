@@ -207,9 +207,9 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
         </div>
 
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-4">
-          <div className="flex mr-0 md:mr-4">
+          <div className="flex mr-0 md:mr-4 items-center">
             <img
-              className="w-8 h-8 rounded-full mr-0 md:mr-2 mt-1"
+              className="w-10 h-10 rounded-full mr-0 md:mr-3 mt-1 "
               src="https://jeffjbutler.com//wp-content/uploads/2018/01/default-user.png"
               alt="user default"
             />
@@ -218,6 +218,13 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
                 {user.name}
               </span>
               <span className="block text-sm text-gray-700">{user.email}</span>
+              {/* view profile */}
+              <Link
+                to={`/profile/${user._id}`}
+                className="text-xs text-blue-500"
+              >
+                View Profile
+              </Link>
             </div>
           </div>
 
