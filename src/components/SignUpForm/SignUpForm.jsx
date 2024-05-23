@@ -73,12 +73,12 @@ export default function SignUpForm({ setUser }) {
             style={{ width: "500px" }}
           >
             <div className="grid h-full w-full overflow-hidden  p-6 py-8 sm:p-8 lg:p-12">
-              <h3 className="mb-12 text-lg/7 font-semibold tracking-[-0.015em] text-white text-left">
+              <h3 className="mb-12 text-lg/7 font-semibold tracking-[-0.015em] text-gray-200 text-left">
                 Sign up
               </h3>
 
               <div className="flex flex-col justify-start ">
-                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-white mb-4">
+                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-gray-200 mb-4">
                   Name
                 </label>
                 <input
@@ -86,12 +86,12 @@ export default function SignUpForm({ setUser }) {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
+                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
                   required
                 />
               </div>
               <div className="flex flex-col justify-start ">
-                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-white mb-4 mt-4">
+                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-gray-200 mb-4 mt-4">
                   Email
                 </label>
                 <input
@@ -99,12 +99,12 @@ export default function SignUpForm({ setUser }) {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
+                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
                   required
                 />
               </div>
               <div className="flex flex-col justify-start ">
-                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-white mb-4 mt-4">
+                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-gray-200 mb-4 mt-4">
                   Password
                 </label>
                 <input
@@ -112,12 +112,12 @@ export default function SignUpForm({ setUser }) {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
+                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
                   required
                 />
               </div>
               <div className="flex flex-col justify-start ">
-                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-white mb-4 mt-4">
+                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-gray-200 mb-4 mt-4">
                   Confirm
                 </label>
                 <input
@@ -125,7 +125,7 @@ export default function SignUpForm({ setUser }) {
                   name="confirm"
                   value={formData.confirm}
                   onChange={handleChange}
-                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
+                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
                   required
                 />
               </div>
@@ -133,7 +133,7 @@ export default function SignUpForm({ setUser }) {
                 <p className="text-red-500 text-sm">Passwords do not match</p>
               )}
               <button
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-8 flex justify-center"
+                className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-8 flex justify-center"
                 type="submit"
                 disabled={disable}
                 style={{ backgroundColor: disable ? "#ccc" : null }}
@@ -170,7 +170,7 @@ export default function SignUpForm({ setUser }) {
                 Already have an account?{" "}
                 <span
                   onClick={() => navigate("/login")}
-                  className="font-semibold text-zinc-950 hover:text-zinc-700 dark:text-white dark:hover:text-zinc-300 cursor-pointer"
+                  className="font-semibold text-zinc-950 hover:text-zinc-700 dark:text-gray-200 dark:hover:text-zinc-300 cursor-pointer"
                 >
                   Sign in
                 </span>

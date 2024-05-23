@@ -211,11 +211,11 @@ const CreateEvent = () => {
     <div className="max-w-4xl mx-auto mt-12 mb-12">
       <ToastContainer />
       <Link to="/">
-        <button className="rounded-lg px-4 py-2 text-white bg-blue-500 hover:bg-blue-700 focus:outline-none">
+        <button className="rounded-lg px-4 py-2 text-gray-200 bg-blue-500 hover:bg-blue-700 focus:outline-none">
           <i className="las la-arrow-left"></i> Back
         </button>
       </Link>
-      <h1 className="text-3xl font-semibold text-white pt-8 mb-4">
+      <h1 className="text-3xl font-semibold text-gray-200 pt-8 mb-4">
         Create Event
       </h1>
       <div>
@@ -224,17 +224,17 @@ const CreateEvent = () => {
             className="flex flex-col gap-4 w-full mb-12 rounded-md p-4 bg-zinc-800 border border-zinc-600 pt-8  pb-8"
             onSubmit={handleSubmit}
           >
-            <label className="text-white text-left">Event Title</label>
+            <label className="text-gray-200 text-left">Event Title</label>
             <input
               name="title"
               placeholder="Title"
               value={eventDetails.title}
               onChange={handleAddressChange}
               required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
             />
 
-            <label className="text-white text-left">Location details</label>
+            <label className="text-gray-200 text-left">Location details</label>
             <AddressAutofill accessToken={token}>
               <input
                 name="address"
@@ -245,7 +245,7 @@ const CreateEvent = () => {
                 value={eventDetails.address}
                 disabled={disabledFields.address}
                 required
-                className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+                className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
               />
             </AddressAutofill>
             <input
@@ -255,7 +255,7 @@ const CreateEvent = () => {
               onChange={handleAddressChange}
               disabled={disabledFields.city}
               required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
             />
             <input
               name="state"
@@ -264,7 +264,7 @@ const CreateEvent = () => {
               onChange={handleAddressChange}
               disabled={disabledFields.state}
               required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
             />
             <input
               name="country"
@@ -273,7 +273,7 @@ const CreateEvent = () => {
               onChange={handleAddressChange}
               disabled={disabledFields.country}
               required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
             />
             <input
               name="zip"
@@ -282,7 +282,7 @@ const CreateEvent = () => {
               onChange={handleAddressChange}
               disabled={disabledFields.zip}
               required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
             />
             <span
               onClick={clearAddressFields}
@@ -293,7 +293,7 @@ const CreateEvent = () => {
             <button
               type="button"
               onClick={handleSelectAddress}
-              className="w-full block rounded-lg px-4 py-2 text-base text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base text-gray-200 bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
             >
               Verify Address
             </button>
@@ -322,21 +322,21 @@ const CreateEvent = () => {
                 )}
               </Map>
             </div>
-            <label className="text-white text-left">Event Description</label>
+            <label className="text-gray-200 text-left">Event Description</label>
             <textarea
               name="description"
               placeholder="Description"
               rows="4"
               value={eventDetails.description}
               onChange={handleAddressChange}
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
             />
 
-            <label className="text-white text-left">Event Type</label>
+            <label className="text-gray-200 text-left">Event Type</label>
             <select
               name="eventType"
               onChange={handleAddressChange}
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
             >
               <option value="">Select Event Type</option>
               {eventTypes.map((type) => (
@@ -346,7 +346,7 @@ const CreateEvent = () => {
               ))}
             </select>
 
-            <label className="text-white text-left">Report Date</label>
+            <label className="text-gray-200 text-left">Report Date</label>
             <input
               name="reportDate"
               type="date"
@@ -354,12 +354,12 @@ const CreateEvent = () => {
               value={eventDetails.reportDate}
               onChange={handleAddressChange}
               required
-              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-white border border-white/10 bg-white/5 focus:outline-none"
+              className="w-full block rounded-lg px-4 py-2 text-base placeholder-zinc-500 text-gray-200 border border-white/10 bg-white/5 focus:outline-none"
             />
 
             <button
               type="submit"
-              className="w-full flex justify-center rounded-lg px-4 py-2 text-base text-white bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
+              className="w-full flex justify-center rounded-lg px-4 py-2 text-base text-gray-200 bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
             >
               {isLoaded ? (
                 <div role="status">

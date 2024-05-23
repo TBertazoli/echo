@@ -102,7 +102,7 @@ export default function ViewEvent({ user }) {
     <div className="container mx-auto p-4 mb-4">
       <ToastContainer />
       <Link to="/">
-        <button className="rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer">
+        <button className="rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer">
           <i className="las la-arrow-left"></i> Back
         </button>
       </Link>
@@ -132,7 +132,7 @@ export default function ViewEvent({ user }) {
 
         <button
           onClick={handleCopyUrl}
-          className="absolute top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
+          className="absolute top-4 right-4 bg-blue-500 text-gray-200 px-4 py-2 rounded-lg"
         >
           Share
         </button>
@@ -144,13 +144,13 @@ export default function ViewEvent({ user }) {
         <div className="mb-8 flex justify-end gap-4">
           <button
             onClick={openModal}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg"
+            className="bg-red-500 text-gray-200 px-4 py-2 rounded-lg"
           >
             Delete Event
           </button>
 
           <Link to={`/events/${id}/edit`}>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+            <button className="bg-blue-500 text-gray-200 px-4 py-2 rounded-lg">
               Edit Event
             </button>
           </Link>
@@ -169,7 +169,7 @@ export default function ViewEvent({ user }) {
         <div className="flex gap-4">
           <button
             onClick={handleDelete}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg"
+            className="bg-red-500 text-gray-200 px-4 py-2 rounded-lg"
           >
             {isLoadingDelete ? (
               <div role="status">
@@ -197,7 +197,7 @@ export default function ViewEvent({ user }) {
           </button>
           <button
             onClick={closeModal}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            className="bg-blue-500 text-gray-200 px-4 py-2 rounded-lg"
           >
             No
           </button>
@@ -205,7 +205,9 @@ export default function ViewEvent({ user }) {
       </Modal>
       <div className="flex flex-col gap-4 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
         <div className="flex justify-between ">
-          <h1 className="text-3xl font-bold mb-2 text-white">{event.title}</h1>
+          <h1 className="text-3xl font-bold mb-2 text-gray-200">
+            {event.title}
+          </h1>
 
           <EventTypeIcon type={event.eventType.type} />
         </div>
@@ -223,7 +225,7 @@ export default function ViewEvent({ user }) {
           })}
         </p>
         {event.description && (
-          <p className="text-white mb-4">{event.description}</p>
+          <p className="text-gray-200 mb-4">{event.description}</p>
         )}
         {event.mediaUrl && (
           <img

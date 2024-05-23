@@ -70,11 +70,11 @@ export default function LoginForm({ setUser }) {
           >
             <div className="grid h-full w-full overflow-hidden  p-6 py-8 sm:p-8 lg:p-12">
               <div className="flex items-center justify-center"></div>
-              <h3 className="text-lg/7 font-semibold tracking-[-0.015em] text-white text-left mb-12">
+              <h3 className="text-lg/7 font-semibold tracking-[-0.015em] text-gray-200 text-left mb-12">
                 Sign in
               </h3>
               <div className="flex flex-col justify-start ">
-                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-white mb-4">
+                <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-gray-200 mb-4">
                   Email
                 </label>
                 <input
@@ -82,11 +82,11 @@ export default function LoginForm({ setUser }) {
                   name="email"
                   value={credentials.email}
                   onChange={handleChange}
-                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
+                  className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
                   required
                 />
               </div>
-              <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-white mb-4 mt-4">
+              <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-gray-200 mb-4 mt-4">
                 Password
               </label>
               <input
@@ -95,11 +95,11 @@ export default function LoginForm({ setUser }) {
                 value={credentials.password}
                 onChange={handleChange}
                 required
-                className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
+                className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border  border-white/10 data-[hover]:border-white/20  bg-white/5 focus:outline-none"
               />
               <button
                 type="submit"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-8 flex justify-center"
+                className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-8 flex justify-center"
                 onClick={handleSubmit}
               >
                 {!isLoading ? (
@@ -131,7 +131,7 @@ export default function LoginForm({ setUser }) {
                 Don’t have an account?{" "}
                 <span
                   onClick={() => navigate("/signup")}
-                  className="font-semibold  cursor-pointer text-white"
+                  className="font-semibold  cursor-pointer text-gray-200"
                 >
                   Sign up
                 </span>

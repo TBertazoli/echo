@@ -40,14 +40,14 @@ export default function EventsList({
       <div className="col-span-4 relative bg-zinc-900 border-r border-zinc-800 overflow-scroll">
         <div className="border-b border-zinc-800">
           <div className="sticky top-0 flex justify-between bg-zinc-900 ">
-            <h1 className="text-white text-2xl font-semibold p-4 sticky top-0 mt-4 ">
+            <h1 className="text-gray-200 text-2xl font-semibold p-4 sticky top-0 mt-4 ">
               Events
             </h1>
 
             {/* create events buttons */}
             <div className="flex items-center p-4 pb-2 ">
               <Link to="/create-event">
-                <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center mt-4">
+                <button className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center mt-4">
                   Create Event
                 </button>
               </Link>
@@ -167,14 +167,14 @@ export default function EventsList({
     <div className="col-span-4 relative bg-zinc-900 border-r border-zinc-800 overflow-scroll ">
       <div>
         <div className="sticky top-0 flex justify-between bg-zinc-900">
-          <h1 className="text-white text-2xl font-semibold p-4 sticky top-0 mt-4">
+          <h1 className="text-gray-200 text-2xl font-semibold p-4 sticky top-0 mt-4">
             Events
           </h1>
 
           {/* create events buttons */}
           <div className="flex items-center p-4 pb-2">
             <Link to="/create-event">
-              <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center mt-4">
+              <button className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center mt-4">
                 Create Event
               </button>
             </Link>
@@ -194,7 +194,7 @@ export default function EventsList({
           >
             <div className="">
               <h2
-                className="text-white font-semibold mb-2  truncate"
+                className="text-gray-200 font-semibold mb-2  truncate"
                 style={{ maxWidth: "250px" }}
               >
                 {" "}

@@ -128,7 +128,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
                 </g>
               </g>
             </svg>
-            <span className="self-center text-3xl font-semibold whitespace-nowrap text-white hidden md:block">
+            <span className="self-center text-3xl font-semibold whitespace-nowrap text-gray-200 hidden md:block">
               Echo
             </span>
           </Link>
@@ -214,7 +214,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
               alt="user default"
             />
             <div className="flex flex-col hidden md:block">
-              <span className="block text-sm text-gray-300 font-semibold">
+              <span className="block text-sm text-gray-200 font-semibold">
                 {user.name}
               </span>
               <span className="block text-sm text-gray-700">{user.email}</span>
@@ -223,7 +223,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
 
           <button
             onClick={handleLogOut}
-            className="text-white  focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-zinc-800 hover:bg-zinc-700 focus:ring-zinc-700 border-zinc-700"
+            className="text-gray-200  focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-zinc-800 hover:bg-zinc-700 focus:ring-zinc-700 border-zinc-700"
           >
             Log Out
           </button>
