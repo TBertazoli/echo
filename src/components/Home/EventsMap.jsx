@@ -124,7 +124,7 @@ export default function EventsMap({
                   onChange={handleAddressChange}
                   type="text"
                   autoComplete="address-line1"
-                  className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+                  className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
                 />
               </AddressAutofill>
             </div>
@@ -135,7 +135,7 @@ export default function EventsMap({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-line2"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -144,7 +144,7 @@ export default function EventsMap({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-level2"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -153,7 +153,7 @@ export default function EventsMap({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-level1"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -162,7 +162,7 @@ export default function EventsMap({
               type="text"
               onChange={handleAddressChange}
               autoComplete="country"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -171,14 +171,14 @@ export default function EventsMap({
               type="text"
               onChange={handleAddressChange}
               autoComplete="postal-code"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <div className="flexw-full">
               <input
                 type="submit"
                 value="Submit"
-                className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer"
+                className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"
               />
             </div>
           </form>
@@ -240,17 +240,17 @@ export default function EventsMap({
                   offsetTop={-10}
                 >
                   <div className="p-2">
-                    <h2 className="text-white font-semibold text-lg mb-2 truncate">
+                    <h2 className="text-gray-200 font-semibold text-lg mb-2 truncate">
                       {selectedEvent.title}
                     </h2>
                     <div className="flex items-center justify-between">
-                      <p className="text-gray-400  font-semibold truncate w-1/2">
+                      <p className="text-zinc-600  font-semibold truncate w-1/2">
                         {selectedEvent.address}
                       </p>
                       <EventTypeIcon type={selectedEvent.eventType.type} />
                     </div>
 
-                    <p className="text-white text-sm mt-4 mb-4 truncate">
+                    <p className="text-gray-200 text-xs mt-4 mb-4 truncate">
                       {selectedEvent.description}
                     </p>
 
@@ -267,7 +267,7 @@ export default function EventsMap({
                         )}
                       </p>
                       <Link to={`/events/${selectedEvent._id}`}>
-                        <button className=" mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button className=" bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded">
                           View Event
                         </button>
                       </Link>

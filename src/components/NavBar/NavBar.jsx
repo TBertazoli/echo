@@ -128,7 +128,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
                 </g>
               </g>
             </svg>
-            <span className="self-center text-3xl font-semibold whitespace-nowrap text-white hidden md:block">
+            <span className="self-center text-3xl font-semibold whitespace-nowrap text-gray-200 hidden md:block">
               Echo
             </span>
           </Link>
@@ -178,7 +178,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
                 <span className="sr-only">Loading...</span>
               </div>
               <div role="status" class=" animate-pulse flex items-center">
-                <div class="h-2.5  rounded-full bg-zinc-700 w-48 "></div>
+                <div class="h-2.5  rounded-full bg-zinc-600 w-48 "></div>
                 <span
                   className="mx-2 font-semibold text-gray-400 dark:text-zinc-800 text-2xl block"
                   style={{
@@ -189,7 +189,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
                 >
                   |
                 </span>
-                <div class="h-2.5  rounded-full bg-zinc-700 w-48 block ml-4"></div>
+                <div class="h-2.5  rounded-full bg-zinc-600 w-48 block ml-4"></div>
                 <span class="sr-only">Loading...</span>
               </div>
             </div>
@@ -207,23 +207,30 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
         </div>
 
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-4">
-          <div className="flex mr-0 md:mr-4">
+          <div className="flex mr-0 md:mr-4 items-center">
             <img
-              className="w-8 h-8 rounded-full mr-0 md:mr-2 mt-1"
+              className="w-10 h-10 rounded-full mr-0 md:mr-3 mt-1 "
               src="https://jeffjbutler.com//wp-content/uploads/2018/01/default-user.png"
               alt="user default"
             />
             <div className="flex flex-col hidden md:block">
-              <span className="block text-sm text-white font-semibold">
+              <span className="block text-sm text-gray-200 font-semibold">
                 {user.name}
               </span>
-              <span className="block text-sm text-gray-400">{user.email}</span>
+              <span className="block text-sm text-gray-700">{user.email}</span>
+              {/* view profile */}
+              <Link
+                to={`/profile/${user._id}`}
+                className="text-xs text-blue-500"
+              >
+                View Profile
+              </Link>
             </div>
           </div>
 
           <button
             onClick={handleLogOut}
-            className="text-white  text-sm border bg-zinc-600 border-zinc-600 data-[hover]:border-zinc-700 hover:bg-zinc-700 focus:outline-none cursor-pointer px-2 py-2 rounded-lg"
+            className="text-gray-200  focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-zinc-800 hover:bg-zinc-700 focus:ring-zinc-700 border-zinc-700"
           >
             Log Out
           </button>

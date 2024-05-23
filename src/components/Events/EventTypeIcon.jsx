@@ -49,9 +49,8 @@ export default function EventTypeIcon({ type }) {
     Others: "❓",
   };
 
-
   return (
-    <p className="text-sm text-zinc-600 text-right ">
+    <p className="text-xs font-semibold text-gray-200  ">
       <span role="img" aria-label={type}>
         {type} {icons[type]}
       </span>
