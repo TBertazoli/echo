@@ -26,3 +26,7 @@ export async function addMedia(id, media) {
 export async function addEventTimeline(id, event) {
   return userEventsAPI.addEventTimeline(id, event);
 }
+
+export async function deleteEventTimeline(id, timelineId) {
+  return userEventsAPI.deleteEventTimeline(id, timelineId);
+}

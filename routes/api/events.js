@@ -9,5 +9,6 @@ router.get("/:id", eventsCtrl.showOne); //to show only users report by id
 router.put("/:id", eventsCtrl.update); //
 router.delete("/:id", eventsCtrl.delete);
 router.post("/:id/timeline", eventsCtrl.createTimeline);
+router.delete("/:id/timeline/:timelineId", eventsCtrl.deleteTimeline);
 
 module.exports = router;
