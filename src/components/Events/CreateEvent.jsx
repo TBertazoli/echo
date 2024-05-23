@@ -226,7 +226,7 @@ const CreateEvent = () => {
         </button>
       </Link>
       <h1 className="text-3xl font-semibold text-gray-200 pt-8 mb-4">
-        Create Event
+        {id ? "Edit Event Details" : "Create Event"}
       </h1>
       <div>
         <div>
