@@ -25,6 +25,7 @@ body {
   border: 1px solid #353539;
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px !important;
 }
 
 .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {

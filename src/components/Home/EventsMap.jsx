@@ -244,13 +244,13 @@ export default function EventsMap({
                       {selectedEvent.title}
                     </h2>
                     <div className="flex items-center justify-between">
-                      <p className="text-gray-400  font-semibold truncate w-1/2">
+                      <p className="text-zinc-600  font-semibold truncate w-1/2">
                         {selectedEvent.address}
                       </p>
                       <EventTypeIcon type={selectedEvent.eventType.type} />
                     </div>
 
-                    <p className="text-gray-200 text-sm mt-4 mb-4 truncate">
+                    <p className="text-gray-200 text-xs mt-4 mb-4 truncate">
                       {selectedEvent.description}
                     </p>
 
