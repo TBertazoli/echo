@@ -36,20 +36,21 @@ async function generateSignedUrls(image, eventId) {
 
 async function create(req, res) {
   const user = await User.findById(req.user._id);
-  const images = req.body.mediaUrl;
+  const image = req.body.mediaUrl;
   try {
     const event = await Event.create({
       ...req.body,
       user: user,
     });
-    console.log(event._id);
-    if (images) {
-      const uploadedImages = await generateSignedUrls(images, event.id);
-      console.log(uploadedImages);
-      event.mediaUrl = uploadedImages;
+    let uploadedImages;
+
+    if (image) {
+      uploadedImages = await generateSignedUrls(image, event.id);
     }
-    await event.save();
-    res.json(event);
+    res.json({
+      event,
+      uploadedImages,
+    });
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
