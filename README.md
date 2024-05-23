@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Echo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Screenshots
 
-## Available Scripts
+Sign in Page
+<img src="public/images/image1.png">
 
-In the project directory, you can run:
+Landing Page
+<img src="public/images/image2.png">
 
-### `npm start`
+Create Event Page
+<img src="public/images/image3.png">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Description
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Echo is a user-friendly app designed to keep your community informed and safe. With Echo, you can quickly report crimes, traffic incidents, and other disruptive events in real-time. Stay connected with local updates and contribute to a safer environment for everyone. Your voice helps echo important information across the community.
 
-### `npm test`
+## Table of contents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Description](#description)
+- [Screenshots](#screenshots)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Credits](#credits)
+- [Future Enhancements](#future-enhancements)
+- [Questions](#questions)
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- HTML
+- CSS
+- JavaScript
+- React
+- Tailwind
+- Express.js
+- MongoDB
+- Moongose
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1 - Access the [website](https://echo-app-2-123bb946dec5.herokuapp.com/).  
+2 - Create your credentials to be able to access the website.  
+3 - Upon sucessfull sign-in the user will be redirect to the landing page.  
+4 - The website will attemp to look for the users location.  
+5 - The user can look for events near you or around the map.  
+6 - The user can create events and upload images.  
+7 - The user can add story timeline to your events.  
+8 - The user can edit and delete all the events and timeline created.  
+9 - Link to [trello](https://trello.com/invite/b/soYxoDsY/ATTI6041e05592142c0a1556645868b4f1520282070C/echo) project planning.
 
-### `npm run eject`
+## Credits
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[Miguel Coria](https://github.com/miguelcoria94) and [Tatiana Bertazoli](https://github.com/TBertazoli)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Future Enhancements
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1 - Add goggle Oauth option  
+2 - Option to add more than one image/video  
+3 - Add comments
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Questions
 
-## Learn More
+For questions please contact: [Tatiana Bertazoli](tatianabertazoli@gmail.com) or [Miguel Coria](miguelcoria94@gmail.com)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[GitHub Link](https://github.com/TBertazoli/echo)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Heroku Link](https://echo-app-2-123bb946dec5.herokuapp.com/)
