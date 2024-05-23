@@ -65,6 +65,7 @@ export default function EventsList({
             <div className="mt-2">
               <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
               <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
               <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
@@ -79,6 +80,7 @@ export default function EventsList({
             <div className="mt-2">
               <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
               <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
               <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
@@ -92,6 +94,7 @@ export default function EventsList({
             <div className="mt-2">
               <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
               <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
               <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
@@ -105,6 +108,7 @@ export default function EventsList({
             <div className="mt-2">
               <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
               <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
               <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
@@ -118,6 +122,7 @@ export default function EventsList({
             <div className="mt-2">
               <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
               <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
               <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
@@ -131,6 +136,7 @@ export default function EventsList({
             <div className="mt-2">
               <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
               <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
               <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
@@ -144,6 +150,7 @@ export default function EventsList({
             <div className="mt-2">
               <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
               <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
               <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
@@ -185,7 +192,7 @@ export default function EventsList({
             className="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-800 cursor-pointer"
             onClick={() => handleClick(event)}
           >
-            <div className="mb-8">
+            <div className="">
               <h2
                 className="text-white font-semibold mb-2  truncate"
                 style={{ maxWidth: "250px" }}
@@ -194,14 +201,18 @@ export default function EventsList({
                 {event.title}
               </h2>
               <p
-                className="text-gray-400 text-sm mb-8"
+                className="text-gray-400 text-xs mb-8 truncate"
                 style={{ maxWidth: "250px" }}
               >
                 {event.address}
               </p>
+
+              <p className="text-gray-400 text-xs  mt-8 font-semibold">
+                {event.city}, {event.state}, {event.country} {event.zipCode}
+              </p>
             </div>
 
-            <div className="mt-12">
+            <div className="mt-8">
               <EventTypeIcon type={event.eventType.type} />
               <p className="text-gray-400 text-xs  mt-2 font-semibold">
                 {new Date(event.createdAt).toLocaleString("en-US", {

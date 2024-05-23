@@ -267,7 +267,7 @@ export default function EventsMap({
                         )}
                       </p>
                       <Link to={`/events/${selectedEvent._id}`}>
-                        <button className=" mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                           View Event
                         </button>
                       </Link>
