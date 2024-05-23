@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { signUp } from "../../utilities/users-service";
-import { useSpring, animated } from "@react-spring/web";
+
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUpForm({ setUser }) {
   const navigate = useNavigate();
@@ -22,15 +24,6 @@ export default function SignUpForm({ setUser }) {
     error: "",
   });
   const [error, setError] = useState("");
-  const springs = useSpring({
-    from: { opacity: 0, backgroundColor: "#fff", borderColor: "#fff" },
-    to: {
-      opacity: error ? 1 : 0,
-      backgroundColor: error ? "#fed7d7" : "#fff",
-      borderColor: error ? "#e53e3e" : "#fff",
-    },
-    config: { duration: 200 },
-  });
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,10 +42,20 @@ export default function SignUpForm({ setUser }) {
       const user = await signUp({ name, email, password });
       setUser(user);
       setIsLoading(false);
-      navigate("/");
+      toast.info("Welcome!", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+        icon: false,
+      });
     } catch (error) {
       setIsLoading(false);
-      setError("Sign Up Failed - Try Again");
+      toast.error("We had a problem signing you up", {
+        position: "top-center",
+        autoClose: 1000,
+        theme: "dark",
+        icon: false,
+      });
     }
   }
 
@@ -60,6 +63,7 @@ export default function SignUpForm({ setUser }) {
 
   return (
     <div className="h-screen flex items-center justify-center">
+      <ToastContainer />
       <main className="font-sans h-full bg-zinc-950 flex  flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="w-full mx-auto flex justify-center items-center h-full">
           <form
@@ -69,33 +73,9 @@ export default function SignUpForm({ setUser }) {
             style={{ width: "500px" }}
           >
             <div className="grid h-full w-full overflow-hidden  p-6 py-8 sm:p-8 lg:p-12">
-              <h3 className="text-lg/7 font-semibold tracking-[-0.015em] text-white text-left mb-4">
+              <h3 className="mb-12 text-lg/7 font-semibold tracking-[-0.015em] text-white text-left">
                 Sign up
               </h3>
-
-              <animated.div
-                className="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-                role="alert"
-                style={springs}
-              >
-                {error && (
-                  <>
-                    <svg
-                      className="flex-shrink-0 inline w-4 h-4 me-3"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                    </svg>
-                    <span className="sr-only">Info</span>
-                    <div>
-                      <span className="font-medium">{error}</span>
-                    </div>{" "}
-                  </>
-                )}
-              </animated.div>
 
               <div className="flex flex-col justify-start ">
                 <label className="select-none text-left text-base/6 data-[disabled]:opacity-50 sm:text-sm/6 text-white mb-4">
@@ -153,7 +133,7 @@ export default function SignUpForm({ setUser }) {
                 <p className="text-red-500 text-sm">Passwords do not match</p>
               )}
               <button
-                className="mt-8 w-full relative isolate inline-flex items-center justify-center gap-x-2 rounded-lg border text-base/6 font-semibold px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing.3)-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] sm:text-sm/6 focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 data-[disabled]:opacity-50 [&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-0.5 [&>[data-slot=icon]]:size-5 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:text-[--btn-icon] [&>[data-slot=icon]]:sm:my-1 [&>[data-slot=icon]]:sm:size-4 forced-colors:[--btn-icon:ButtonText] forced-colors:data-[hover]:[--btn-icon:ButtonText] border-transparent bg-[--btn-border] dark:bg-[--btn-bg] before:absolute before:inset-0 before:-z-10 before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-[--btn-bg] before:shadow dark:before:hidden dark:border-white/5 after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(colors.white/15%)] after:data-[active]:bg-[--btn-hover-overlay] after:data-[hover]:bg-[--btn-hover-overlay] dark:after:-inset-px dark:after:rounded-lg before:data-[disabled]:shadow-none after:data-[disabled]:shadow-none text-white [--btn-bg:theme(colors.zinc.900)] [--btn-border:theme(colors.zinc.950/90%)] [--btn-hover-overlay:theme(colors.white/10%)] dark:text-white dark:[--btn-bg:theme(colors.zinc.600)] dark:[--btn-hover-overlay:theme(colors.white/5%)] [--btn-icon:theme(colors.zinc.400)] data-[active]:[--btn-icon:theme(colors.zinc.300)] data-[hover]:[--btn-icon:theme(colors.zinc.300)] cursor-pointer"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-8 flex justify-center"
                 type="submit"
                 disabled={disable}
                 style={{ backgroundColor: disable ? "#ccc" : null }}
@@ -164,7 +144,7 @@ export default function SignUpForm({ setUser }) {
                   <div role="status">
                     <svg
                       aria-hidden="true"
-                      className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                      className="w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-white"
                       viewBox="0 0 100 101"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
