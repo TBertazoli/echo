@@ -168,7 +168,12 @@ const CreateEvent = () => {
         setViewport({ ...viewport, latitude, longitude });
         setMarker({ latitude, longitude });
       } else {
-        toast.error("Address not found");
+        toast.error("Invalid Address", {
+          position: "top-right",
+          autoClose: 1000,
+          theme: "dark",
+          icon: false,
+        });
       }
     } catch (error) {
       console.error("Error fetching geocoding data:", error);
@@ -201,7 +206,12 @@ const CreateEvent = () => {
         });
       }
     } catch (error) {
-      toast.error("Error creating event");
+      toast.error("Invalid Credentials", {
+        position: "top-center",
+        autoClose: 1000,
+        theme: "dark",
+        icon: false,
+      });
     } finally {
       setIsLoaded(false);
     }
@@ -211,7 +221,7 @@ const CreateEvent = () => {
     <div className="max-w-4xl mx-auto mt-12 mb-12">
       <ToastContainer />
       <Link to="/">
-        <button className="rounded-lg px-4 py-2 text-gray-200 bg-blue-500 hover:bg-blue-700 focus:outline-none">
+        <button className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex items-center gap-2">
           <i className="las la-arrow-left"></i> Back
         </button>
       </Link>
@@ -293,7 +303,7 @@ const CreateEvent = () => {
             <button
               type="button"
               onClick={handleSelectAddress}
-              className="w-full block rounded-lg px-4 py-2 text-base text-gray-200 bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
+              className="w-full text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"
             >
               Verify Address
             </button>
@@ -359,7 +369,7 @@ const CreateEvent = () => {
 
             <button
               type="submit"
-              className="w-full flex justify-center rounded-lg px-4 py-2 text-base text-gray-200 bg-blue-500 border border-blue-600 hover:bg-blue-700 focus:outline-none"
+              className="w-full text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"
             >
               {isLoaded ? (
                 <div role="status">
