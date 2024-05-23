@@ -214,16 +214,16 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
               alt="user default"
             />
             <div className="flex flex-col hidden md:block">
-              <span className="block text-sm text-white font-semibold">
+              <span className="block text-sm text-gray-300 font-semibold">
                 {user.name}
               </span>
-              <span className="block text-sm text-gray-400">{user.email}</span>
+              <span className="block text-sm text-gray-700">{user.email}</span>
             </div>
           </div>
 
           <button
             onClick={handleLogOut}
-            className="text-white  text-sm border bg-zinc-600 border-zinc-600 data-[hover]:border-zinc-700 hover:bg-zinc-700 focus:outline-none cursor-pointer px-2 py-2 rounded-lg"
+            className="text-white  focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-zinc-800 hover:bg-zinc-700 focus:ring-zinc-700 border-zinc-700"
           >
             Log Out
           </button>
