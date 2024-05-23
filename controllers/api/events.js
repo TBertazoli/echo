@@ -58,14 +58,12 @@ async function create(req, res) {
 }
 
 async function show(req, res) {
+  const user = await User.findById(req.user._id);
+  console.log(user);
   try {
-    const user = await User.findById(req.user._id);
-    const event = await Event.find({ user: user })
-      .populate({
-        path: "eventType",
-        model: "EventType",
-      })
-      .populate(incidentTimeline);
+    const event = await Event.find({ user: user }).populate({
+      path: "eventType",
+    });
 
     res.json(event);
   } catch (err) {
@@ -79,6 +77,7 @@ async function showOne(req, res) {
       path: "eventType",
       model: "EventType",
     });
+
     res.json(event);
   } catch (err) {
     res.status(400).json(err);
