@@ -3,15 +3,16 @@ const User = require("../../models/user");
 const { S3Client } = require("@aws-sdk/client-s3");
 const { PutObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
-const incidentTimeline = require("../../models/incidentTimeline");
 
 module.exports = {
   create,
   show,
   showOne,
   update,
-  delete: deleteReport,
+  delete: deleteEvent,
   createTimeline,
+  deleteTimeline,
+  updateTimeline,
 };
 
 async function generateSignedUrls(image, eventId) {
@@ -58,14 +59,12 @@ async function create(req, res) {
 }
 
 async function show(req, res) {
+  const user = await User.findById(req.user._id);
+  console.log(user);
   try {
-    const user = await User.findById(req.user._id);
-    const event = await Event.find({ user: user })
-      .populate({
-        path: "eventType",
-        model: "EventType",
-      })
-      .populate(incidentTimeline);
+    const event = await Event.find({ user: user }).populate({
+      path: "eventType",
+    });
 
     res.json(event);
   } catch (err) {
@@ -79,6 +78,7 @@ async function showOne(req, res) {
       path: "eventType",
       model: "EventType",
     });
+
     res.json(event);
   } catch (err) {
     res.status(400).json(err);
@@ -96,7 +96,7 @@ async function update(req, res) {
   }
 }
 
-async function deleteReport(req, res) {
+async function deleteEvent(req, res) {
   try {
     const deleteEvent = await Event.findByIdAndDelete(req.params.id);
     res.json(deleteEvent);
@@ -107,11 +107,43 @@ async function deleteReport(req, res) {
 
 async function createTimeline(req, res) {
   const event = await Event.findById(req.params.id);
-  console.log(event);
   event.incidentTimeline.push(req.body);
-  let incident;
   try {
-    incident = await event.save();
+    const incident = await event.save();
+    res.json(incident);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+async function deleteTimeline(req, res) {
+  const event = await Event.findById(req.params.id);
+  console.log(event);
+  const timeline = event.incidentTimeline.findIndex(
+    (t) => t.id === req.params.timelineId
+  );
+  console.log(timeline);
+  event.incidentTimeline.splice(timeline, 1);
+
+  try {
+    const incident = await event.save();
+
+    res.json(incident);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+async function updateTimeline(req, res) {
+  const event = await Event.findById(req.params.id);
+  const timeline = event.incidentTimeline.findIndex(
+    (t) => t.id === req.params.timelineId
+  );
+
+  event.incidentTimeline[timeline] = req.body;
+
+  try {
+    const incident = await event.save();
     res.json(incident);
   } catch (err) {
     res.status(400).json(err);
