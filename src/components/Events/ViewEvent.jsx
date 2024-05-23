@@ -206,28 +206,34 @@ export default function ViewEvent({ user }) {
       </Modal>
       <div className="flex flex-col gap-2 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
         <div className="">
-          <div className="flex item-center justify-start gap-2 m2 text-xs font-semibold text-gray-200 ">
-            <EventTypeIcon type={event.eventType.type} />
-          </div>
-          <h1 className="text-3xl font-bold text-gray-200 mb-2 mt-2">
+          <EventTypeIcon type={event.eventType.type} />
+
+          <p className="text-gray-400 mt-2">
+            {event.address} {event.city} {event.state}, {event.country}{" "}
+            {event.zip}
+          </p>
+
+          <h1 className="text-3xl font-bold text-gray-200 mt-2">
             {event.title}
           </h1>
-          <p className="text-gray-500 mb-2 ">
-            Reported on:{" "}
-            {new Date(event.reportDate).toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
+
+          <div className="flex justify-between w-full mt-2">
+            <div className="flex justify-start"></div>
+            <p className="text-gray-500 mb-2 text-sm">
+              Reported on:{" "}
+              {new Date(event.reportDate).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+          </div>
         </div>
-
-        <p className="text-gray-400">Address: {event.address}</p>
-        <span className="text-gray-400 mb-2">
-          {event.city}, {event.state}, {event.country} {event.zip}
-        </span>
-
         {/* label */}
+
+        {event.description && (
+          <h2 className="text-2xl font-bold text-gray-200 mt-2">Summary</h2>
+        )}
 
         {event.description && (
           <p className="text-gray-200 mb-4">{event.description}</p>
