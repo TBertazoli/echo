@@ -24,11 +24,11 @@ async function generateSignedUrls(image, eventId) {
     },
   });
   console.log(s3);
-
+  const filename = `${eventId}/${image}`;
   const command = new PutObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `${eventId}/${image.filename}`,
-    Body: image.data,
+    Key: filename,
+    Body: image,
   });
   const signedUrl = await getSignedUrl(s3, command, { expiresIn: 3600 });
   return signedUrl;
@@ -37,20 +37,18 @@ async function generateSignedUrls(image, eventId) {
 async function create(req, res) {
   const user = await User.findById(req.user._id);
   const images = req.body.mediaUrl;
-  console.log(user);
-  console.log(images);
-  let uploadedImages;
-  if (images) {
-    uploadedImages = await generateSignedUrls(images, req.body._id);
-  }
-
   try {
     const event = await Event.create({
       ...req.body,
       user: user,
-      mediaUrl: uploadedImages,
     });
-    console.log(event);
+    console.log(event._id);
+    if (images) {
+      const uploadedImages = await generateSignedUrls(images, event.id);
+      console.log(uploadedImages);
+      event.mediaUrl = uploadedImages;
+    }
+    await event.save();
     res.json(event);
   } catch (err) {
     console.log(err);
