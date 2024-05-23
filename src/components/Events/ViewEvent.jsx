@@ -102,7 +102,7 @@ export default function ViewEvent({ user }) {
     <div className="container mx-auto p-4 mb-4">
       <ToastContainer />
       <Link to="/">
-        <button className="rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer">
+        <button className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-8 flex justify-center gap-2 items-center">
           <i className="las la-arrow-left"></i> Back
         </button>
       </Link>
@@ -132,9 +132,10 @@ export default function ViewEvent({ user }) {
 
         <button
           onClick={handleCopyUrl}
-          className="absolute top-4 right-4 bg-blue-500 text-gray-200 px-4 py-2 rounded-lg"
+          className="absolute top-4 right-4 text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-4 flex justify-center"
         >
           Share
+          <i className="las la-share-alt ml-2 mt-1"></i>
         </button>
       </div>
 
@@ -144,13 +145,13 @@ export default function ViewEvent({ user }) {
         <div className="mb-8 flex justify-end gap-4">
           <button
             onClick={openModal}
-            className="bg-red-500 text-gray-200 px-4 py-2 rounded-lg"
+            className="text-gray-200  focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-red-800  flex justify-center gap-2 items-center"
           >
             Delete Event
           </button>
 
           <Link to={`/events/${id}/edit`}>
-            <button className="bg-blue-500 text-gray-200 px-4 py-2 rounded-lg">
+            <button className="text-gray-200 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800  flex justify-center gap-2 items-center">
               Edit Event
             </button>
           </Link>
@@ -166,10 +167,10 @@ export default function ViewEvent({ user }) {
         <h2 className="text-2xl mb-4">
           Are you sure you want to delete this event?
         </h2>
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           <button
             onClick={handleDelete}
-            className="bg-red-500 text-gray-200 px-4 py-2 rounded-lg"
+            className="text-gray-200  focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-red-800  flex justify-center gap-2 items-center"
           >
             {isLoadingDelete ? (
               <div role="status">
@@ -197,43 +198,47 @@ export default function ViewEvent({ user }) {
           </button>
           <button
             onClick={closeModal}
-            className="bg-blue-500 text-gray-200 px-4 py-2 rounded-lg"
+            className="text-gray-200 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800  flex justify-center gap-2 items-center"
           >
             No
           </button>
         </div>
       </Modal>
-      <div className="flex flex-col gap-4 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
-        <div className="flex justify-between ">
-          <h1 className="text-3xl font-bold mb-2 text-gray-200">
+      <div className="flex flex-col gap-2 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
+        <div className="">
+          <div className="flex item-center justify-start gap-2 m2 text-xs font-semibold text-gray-200 ">
+            <EventTypeIcon type={event.eventType.type} />
+          </div>
+          <h1 className="text-3xl font-bold text-gray-200 mb-2 mt-2">
             {event.title}
           </h1>
-
-          <EventTypeIcon type={event.eventType.type} />
+          <p className="text-gray-500 mb-2 ">
+            Reported on:{" "}
+            {new Date(event.reportDate).toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
         </div>
 
-        <p className="text-gray-400 mb-2">{event.address}</p>
+        <p className="text-gray-400">Address: {event.address}</p>
         <span className="text-gray-400 mb-2">
           {event.city}, {event.state}, {event.country} {event.zip}
         </span>
-        <p className="text-gray-600 mb-2">
-          Reported on:{" "}
-          {new Date(event.reportDate).toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </p>
+
+        {/* label */}
+
         {event.description && (
           <p className="text-gray-200 mb-4">{event.description}</p>
         )}
-        {event.mediaUrl && (
+        {/* {event.mediaUrl && (
           <img
             src={event.mediaUrl}
             alt="Event media"
             className="w-full h-auto rounded-lg shadow-md"
           />
-        )}
+        )} */}
       </div>
     </div>
   );

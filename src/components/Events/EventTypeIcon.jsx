@@ -50,7 +50,7 @@ export default function EventTypeIcon({ type }) {
   };
 
   return (
-    <p className="text-xs font-semibold text-zinc-600 text-right ">
+    <p className="text-xs font-semibold text-gray-200 text-right ">
       <span role="img" aria-label={type}>
         {type} {icons[type]}
       </span>
