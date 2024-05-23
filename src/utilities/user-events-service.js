@@ -22,3 +22,7 @@ export async function deleteUserEvent(id) {
 export async function addMedia(id, media) {
   return userEventsAPI.addMedia(id, media);
 }
+
+export async function addEventTimeline(id, event) {
+  return userEventsAPI.addEventTimeline(id, event);
+}
