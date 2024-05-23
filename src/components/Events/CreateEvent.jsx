@@ -311,7 +311,6 @@ const CreateEvent = () => {
               <Map
                 mapboxAccessToken={token}
                 viewState={viewport}
-                onMove={(evt) => setViewport(evt.viewState)}
                 mapStyle="mapbox://styles/mapbox/dark-v10"
                 style={{
                   width: "100%",
