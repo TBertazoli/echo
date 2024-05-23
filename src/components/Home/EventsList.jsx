@@ -212,7 +212,7 @@ export default function EventsList({
               </p>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col items-end">
               <EventTypeIcon type={event.eventType.type} />
               <p className="text-gray-400 text-xs  mt-2 font-semibold">
                 {new Date(event.createdAt).toLocaleString("en-US", {
