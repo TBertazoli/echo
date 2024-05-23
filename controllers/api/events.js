@@ -12,6 +12,7 @@ module.exports = {
   delete: deleteEvent,
   createTimeline,
   deleteTimeline,
+  updateTimeline,
 };
 
 async function generateSignedUrls(image, eventId) {
@@ -127,6 +128,22 @@ async function deleteTimeline(req, res) {
   try {
     const incident = await event.save();
 
+    res.json(incident);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+async function updateTimeline(req, res) {
+  const event = await Event.findById(req.params.id);
+  const timeline = event.incidentTimeline.findIndex(
+    (t) => t.id === req.params.timelineId
+  );
+
+  event.incidentTimeline[timeline] = req.body;
+
+  try {
+    const incident = await event.save();
     res.json(incident);
   } catch (err) {
     res.status(400).json(err);

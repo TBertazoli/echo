@@ -27,6 +27,10 @@ export async function addEventTimeline(id, event) {
   return userEventsAPI.addEventTimeline(id, event);
 }
 
-export async function deleteEventTimeline(id, timelineId) {
-  return userEventsAPI.deleteEventTimeline(id, timelineId);
+export async function deleteEventTimeline(id, timeline) {
+  return userEventsAPI.deleteEventTimeline(id, timeline);
+}
+
+export async function updateEventTimeline(id, timeline) {
+  return userEventsAPI.updateEventTimeline(id, timeline);
 }
