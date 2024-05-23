@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const reportTypeSchema = new Schema(
+const eventTypeSchema = new Schema(
   {
     type: { type: String, required: true },
   },
@@ -10,4 +10,4 @@ const reportTypeSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("ReportType", reportTypeSchema);
+module.exports = mongoose.model("EventType", eventTypeSchema);

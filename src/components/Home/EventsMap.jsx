@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AddressAutofill, config } from "@mapbox/search-js-react";
-import Map, { Marker } from "react-map-gl";
+import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import EventTypeIcon from "../Events/EventTypeIcon";
 
-export default function MapSearch({
+import { Link } from "react-router-dom";
+
+export default function EventsMap({
   longitude: propLongitude,
   latitude: propLatitude,
+  reports,
+  selectedEvent,
+  setSelectedEvent,
 }) {
   const [viewport, setViewport] = useState({
     latitude: propLatitude,
@@ -16,6 +22,8 @@ export default function MapSearch({
     latitude: propLatitude,
     longitude: propLongitude,
   });
+
+  const isUserInitiated = useRef(false);
 
   useEffect(() => {
     setViewport({
@@ -29,6 +37,16 @@ export default function MapSearch({
     });
   }, [propLongitude, propLatitude]);
 
+  useEffect(() => {
+    if (selectedEvent) {
+      setViewport({
+        latitude: selectedEvent.latitude,
+        longitude: selectedEvent.longitude,
+        zoom: 13,
+      });
+    }
+  }, [selectedEvent]);
+
   const [address, setAddress] = useState({
     address: "",
     unit: "",
@@ -39,7 +57,8 @@ export default function MapSearch({
   });
 
   function handleAddressChange(evt) {
-    setAddress({ ...address, [evt.target.name]: evt.target.value });
+    const { name, value } = evt.target;
+    setAddress((prevAddress) => ({ ...prevAddress, [name]: value }));
   }
 
   const token =
@@ -52,9 +71,7 @@ export default function MapSearch({
   async function handleSelect(evt) {
     evt.preventDefault();
 
-    console.log("Address:", address); // Debugging log
-
-    const fullAddress = `${address.address} ${address.unit} ${address.city} ${address.state} ${address.country} ${address.postcode}`;
+    const fullAddress = `${address["address address-search"]} ${address.unit} ${address.city} ${address.state} ${address.country} ${address.postcode}`;
 
     try {
       const response = await fetch(
@@ -79,7 +96,7 @@ export default function MapSearch({
           alert("Coordinates not found in the response.");
         }
       } else {
-        alert("Address not found");
+        alert("Please enter a valid address.");
       }
     } catch (error) {
       console.error("Error fetching geocoding data:", error);
@@ -87,8 +104,12 @@ export default function MapSearch({
     }
   }
 
+  const handleMarkerClick = (report) => {
+    setSelectedEvent(report);
+  };
+
   return (
-    <div className="col-span-8 h-full w-full">
+    <div className="col-span-8 h-full w-full overflow-hidden">
       <div className="relative w-full h-full">
         <div className="absolute w-full p-4 z-10">
           <form
@@ -103,7 +124,7 @@ export default function MapSearch({
                   onChange={handleAddressChange}
                   type="text"
                   autoComplete="address-line1"
-                  className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+                  className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
                 />
               </AddressAutofill>
             </div>
@@ -114,7 +135,7 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-line2"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -123,7 +144,7 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-level2"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -132,7 +153,7 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="address-level1"
-              className="w-full  relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -141,7 +162,7 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="country"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <input
@@ -150,14 +171,14 @@ export default function MapSearch({
               type="text"
               onChange={handleAddressChange}
               autoComplete="postal-code"
-              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
+              className="w-full relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-gray-200 border border-white/10 data-[hover]:border-white/20 bg-white/5 focus:outline-none"
             />
 
             <div className="flexw-full">
               <input
                 type="submit"
                 value="Submit"
-                className="w-full  relative block appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 placeholder:text-zinc-500 sm:text-sm/6 text-white border bg-blue-500 border-blue-600 data-[hover]:border-blue-700 bg-blue hover:bg-blue-700 focus:outline-none cursor-pointer"
+                className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"
               />
             </div>
           </form>
@@ -167,20 +188,93 @@ export default function MapSearch({
             <Map
               mapboxAccessToken={token}
               viewState={viewport}
+              onMove={(evt) => {
+                setTimeout(() => {
+                  isUserInitiated.current = true;
+                  setViewport(evt.viewState);
+                }, 0);
+              }}
+              onMoveEnd={() => {
+                isUserInitiated.current = false;
+              }}
               mapStyle="mapbox://styles/mapbox/dark-v10"
               style={{ width: "100%", height: "100%" }}
             >
-              <Marker
-                longitude={marker.longitude}
-                latitude={marker.latitude}
-                offsetLeft={-20}
-                offsetTop={-10}
-              >
-                <span class="relative flex h-3 w-3">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              {reports.map((report) => (
+                <Marker
+                  key={report.id}
+                  longitude={report.longitude}
+                  latitude={report.latitude}
+                  onClick={() => handleMarkerClick(report)}
+                >
+                  <span className="relative flex h-3 w-3 cursor-pointer">
+                    {report.eventType.type === "Construction" ||
+                    report.eventType.type === "Traffic" ||
+                    report.eventType.type === "Roadblock" ? (
+                      <>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                      </>
+                    )}
+                  </span>
+                </Marker>
+              ))}
+              <Marker longitude={marker.longitude} latitude={marker.latitude}>
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </span>
               </Marker>
+
+              {selectedEvent && (
+                <Popup
+                  latitude={selectedEvent.latitude}
+                  longitude={selectedEvent.longitude}
+                  closeOnClick={true}
+                  onClose={() => setSelectedEvent(null)}
+                  offsetTop={-10}
+                >
+                  <div className="p-2">
+                    <h2 className="text-gray-200 font-semibold text-lg mb-2 truncate">
+                      {selectedEvent.title}
+                    </h2>
+                    <div className="flex items-center justify-between">
+                      <p className="text-zinc-600  font-semibold truncate w-1/2">
+                        {selectedEvent.address}
+                      </p>
+                      <EventTypeIcon type={selectedEvent.eventType.type} />
+                    </div>
+
+                    <p className="text-gray-200 text-xs mt-4 mb-4 truncate">
+                      {selectedEvent.description}
+                    </p>
+
+                    <div className="flex justify-between items-center">
+                      <p className="text-gray-400 text-xs mt-2">
+                        {new Date(selectedEvent.createdAt).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric",
+                          }
+                        )}
+                      </p>
+                      <Link to={`/events/${selectedEvent._id}`}>
+                        <button className=" bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded">
+                          View Event
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </Popup>
+              )}
             </Map>
           )}
         </div>

@@ -2,10 +2,12 @@ const express = require("express");
 const path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
-// Always require and configure near the top
+const passport = require("passport");
+
 require("dotenv").config();
 // Connect to the database
 require("./config/database");
+require("./config/passport");
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use(express.static(path.join(__dirname, "build")));
 
 // Middleware to check and verify a JWT and
 // assign the user object from the JWT to req.user
+app.use(passport.initialize());
 app.use(require("./config/checkToken"));
 
 const port = process.env.PORT || 3001;
@@ -28,8 +31,9 @@ app.use("/api/users", require("./routes/api/users"));
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX/API requests
-app.use("/api/user/reports", require("./routes/api/reports"));
-app.use("/api/reports", require("./routes/api/allReports"));
+app.use("/api/user/events", require("./routes/api/events"));
+app.use("/api/events", require("./routes/api/allEvents"));
+app.use("/api/eventtype", require("./routes/api/eventType"));
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
