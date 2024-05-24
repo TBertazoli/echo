@@ -287,7 +287,7 @@ export default function ViewEvent({ user }) {
         </button>
       </div>
 
-      {event.mediaUrl && (
+      {/* {event.mediaUrl && (
         <div className="flex gap-4 mb-8">
           {console.log(
             `https://dqc7zxab9yyfq.cloudfront.net/${event._id}/${event.mediaUrl}`
@@ -298,7 +298,7 @@ export default function ViewEvent({ user }) {
             className="max-w-full h-auto"
           />
         </div>
-      )}
+      )} */}
 
       {/* delete modal */}
 

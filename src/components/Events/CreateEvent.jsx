@@ -350,7 +350,7 @@ const CreateEvent = () => {
             {
               // image preview
               image ? (
-                <div className="flex justify-center">
+                <div className="flex justify-center p-4 w-full bg-zinc-800 border border-zinc-600 rounded-lg">
                   <img
                     src={URL.createObjectURL(image)}
                     alt="event"
