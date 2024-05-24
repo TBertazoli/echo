@@ -44,10 +44,11 @@ async function create(req, res) {
       user: user,
     });
     let signedUrl;
-
+    console.log(event);
     if (image) {
       signedUrl = await generateSignedUrls(image, event.id);
     }
+    console.log(signedUrl);
     res.json({
       event,
       signedUrl,
