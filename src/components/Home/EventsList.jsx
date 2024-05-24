@@ -57,107 +57,107 @@ export default function EventsList({
             Scroll ↓
           </span>
         </div>
-        <div role="status" class=" rounded shadow animate-pulse ">
+        <div role="status" className=" rounded shadow animate-pulse ">
           <div
-            class="flex  justify-between p-4 border-b border-zinc-800 w-full"
+            className="flex  justify-between p-4 border-b border-zinc-800 w-full"
             style={{ width: "100%", height: "130px" }}
           >
             <div className="mt-2">
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
-              <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div class="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
             </div>
           </div>
 
           <div
-            class="flex  justify-between p-4 border-b border-zinc-800 w-full"
+            className="flex  justify-between p-4 border-b border-zinc-800 w-full"
             style={{ width: "100%", height: "130px" }}
           >
             <div className="mt-2">
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
-              <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div class="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
             </div>
           </div>
           <div
-            class="flex  justify-between p-4 border-b border-zinc-800 w-full"
+            className="flex  justify-between p-4 border-b border-zinc-800 w-full"
             style={{ width: "100%", height: "130px" }}
           >
             <div className="mt-2">
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
-              <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div class="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
             </div>
           </div>
           <div
-            class="flex  justify-between p-4 border-b border-zinc-800 w-full"
+            className="flex  justify-between p-4 border-b border-zinc-800 w-full"
             style={{ width: "100%", height: "130px" }}
           >
             <div className="mt-2">
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
-              <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div class="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
             </div>
           </div>
           <div
-            class="flex  justify-between p-4 border-b border-zinc-800 w-full"
+            className="flex  justify-between p-4 border-b border-zinc-800 w-full"
             style={{ width: "100%", height: "130px" }}
           >
             <div className="mt-2">
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
-              <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div class="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
             </div>
           </div>
           <div
-            class="flex  justify-between p-4 border-b border-zinc-800 w-full"
+            className="flex  justify-between p-4 border-b border-zinc-800 w-full"
             style={{ width: "100%", height: "130px" }}
           >
             <div className="mt-2">
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
-              <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div class="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
             </div>
           </div>
           <div
-            class="flex  justify-between p-4 border-b border-zinc-800 w-full"
+            className="flex  justify-between p-4 border-b border-zinc-800 w-full"
             style={{ width: "100%", height: "130px" }}
           >
             <div className="mt-2">
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div class="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div class="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
             </div>
             <div className="flex flex-col">
-              <div class="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div class="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
             </div>
           </div>
-          <span class="sr-only">Loading...</span>
+          <span className="sr-only">Loading...</span>
         </div>
       </div>
     );
@@ -188,7 +188,7 @@ export default function EventsList({
       <div className="overflow-scroll max-h-full border-t border-zinc-800">
         {reports.map((event) => (
           <div
-            key={event.id}
+            key={event._id}
             className="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-800 cursor-pointer"
             onClick={() => handleClick(event)}
           >

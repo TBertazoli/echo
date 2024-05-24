@@ -17,12 +17,6 @@ module.exports = {
 };
 
 async function generateSignedUrls(image, eventId) {
-  console.log(
-    process.env.AWS_REGION,
-    process.env.AWS_ACCESS_KEY_ID,
-    process.env.AWS_SECRET_ACCESS_KEY,
-    process.env.AWS_BUCKET_NAME
-  );
   const s3 = new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
@@ -59,7 +53,6 @@ async function create(req, res) {
       signedUrl,
     });
   } catch (err) {
-    console.log(err);
     res.status(400).json(err);
   }
 }

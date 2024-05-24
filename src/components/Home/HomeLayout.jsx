@@ -10,19 +10,31 @@ export default function HomeLayout({ longitude, latitude }) {
   useEffect(() => {
     async function getReports() {
       const reports = await Reports.getAllEvents();
-      console.log(reports);
+
       setReports(reports);
     }
     getReports();
   }, []);
 
-  console.log(reports);
   return (
-    <div className="grid grid-cols-12 h-full overflow-hidden" style={{
-      maxHeight: "100vh",
-    }}>
-      <EventsList reports={reports} selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} />
-      <EventsMap longitude={longitude} latitude={latitude} reports={reports} selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} />
+    <div
+      className="grid grid-cols-12 h-full overflow-hidden"
+      style={{
+        maxHeight: "100vh",
+      }}
+    >
+      <EventsList
+        reports={reports}
+        selectedEvent={selectedEvent}
+        setSelectedEvent={setSelectedEvent}
+      />
+      <EventsMap
+        longitude={longitude}
+        latitude={latitude}
+        reports={reports}
+        selectedEvent={selectedEvent}
+        setSelectedEvent={setSelectedEvent}
+      />
     </div>
   );
 }

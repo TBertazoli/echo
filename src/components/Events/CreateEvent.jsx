@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const CreateEvent = () => {
   // check if id exists in the url
-  console.log("create event");
+
   const { id } = useParams();
   const [eventDetails, setEventDetails] = useState({
     title: "",
@@ -201,16 +201,16 @@ const CreateEvent = () => {
         return;
       } else {
         let response = await Events.createEvent(eventDetails);
-        const formData = new FormData();
-        formData.append("file", image);
+        const headers = {};
+        if (image.type) {
+          headers["Content-Type"] = image.type;
+        }
         if (response.signedUrl) {
-          const image = {
+          const result = await fetch(response.signedUrl, {
             method: "PUT",
-            body: formData,
-            headers: { "Content-Type": "multipart/form-data" },
-          };
-          const resutl = await fetch(response.signedUrl, image);
-          console.log(resutl);
+            headers: headers,
+            body: image,
+          });
         }
 
         toast.info("Creating your event", {

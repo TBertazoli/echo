@@ -202,7 +202,7 @@ export default function EventsMap({
             >
               {reports.map((report) => (
                 <Marker
-                  key={report.id}
+                  key={report._id}
                   longitude={report.longitude}
                   latitude={report.latitude}
                   onClick={() => handleMarkerClick(report)}

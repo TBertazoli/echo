@@ -16,8 +16,6 @@ async function show(req, res) {
       .catch((err) => {
         console.log(err);
       });
-
-    console.log(events);
     res.json(events);
   } catch (err) {
     res.status(400).json(err);
