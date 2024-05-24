@@ -59,7 +59,6 @@ async function create(req, res) {
       signedUrl,
     });
   } catch (err) {
-    console.log(err);
     res.status(400).json(err);
   }
 }

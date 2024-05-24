@@ -177,8 +177,8 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
                 </svg>
                 <span className="sr-only">Loading...</span>
               </div>
-              <div role="status" class=" animate-pulse flex items-center">
-                <div class="h-2.5  rounded-full bg-zinc-600 w-48 "></div>
+              <div role="status" className=" animate-pulse flex items-center">
+                <div className="h-2.5  rounded-full bg-zinc-600 w-48 "></div>
                 <span
                   className="mx-2 font-semibold text-gray-400 dark:text-zinc-800 text-2xl block"
                   style={{
@@ -189,8 +189,8 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
                 >
                   |
                 </span>
-                <div class="h-2.5  rounded-full bg-zinc-600 w-48 block ml-4"></div>
-                <span class="sr-only">Loading...</span>
+                <div className="h-2.5  rounded-full bg-zinc-600 w-48 block ml-4"></div>
+                <span className="sr-only">Loading...</span>
               </div>
             </div>
           ) : (
