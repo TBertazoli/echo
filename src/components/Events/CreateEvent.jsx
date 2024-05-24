@@ -202,15 +202,17 @@ const CreateEvent = () => {
       } else {
         let response = await Events.createEvent(eventDetails);
         const headers = {};
-        if (image.type) {
-          headers["Content-Type"] = image.type;
-        }
-        if (response.signedUrl && image) {
-          const result = await fetch(response.signedUrl, {
-            method: "PUT",
-            headers: headers,
-            body: image,
-          });
+        if (image) {
+          if (image.type) {
+            headers["Content-Type"] = image.type;
+          }
+          if (response.signedUrl) {
+            const result = await fetch(response.signedUrl, {
+              method: "PUT",
+              headers: headers,
+              body: image,
+            });
+          }
         }
 
         toast.info("Creating your event", {
