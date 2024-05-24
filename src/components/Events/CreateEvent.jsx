@@ -205,7 +205,7 @@ const CreateEvent = () => {
         if (image.type) {
           headers["Content-Type"] = image.type;
         }
-        if (response.signedUrl) {
+        if (response.signedUrl && image) {
           const result = await fetch(response.signedUrl, {
             method: "PUT",
             headers: headers,
