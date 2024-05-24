@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import * as userService from "../../utilities/users-service";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
   const [location, setLocation] = useState(null);
@@ -8,6 +9,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
   const [address, setAddress] = useState(null);
   const [isLocationLoaded, setIsLocationLoaded] = useState(false);
   const [isWeatherLoaded, setIsWeatherLoaded] = useState(false);
+  const navigate = useNavigate();
 
   const openWeatherAPI = process.env.REACT_APP_OPENWEATHER_API_KEY;
   const mapboxToken =
@@ -24,6 +26,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
   function handleLogOut() {
     userService.logOut();
     setUser(null);
+    navigate("/login");
   }
 
   function success(position) {
