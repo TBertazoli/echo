@@ -9,7 +9,7 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import ProtectedRoute from "../../components/ProtecedRoute";
 import CreateEvent from "../../components/Events/CreateEvent";
 import ViewEvent from "../../components/Events/ViewEvent";
-
+import ProfilePage from "../../components/User/ProfilePage";
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [longitude, setLongitude] = useState(null);
@@ -44,6 +44,8 @@ export default function App() {
             <Route path="/events/:id" element={<ViewEvent user={user} />} />
             {/* edit event */}
             <Route path="/events/:id/edit" element={<CreateEvent />} />
+            {/* profile page */}
+            <Route path="/profile/:id" element={<ProfilePage />} />
           </Routes>
         </>
       ) : (

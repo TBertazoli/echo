@@ -3,6 +3,7 @@ const User = require("../../models/user");
 const { S3Client } = require("@aws-sdk/client-s3");
 const { PutObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = {
   create,
@@ -23,12 +24,11 @@ async function generateSignedUrls(image, eventId) {
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
   });
-  console.log(s3);
   const filename = `${eventId}/${image}`;
   const command = new PutObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: filename,
-    Body: image,
+    ContentType: "image/jpeg",
   });
   const signedUrl = await getSignedUrl(s3, command, { expiresIn: 3600 });
   return signedUrl;
@@ -36,30 +36,29 @@ async function generateSignedUrls(image, eventId) {
 
 async function create(req, res) {
   const user = await User.findById(req.user._id);
-  const image = req.body.mediaUrl;
+  const image = `${uuidv4()}.jpeg`;
   try {
     const event = await Event.create({
       ...req.body,
+      mediaUrl: image,
       user: user,
     });
-    let uploadedImages;
+    let signedUrl;
 
     if (image) {
-      uploadedImages = await generateSignedUrls(image, event.id);
+      signedUrl = await generateSignedUrls(image, event.id);
     }
     res.json({
       event,
-      uploadedImages,
+      signedUrl,
     });
   } catch (err) {
-    console.log(err);
     res.status(400).json(err);
   }
 }
 
 async function show(req, res) {
   const user = await User.findById(req.user._id);
-  console.log(user);
   try {
     const event = await Event.find({ user: user }).populate({
       path: "eventType",
@@ -117,11 +116,9 @@ async function createTimeline(req, res) {
 
 async function deleteTimeline(req, res) {
   const event = await Event.findById(req.params.id);
-  console.log(event);
   const timeline = event.incidentTimeline.findIndex(
     (t) => t.id === req.params.timelineId
   );
-  console.log(timeline);
   event.incidentTimeline.splice(timeline, 1);
 
   try {
