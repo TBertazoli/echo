@@ -60,7 +60,7 @@ Echo is a user-friendly app designed to keep your community informed and safe. W
 
 ## Questions
 
-For questions please contact: [Tatiana Bertazoli](tatianabertazoli@gmail.com) or [Miguel Coria](miguelcoria94@gmail.com)
+For questions please contact: tatianabertazoli@gmail.com or miguelcoria94@gmail.com
 
 [GitHub Link](https://github.com/TBertazoli/echo)
 
