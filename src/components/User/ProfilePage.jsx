@@ -71,101 +71,121 @@ export default function ProfilePage() {
         <div role="status" className="rounded shadow animate-pulse ">
           <div
             className="flex  justify-between p-4 border-b border-zinc-800 w-full"
-            style={{ width: "100%", height: "130px" }}
+            style={{ width: "100%", height: "auto" }}
           >
-            <div className="mt-2">
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+            <div className="flex">
+              <div className="w-32 h-32 bg-gray-800 rounded-lg mr-4"></div>
+              <div className="mt-2">
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+                <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              </div>
             </div>
+
             <div className="flex flex-col">
               <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-full"></div>
+
+              <div className="flex mt-24 gap-2">
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+              </div>
             </div>
           </div>
 
           <div
             className="flex  justify-between p-4 border-b border-zinc-800 w-full"
-            style={{ width: "100%", height: "130px" }}
+            style={{ width: "100%", height: "auto" }}
           >
-            <div className="mt-2">
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+            <div className="flex">
+              <div className="w-32 h-32 bg-gray-800 rounded-lg mr-4"></div>
+              <div className="mt-2">
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+                <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              </div>
             </div>
+
             <div className="flex flex-col">
               <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-full"></div>
+
+              <div className="flex mt-24 gap-2">
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+              </div>
             </div>
           </div>
+
           <div
             className="flex  justify-between p-4 border-b border-zinc-800 w-full"
-            style={{ width: "100%", height: "130px" }}
+            style={{ width: "100%", height: "auto" }}
           >
-            <div className="mt-2">
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+            <div className="flex">
+              <div className="w-32 h-32 bg-gray-800 rounded-lg mr-4"></div>
+              <div className="mt-2">
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+                <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              </div>
             </div>
+
             <div className="flex flex-col">
               <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-full"></div>
+
+              <div className="flex mt-24 gap-2">
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+              </div>
             </div>
           </div>
+
           <div
             className="flex  justify-between p-4 border-b border-zinc-800 w-full"
-            style={{ width: "100%", height: "130px" }}
+            style={{ width: "100%", height: "auto" }}
           >
-            <div className="mt-2">
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+            <div className="flex">
+              <div className="w-32 h-32 bg-gray-800 rounded-lg mr-4"></div>
+              <div className="mt-2">
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+                <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              </div>
             </div>
+
             <div className="flex flex-col">
               <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-full"></div>
+
+              <div className="flex mt-24 gap-2">
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+              </div>
             </div>
           </div>
+
           <div
             className="flex  justify-between p-4 border-b border-zinc-800 w-full"
-            style={{ width: "100%", height: "130px" }}
+            style={{ width: "100%", height: "auto" }}
           >
-            <div className="mt-2">
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+            <div className="flex">
+              <div className="w-32 h-32 bg-gray-800 rounded-lg mr-4"></div>
+              <div className="mt-2">
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
+                <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
+                <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
+              </div>
             </div>
+
             <div className="flex flex-col">
               <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
-            </div>
-          </div>
-          <div
-            className="flex  justify-between p-4 border-b border-zinc-800 w-full"
-            style={{ width: "100%", height: "130px" }}
-          >
-            <div className="mt-2">
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
-            </div>
-            <div className="flex flex-col">
-              <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
-            </div>
-          </div>
-          <div
-            className="flex  justify-between p-4 border-b border-zinc-800 w-full"
-            style={{ width: "100%", height: "130px" }}
-          >
-            <div className="mt-2">
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mb-4"></div>
-              <div className="w-32 h-2.5 bg-gray-700 rounded-full"></div>
-              <div className="h-2.5 rounded-full bg-gray-600 w-24 mt-9"></div>
-            </div>
-            <div className="flex flex-col">
-              <div className="h-2.5 bg-gray-600 rounded-full ml-auto w-6 mb-3 mt-12"></div>
-              <div className="h-2.5 bg-gray-700 rounded-full  w-12"></div>
+              <div className="h-2.5 bg-gray-700 rounded-full  w-full"></div>
+
+              <div className="flex mt-24 gap-2">
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+                <div className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center"></div>
+              </div>
             </div>
           </div>
           <span className="sr-only">Loading...</span>
@@ -179,7 +199,7 @@ export default function ProfilePage() {
       <div>
         <div className="sticky top-0 flex justify-between bg-zinc-900">
           <h1 className="text-gray-200 text-2xl font-semibold p-4 sticky top-0 mt-4">
-            Events
+            My Events
           </h1>
 
           {/* create events buttons */}
