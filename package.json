@@ -29,7 +29,8 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "uuidv4": "^6.2.13"
   },
   "scripts": {
     "start": "react-scripts start",

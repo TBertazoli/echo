@@ -275,7 +275,12 @@ export default function ViewEvent({ user }) {
       </div>
 
       {event.mediaUrl && (
-        <div className="flex gap-4 mb-8">{event.mediaUrl[0]}</div>
+        <div className="flex gap-4 mb-8">
+          <img
+            src={`https://dqc7zxab9yyfq.cloudfront.net/${event.id}/${event.mediaUrl}`}
+            alt={event.eventType}
+          />
+        </div>
       )}
 
       {/* delete modal */}
