@@ -181,6 +181,16 @@ export default function ViewEvent({ user }) {
     }
   }
 
+  // move router back one page
+  const goBack = () => {
+    // check edit is not int the previous url
+    if (window.location.href.includes("/edit")) {
+      navigate(`/events/${id}`);
+    } else {
+      window.history.back();
+    }
+  };
+
   async function handleDeleteTimelineEvent() {
     try {
       await UserEventsService.deleteEventTimeline(
@@ -236,11 +246,14 @@ export default function ViewEvent({ user }) {
   return (
     <div className="container mx-auto p-4 mb-4">
       <ToastContainer />
-      <Link to="/">
-        <button className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-8 flex justify-center gap-2 items-center">
-          <i className="las la-arrow-left"></i> Back
-        </button>
-      </Link>
+
+      <button
+        className="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-8 flex justify-center gap-2 items-center"
+        onClick={goBack}
+      >
+        <i className="las la-arrow-left"></i> Back
+      </button>
+
       <div className="relative w-full h-96 mb-8 mt-8 rounded-md">
         <Map
           mapboxAccessToken="pk.eyJ1IjoiYmVydGF6b2xpdCIsImEiOiJjbHc2ZnZkMXIxd3ZnMmtuNnFocDg2MDBpIn0.3FrIoyBW1TCx6Yb9VAsCEA"
