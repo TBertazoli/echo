@@ -36,7 +36,7 @@ async function generateSignedUrls(image, eventId) {
 
 async function create(req, res) {
   const user = await User.findById(req.user._id);
-  const image = `${uuidv4()}.jpeg`;
+  const image = req.body.hasMedia ? `${uuidv4()}.jpeg` : null;
   try {
     const event = await Event.create({
       ...req.body,

@@ -7,6 +7,7 @@ import * as Events from "../../utilities/user-events-service";
 import * as EventTypes from "../../utilities/eventType-service";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { hasFormSubmit } from "@testing-library/user-event/dist/utils";
 
 const CreateEvent = () => {
   // check if id exists in the url
@@ -25,6 +26,7 @@ const CreateEvent = () => {
     reportDate: "",
     mediaUrl: "",
     eventType: "",
+    hasMedia: false,
   });
 
   const navigate = useNavigate();
@@ -187,7 +189,6 @@ const CreateEvent = () => {
     evt.preventDefault();
     try {
       if (id) {
-        console.log(image);
         setEventDetails({ ...eventDetails, mediaUrl: image });
         await Events.updateUserEvent(id, eventDetails);
 
@@ -200,7 +201,10 @@ const CreateEvent = () => {
         });
         return;
       } else {
-        let response = await Events.createEvent(eventDetails);
+        let response = await Events.createEvent({
+          ...eventDetails,
+          hasMedia: !!image,
+        });
         const headers = {};
         if (image) {
           if (image.type) {
