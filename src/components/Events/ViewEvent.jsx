@@ -20,11 +20,10 @@ export default function ViewEvent({ user }) {
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [deleteTimelineModalIsOpen, setDeleteTimelineModalIsOpen] =
     useState(false);
+  const [imageModalIsOpen, setImageModalIsOpen] = useState(false); // New state for image modal
+  const [imageToShow, setImageToShow] = useState(""); // New state for the image URL
   const [isLoadingDelete, setIsLoading] = useState(false);
-  const [timelineEvent, setTimelineEvent] = useState({
-    time: "",
-    notes: "",
-  });
+  const [timelineEvent, setTimelineEvent] = useState({ time: "", notes: "" });
   const [editingTimelineEvent, setEditingTimelineEvent] = useState(null);
   const [timelineEventToDelete, setTimelineEventToDelete] = useState(null);
   const navigate = useNavigate();
@@ -63,6 +62,16 @@ export default function ViewEvent({ user }) {
   function closeDeleteTimelineModal() {
     setDeleteTimelineModalIsOpen(false);
     setTimelineEventToDelete(null);
+  }
+
+  function openImageModal(imageUrl) {
+    setImageToShow(imageUrl);
+    setImageModalIsOpen(true);
+  }
+
+  function closeImageModal() {
+    setImageToShow("");
+    setImageModalIsOpen(false);
   }
 
   const customStyles = {
@@ -287,18 +296,6 @@ export default function ViewEvent({ user }) {
         </button>
       </div>
 
-      {event.mediaUrl && (
-        <div className="flex gap-4 mb-8">
-          <img
-            src={`https://dqc7zxab9yyfq.cloudfront.net/${event._id}/${event.mediaUrl}`}
-            alt={event.title}
-            className="max-w-full h-auto"
-          />
-        </div>
-      )}
-
-      {/* delete modal */}
-
       {user && user._id === event.user && (
         <div className="mb-8 flex justify-end gap-4">
           <button
@@ -316,6 +313,23 @@ export default function ViewEvent({ user }) {
         </div>
       )}
 
+      {/* Image Modal */}
+      <Modal
+        isOpen={imageModalIsOpen}
+        onRequestClose={closeImageModal}
+        style={customStyles}
+        contentLabel="Image Modal"
+      >
+        <img src={imageToShow} alt="Event" className="w-96 h-auto rounded-md" />
+        <button
+          onClick={closeImageModal}
+          className="text-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800 mt-4 flex justify-center gap-2 items-center"
+        >
+          Close
+        </button>
+      </Modal>
+
+      {/* Delete Modal */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -503,25 +517,21 @@ export default function ViewEvent({ user }) {
 
       <div className="flex flex-col gap-2 w-full mb-8 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
         <div className="">
-          <EventTypeIcon type={event.eventType.type} />
-          <p className="text-gray-400 mt-2">
-            {event.address} {event.city} {event.state}, {event.country}{" "}
-            {event.zip}
-          </p>
-          <h1 className="text-3xl font-bold text-gray-200 mt-2">
-            {event.title}
-          </h1>
-          <div className="flex justify-between w-full mt-2">
-            <div className="flex justify-start"></div>
-            <p className="text-gray-500 mb-2 text-sm">
-              Reported on:{" "}
-              {new Date(event.reportDate).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </p>
+          <h1 className="text-4xl font-bold text-gray-200 ">{event.title}</h1>
+          <div className="flex justify-between">
+            <div></div>
+            <EventTypeIcon type={event.eventType.type} />
           </div>
+          <p className="text-gray-400 mt-2">{event.address} </p>
+          <p className="text-gray-500 mb-2 text-sm font">
+            Posted on:{" "}
+            {new Date(event.reportDate).toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
+          <div className="flex justify-between w-full mt-2"></div>
         </div>
         {event.description && (
           <h2 className="text-2xl font-bold text-gray-200 mt-2">Summary</h2>
@@ -530,6 +540,32 @@ export default function ViewEvent({ user }) {
           <p className="text-gray-200 mb-4">{event.description}</p>
         )}
       </div>
+
+      {event.mediaUrl ? (
+        <div className="flex flex-col gap-2 w-full mb-8 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
+          <h2 className="text-2xl font-bold text-gray-200 mb-2">Pictures</h2>
+
+          <div className="flex gap-4 ">
+            <img
+              src={`https://dqc7zxab9yyfq.cloudfront.net/${event._id}/${event.mediaUrl}`}
+              alt={event.title}
+              className="h-32 w-32 object-cover rounded-md cursor-pointer"
+              onClick={() =>
+                openImageModal(
+                  `https://dqc7zxab9yyfq.cloudfront.net/${event._id}/${event.mediaUrl}`
+                )
+              }
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2 w-full mb-8 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">
+          <h2 className="text-2xl font-bold text-gray-200 mb-2">Pictures</h2>
+          <p className="text-gray-400 4">
+            This event does not have any pictures.
+          </p>
+        </div>
+      )}
 
       {/* Timeline */}
       <div className="flex flex-col gap-4 w-full mb-12 rounded-md bg-clip-padding border border-opacity-20 p-4 bg-zinc-800 border-r border-zinc-600">

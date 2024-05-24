@@ -209,15 +209,18 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
           )}
         </div>
 
-        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-4">
+        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-">
           <div className="flex mr-0 md:mr-4 items-center">
             <img
-              className="w-10 h-10 rounded-full mr-0 md:mr-3 mt-1 "
+              className="w-10 h-10 rounded-full mr-0 md:mr-3 "
               src="https://jeffjbutler.com//wp-content/uploads/2018/01/default-user.png"
               alt="user default"
             />
             <div className="flex flex-col hidden md:block">
-              <span className="block text-sm text-gray-200 font-semibold">
+              <span
+                className="block text-xs text-gray-200 font-bold"
+                style={{ position: "relative", top: "0.1rem" }}
+              >
                 {user.name}
               </span>
               <span className="block text-sm text-gray-700">{user.email}</span>
@@ -225,6 +228,7 @@ export default function NavBar({ user, setUser, setLatitude, setLongitude }) {
               <Link
                 to={`/profile/${user._id}`}
                 className="text-xs text-blue-500"
+                style={{ position: "relative", bottom: "0.4rem" }}
               >
                 View Profile
               </Link>
