@@ -5,7 +5,6 @@ const logger = require("morgan");
 const passport = require("passport");
 
 require("dotenv").config();
-// Connect to the database
 require("./config/database");
 require("./config/passport");
 
@@ -14,23 +13,15 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json());
 
-// Configure both serve-favicon & static middleware
-// to serve from the production 'build' folder
 app.use(favicon(path.join(__dirname, "build", "favicon.ico")));
 app.use(express.static(path.join(__dirname, "build")));
 
-// Middleware to check and verify a JWT and
-// assign the user object from the JWT to req.user
 app.use(passport.initialize());
 app.use(require("./config/checkToken"));
 
 const port = process.env.PORT || 3001;
 
-// Put API routes here, before the "catch all" route
 app.use("/api/users", require("./routes/api/users"));
-
-// The following "catch all" route (note the *) is necessary
-// to return the index.html on all non-AJAX/API requests
 app.use("/api/user/events", require("./routes/api/events"));
 app.use("/api/events", require("./routes/api/allEvents"));
 app.use("/api/eventtype", require("./routes/api/eventType"));

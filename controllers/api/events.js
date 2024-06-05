@@ -44,12 +44,11 @@ async function create(req, res) {
       user: user,
     });
     let signedUrl;
-    console.log(event);
+
     if (image) {
       signedUrl = await generateSignedUrls(image, event.id);
     }
-    console.log(signedUrl);
-    res.json({
+    res.status(200).json({
       event,
       signedUrl,
     });
@@ -64,8 +63,7 @@ async function show(req, res) {
     const event = await Event.find({ user: user }).populate({
       path: "eventType",
     });
-
-    res.json(event);
+    res.status(200).json(event);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -78,7 +76,7 @@ async function showOne(req, res) {
       model: "EventType",
     });
 
-    res.json(event);
+    res.status(200).json(event);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -89,7 +87,7 @@ async function update(req, res) {
     const updateEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.json(updateEvent);
+    res.status(200).json(updateEvent);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -98,7 +96,7 @@ async function update(req, res) {
 async function deleteEvent(req, res) {
   try {
     const deleteEvent = await Event.findByIdAndDelete(req.params.id);
-    res.json(deleteEvent);
+    res.status(200).json(deleteEvent);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -109,7 +107,7 @@ async function createTimeline(req, res) {
   event.incidentTimeline.push(req.body);
   try {
     const incident = await event.save();
-    res.json(incident);
+    res.status(200).json(incident);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -125,7 +123,7 @@ async function deleteTimeline(req, res) {
   try {
     const incident = await event.save();
 
-    res.json(incident);
+    res.status(200).json(incident);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -141,7 +139,7 @@ async function updateTimeline(req, res) {
 
   try {
     const incident = await event.save();
-    res.json(incident);
+    res.status(200).json(incident);
   } catch (err) {
     res.status(400).json(err);
   }

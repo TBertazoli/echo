@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// const incidentTimeline = require("./incidentTimeline");
 const Schema = mongoose.Schema;
 
 require("./eventType");

@@ -195,7 +195,7 @@ const EventType = require("./models/eventType");
       description: "Construction at Broadway",
       user: "664c8d11717164ec8ad06075",
       reportDate: new Date("2023-08-15T00:00:00.000Z"),
-      eventType: eventType[24], // Assuming 24 is the index for 'Construction'
+      eventType: eventType[24],
     },
     {
       title: "Road Repair at Madison Avenue",
@@ -209,7 +209,7 @@ const EventType = require("./models/eventType");
       description: "Road repair causing traffic at Madison Avenue",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2023-09-20T00:00:00.000Z"),
-      eventType: eventType[30], // Assuming 30 is the index for 'Road Repair'
+      eventType: eventType[30],
     },
     {
       title: "Vandalism at Park Avenue",
@@ -223,7 +223,7 @@ const EventType = require("./models/eventType");
       description: "Vandalism reported at Park Avenue",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2023-10-25T00:00:00.000Z"),
-      eventType: eventType[3], // Assuming 3 is the index for 'Vandalism'
+      eventType: eventType[3],
     },
     {
       title: "Construction at Congress Avenue",
@@ -237,7 +237,7 @@ const EventType = require("./models/eventType");
       description: "Construction at Congress Avenue",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2023-11-15T00:00:00.000Z"),
-      eventType: eventType[24], // Assuming 24 is the index for 'Construction'
+      eventType: eventType[24],
     },
     {
       title: "Road Repair at Lamar Boulevard",
@@ -251,7 +251,7 @@ const EventType = require("./models/eventType");
       description: "Road repair causing traffic at Lamar Boulevard",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2023-12-20T00:00:00.000Z"),
-      eventType: eventType[30], // Assuming 30 is the index for 'Road Repair'
+      eventType: eventType[30],
     },
     {
       title: "Vandalism at Guadalupe Street",
@@ -265,7 +265,7 @@ const EventType = require("./models/eventType");
       description: "Vandalism reported at Guadalupe Street",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2024-01-25T00:00:00.000Z"),
-      eventType: eventType[3], // Assuming 3 is the index for 'Vandalism'
+      eventType: eventType[3],
     },
     {
       title: "Construction at Highway 6",
@@ -279,7 +279,7 @@ const EventType = require("./models/eventType");
       description: "Construction at Highway 6",
       user: "664c8d11717164ec8ad06075",
       reportDate: new Date("2024-02-15T00:00:00.000Z"),
-      eventType: eventType[24], // Assuming 24 is the index for 'Construction'
+      eventType: eventType[24],
     },
     {
       title: "Road Repair at Sweetwater Boulevard",
@@ -293,7 +293,7 @@ const EventType = require("./models/eventType");
       description: "Road repair causing traffic at Sweetwater Boulevard",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2024-03-20T00:00:00.000Z"),
-      eventType: eventType[30], // Assuming 30 is the index for 'Road Repair'
+      eventType: eventType[30],
     },
     {
       title: "Vandalism at First Colony Mall",
@@ -307,7 +307,7 @@ const EventType = require("./models/eventType");
       description: "Vandalism reported at First Colony Mall",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2024-04-25T00:00:00.000Z"),
-      eventType: eventType[3], // Assuming 3 is the index for 'Vandalism'
+      eventType: eventType[3],
     },
     {
       title: "Construction at FM 762",
@@ -321,7 +321,7 @@ const EventType = require("./models/eventType");
       description: "Construction at FM 762",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2024-05-15T00:00:00.000Z"),
-      eventType: eventType[24], // Assuming 24 is the index for 'Construction'
+      eventType: eventType[24],
     },
     {
       title: "Road Repair at Mason Road",
@@ -335,7 +335,7 @@ const EventType = require("./models/eventType");
       description: "Road repair causing traffic at Mason Road",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2024-06-20T00:00:00.000Z"),
-      eventType: eventType[30], // Assuming 30 is the index for 'Road Repair'
+      eventType: eventType[30],
     },
     {
       title: "Construction at Jersey Drive",
@@ -349,7 +349,7 @@ const EventType = require("./models/eventType");
       description: "Construction at Jersey Drive",
       user: "664c8d11717164ec8ad06075",
       reportDate: new Date("2024-07-15T00:00:00.000Z"),
-      eventType: eventType[24], // Assuming 24 is the index for 'Construction'
+      eventType: eventType[24],
     },
     {
       title: "Road Repair at Lakeview Drive",
@@ -363,7 +363,7 @@ const EventType = require("./models/eventType");
       description: "Road repair causing traffic at Lakeview Drive",
       user: "664c319ac9683858ae859410",
       reportDate: new Date("2024-08-20T00:00:00.000Z"),
-      eventType: eventType[30], // Assuming 30 is the index for 'Road Repair'
+      eventType: eventType[30],
     },
   ]);
 

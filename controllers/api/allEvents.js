@@ -16,7 +16,7 @@ async function show(req, res) {
       .catch((err) => {
         console.log(err);
       });
-    res.json(events);
+    res.status(200).json(events);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -28,7 +28,7 @@ async function showOne(req, res) {
       path: "eventType",
       model: "EventType",
     });
-    res.json(event);
+    res.status(200).json(event);
   } catch (err) {
     res.status(400).json(err);
   }

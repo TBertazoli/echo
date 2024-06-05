@@ -1,16 +1,5 @@
 # Echo
 
-## Screenshots
-
-Sign in Page
-<img src="public/images/image1.png">
-
-Landing Page
-<img src="public/images/image2.png">
-
-Create Event Page
-<img src="public/images/image3.png">
-
 ## Description
 
 Echo is a user-friendly app designed to keep your community informed and safe. With Echo, you can quickly report crimes, traffic incidents, and other disruptive events in real-time. Stay connected with local updates and contribute to a safer environment for everyone. Your voice helps echo important information across the community.
@@ -24,6 +13,17 @@ Echo is a user-friendly app designed to keep your community informed and safe. W
 - [Credits](#credits)
 - [Future Enhancements](#future-enhancements)
 - [Questions](#questions)
+
+## Screenshots
+
+Sign in Page
+<img src="public/images/image1.png">
+
+Landing Page
+<img src="public/images/image2.png">
+
+Create Event Page
+<img src="public/images/image3.png">
 
 ## Technologies Used
 
@@ -55,8 +55,8 @@ Echo is a user-friendly app designed to keep your community informed and safe. W
 ## Future Enhancements
 
 1 - Add goggle Oauth option  
-2 - Option to add more than one image/video
-3 - Option to delete and edit image/video
+2 - Option to add more than one image/video  
+3 - Option to delete and edit image/video  
 3 - Add comments
 
 ## Questions

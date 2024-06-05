@@ -6,5 +6,5 @@ module.exports = {
 
 async function eventTypeList(req, res) {
   const EventTypes = await EventType.find();
-  res.json(EventTypes);
+  res.status(200).json(EventTypes);
 }
