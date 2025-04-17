@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EventTypeIcon from "../Events/EventTypeIcon";
-import { set } from "mongoose";
 
 export default function EventsList({
   reports,
