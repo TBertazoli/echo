@@ -1,5 +1,5 @@
-import EventsList from "./EventsList";
-import EventsMap from "./EventsMap";
+import EventsList from "../Home/EventsList";
+import EventsMap from "../Home/EventsMap";
 import * as Reports from "../../utilities/events-service";
 import { useState, useEffect } from "react";
 
