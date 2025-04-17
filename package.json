@@ -37,6 +37,7 @@
     "server": "node server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npm run build && npm start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "seed": "node seed.js"
@@ -63,5 +64,15 @@
   "devDependencies": {
     "tailwindcss": "^3.4.3",
     "concurrently": "^7.6.0"
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/controllers/api"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
