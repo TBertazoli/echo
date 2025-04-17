@@ -68,7 +68,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/controllers/api"
+      "destination": "/server.js"
     },
     {
       "source": "/(.*)",
