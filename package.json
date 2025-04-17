@@ -33,9 +33,10 @@
     "uuidv4": "^6.2.13"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "react-scripts start",
     "build": "npm run build",
-    "deploy": "npm run build && npm start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "seed": "node seed.js"
