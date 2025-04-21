@@ -20,7 +20,7 @@
     "mongoose": "^6.7.2",
     "morgan": "^1.10.0",
     "passport": "^0.7.0",
-    "passport-google-oauth": "^2.0.0",
+    "passport-google-oauth20": "^2.0.0",
     "react": "^18.3.1",
     "react-datetime": "^3.2.0",
     "react-dom": "^18.3.1",
@@ -61,17 +61,7 @@
   },
   "proxy": "http://localhost:3001",
   "devDependencies": {
-    "tailwindcss": "^3.4.3",
-    "concurrently": "^7.6.0"
-  },
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "server.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "index.html"
-    }
-  ]
+    "concurrently": "^7.6.0",
+    "tailwindcss": "^3.4.3"
+  }
 }
